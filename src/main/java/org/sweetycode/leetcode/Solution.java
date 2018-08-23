@@ -128,6 +128,15 @@ public class Solution {
     }
 
     /**
+     * 58. Length of Last Word
+     */
+    public int lengthOfLastWord(String s) {
+        if(s == null || s.trim().length() == 0) return 0;
+        String[] words = s.split(" ");
+        return words[words.length - 1].length();
+    }
+
+    /**
      * 66. Plus One
      */
     public int[] plusOne(int[] digits) {

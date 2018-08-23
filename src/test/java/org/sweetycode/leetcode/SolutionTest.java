@@ -114,6 +114,16 @@ public class SolutionTest {
     }
 
     /**
+     * 58. Length of Last Word
+     */
+    @Test
+    public void testLengthOfLastWord() throws Exception {
+        System.out.println(solution.lengthOfLastWord("Hello World"));
+        System.out.println(solution.lengthOfLastWord(" "));
+        System.out.println(solution.lengthOfLastWord("hello test "));
+    }
+
+    /**
      * 66. Plus One
      */
     @Test
