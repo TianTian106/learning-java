@@ -128,6 +128,123 @@ public class Solution {
     }
 
     /**
+     * 14. Longest Common Prefix
+     * TODO: 二分法, startsWith
+     */
+    public String longestCommonPrefix(String[] strs) {
+        if(strs == null || strs.length == 0) return "";
+        String common = strs[0];
+        for(int i = 1; i < strs.length; i ++) {
+            common = common.substring(0, Math.min(common.length(),strs[i].length()));
+            for(int j = 0; j < common.length(); j ++) {
+                if(common.charAt(j) != strs[i].charAt(j)) {
+                    common = common.substring(0, j);
+                    break;
+                }
+            }
+
+            if(common.length() == 0) return "";
+        }
+
+        return common;
+    }
+
+    /**
+     * 20. Valid Parentheses
+     */
+    public boolean isValid(String s) {
+        if(s == null || s.length() == 0) return true;
+        int i = 0;
+        char[] stack = new char[s.length()];
+        for (char c: s.toCharArray()) {
+            if(c == ')') {
+                i --;
+                if(i < 0 || stack[i] != '(') return false;
+            } else if(c == '}') {
+                i --;
+                if(i < 0 || stack[i] != '{') return false;
+            } else if(c == ']') {
+                i --;
+                if(i < 0 || stack[i] != '[') return false;
+            } else {
+                stack[i] = c;
+                i ++;
+            }
+
+        }
+
+        return i == 0;
+    }
+
+    /**
+     * 21. Merge Two Sorted Lists
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+
+        ListNode head ;
+        ListNode l;
+        if(l1.val <= l2.val) {
+            head = l1;
+            l = l2;
+        } else {
+            head = l2;
+            l = l1;
+        }
+        ListNode cur = head;
+        ListNode tmp;
+        while (l != null) {
+            if(cur.next == null) {
+                cur.next = l;
+                return head;
+            }
+
+            if(cur.next.val <= l.val) {
+                cur = cur.next;
+            } else {
+                tmp = cur.next;
+                cur.next = l;
+                l = l.next;
+                cur = cur.next;
+                cur.next = tmp;
+            }
+        }
+        return head;
+    }
+
+    public ListNode mergeTwoListsNew(ListNode l1, ListNode l2) {
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+
+        ListNode head;
+        if(l1.val <= l2.val) {
+            head = l1;
+            head.next = mergeTwoListsNew(l1.next, l2);
+        } else {
+            head = l2;
+            head.next = mergeTwoListsNew(l1, l2.next);
+        }
+
+        return head;
+    }
+
+    /**
+     * 26. Remove Duplicates from Sorted Array
+     */
+    public int removeDuplicates(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        int i = 0;
+        for(int j = 1; j < nums.length; j ++) {
+            if(nums[i] != nums[j]) {
+                i ++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1;
+    }
+
+    /**
      * 58. Length of Last Word
      */
     public int lengthOfLastWord(String s) {
@@ -320,6 +437,24 @@ public class Solution {
     }
 
     /**
+     * 202. Happy Number
+     */
+    public boolean isHappy(int n) {
+        HashSet<Integer> varSet = new HashSet<>();
+        int tmp ;
+        while (varSet.add(n)) {
+            if(n == 1) return true;
+            tmp = 0;
+            while (n > 0) {
+                tmp += Math.pow(n % 10, 2) ;
+                n = n / 10;
+            }
+            n = tmp;
+        }
+        return false;
+    }
+
+    /**
      * 206. Reverse Linked List
      */
     public ListNode reverseList(ListNode head) {
@@ -430,6 +565,24 @@ public class Solution {
             sb.append(c[i]);
         }
         return sb.toString();
+    }
+
+    /**
+     * 349. Intersection of Two Arrays
+     */
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> eleSet = new HashSet<>();
+        for (int num1: nums1) {
+            eleSet.add(num1);
+        }
+        int i = 0;
+        for (int num2: nums2) {
+            if(eleSet.remove(num2)) {
+                nums1[i] = num2;
+                i ++;
+            }
+        }
+        return Arrays.copyOf(nums1, i);
     }
 
     /**
@@ -1241,6 +1394,36 @@ public class Solution {
     }
 
     /**
+     * 860. Lemonade Change
+     */
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0;
+        int ten = 0;
+        for (int bill: bills) {
+            if(bill == 5) {
+                five ++;
+            } else if(bill == 10) {
+                if(five <= 0) {
+                    return false;
+                } else {
+                    five --;
+                    ten ++;
+                }
+            } else if(bill == 20) {
+                if(ten >= 1 && five >= 1) {
+                    ten --;
+                    five --;
+                } else if(five >= 3) {
+                    five -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * 867. Transpose Matrix
      */
     public int[][] transpose(int[][] A) {
@@ -1379,7 +1562,7 @@ public class Solution {
     }
 
     /**
-     * 887. 三维形体投影面积
+     * 883. Projection Area of 3D Shapes
      */
     public int projectionArea(int[][] grid) {
         // like 807
@@ -1404,5 +1587,80 @@ public class Solution {
 
         return result;
     }
+
+    /**
+     * 884. Uncommon Words from Two Sentences
+     */
+    public String[] uncommonFromSentences(String A, String B) {
+        HashMap<String, Integer> dic = new HashMap<>();
+        for (String word: A.split(" ")) {
+            dic.put(word, dic.getOrDefault(word, 0) + 1);
+        }
+
+        for (String word: B.split(" ")) {
+            dic.put(word, dic.getOrDefault(word, 0) + 1);
+        }
+
+        List<String> result = new ArrayList<>();
+        for (String word: dic.keySet()) {
+            if(dic.get(word) == 1) {
+                result.add(word);
+            }
+        }
+
+        return result.toArray(new String[result.size()]);
+    }
+
+    /**
+     * 888. Fair Candy Swap
+     */
+    public int[] fairCandySwap(int[] A, int[] B) {
+        int avg = 0;
+        HashSet<Integer> bSet = new HashSet<>();
+        for (int a: A) {
+            avg += a;
+        }
+
+        int aSum = avg;
+
+        for (int b: B) {
+            avg += b;
+            bSet.add(b);
+
+        }
+        avg >>>=1;
+
+        for (int a: A) {
+            if(bSet.contains(avg - aSum + a)){
+                return new int[]{a, avg - aSum + a};
+            }
+        }
+
+        return new int[]{0,0};
+    }
+
+    /**
+     * 892. Surface Area of 3D Shapes
+     */
+    public int surfaceArea(int[][] grid) {
+        int result = 0 ;
+        for (int i = 0; i < grid.length; i ++) {
+            for (int j = 0; j < grid[0].length; j ++) {
+                if(grid[i][j] > 0) {
+                    result = result + 4 * grid[i][j] + 2 ;
+
+                    if(i - 1 >= 0) {
+                        result = result - 2 * Math.min(grid[i][j], grid[i - 1][j]);
+                    }
+
+                    if(j - 1 >= 0) {
+                        result = result - 2 * Math.min(grid[i][j], grid[i][j - 1]);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 }
 

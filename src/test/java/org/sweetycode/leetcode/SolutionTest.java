@@ -114,6 +114,55 @@ public class SolutionTest {
     }
 
     /**
+     * 14. Longest Common Prefix
+     */
+    @Test
+    public void testLongestCommonPrefix() throws Exception {
+        System.out.println(solution.longestCommonPrefix(new String[]{"flower","flow","flight"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"dog","racecar","car"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"aa","a"}));
+    }
+
+    /**
+     * 20. Valid Parentheses
+     */
+    @Test
+    public void testIsValid() throws Exception {
+        System.out.println(solution.isValid("()"));
+        System.out.println(solution.isValid("()[]{}"));
+        System.out.println(solution.isValid("(]"));
+        System.out.println(solution.isValid("([)]"));
+        System.out.println(solution.isValid("{[]}"));
+    }
+
+    /**
+     * 21. Merge Two Sorted Lists
+     */
+    @Test
+    public void testMergeTwoLists() throws Exception {
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode4 = new ListNode(4);
+
+        ListNode l1 = new ListNode(1);
+        ListNode l3 = new ListNode(3);
+        ListNode l4 = new ListNode(4);
+
+        listNode1.next = listNode2; listNode2.next = listNode4;
+        l1.next = l3; l3.next = l4;
+        Util.printListNode(solution.mergeTwoListsNew(listNode1,l1));
+    }
+
+    /**
+     * 26. Remove Duplicates from Sorted Array
+     */
+    @Test
+    public void testRemoveDuplicates() throws Exception {
+        System.out.println(solution.removeDuplicates(new int[]{0,0,1,1,1,2,2,3,3,4}));
+        System.out.println(solution.removeDuplicates(new int[]{1,1,2}));
+    }
+
+    /**
      * 58. Length of Last Word
      */
     @Test
@@ -216,6 +265,14 @@ public class SolutionTest {
     }
 
     /**
+     * 202. Happy Number
+     */
+    @Test
+    public void testIsHappy() throws Exception {
+        System.out.println(solution.isHappy(12));
+    }
+
+    /**
      * 206. Reverse Linked List
      */
     @Test
@@ -304,6 +361,16 @@ public class SolutionTest {
     @Test
     public void testReverseString() throws Exception {
         System.out.println(solution.reverseString("Hello Tian !"));
+    }
+
+    /**
+     * 349. Intersection of Two Arrays
+     */
+    @Test
+    public void testIntersection() throws Exception {
+        Util.printArray(solution.intersection(new int[]{1,2,2,1}, new int[]{2,2}));
+        Util.printArray(solution.intersection(new int[]{4,9,5}, new int[]{9,4,9,8,4}));
+        Util.printArray(solution.intersection(new int[]{}, new int[]{}));
     }
 
     /**
@@ -708,6 +775,14 @@ public class SolutionTest {
         System.out.println(solution.peakIndexInMountainArray(new int[]{0,1,0}));
         System.out.println(solution.peakIndexInMountainArray(new int[]{0,2,5,8,9,100,0}));
     }
+    
+    /**
+     * 860. Lemonade Change
+     */
+    @Test
+    public void testLemonadeChange() throws Exception {
+        System.out.println(solution.lemonadeChange(new int[]{5,5,10,10,20}));
+    }
 
     /**
      * 867. Transpose Matrix
@@ -782,7 +857,7 @@ public class SolutionTest {
     }
 
     /**
-     * 887. 三维形体投影面积
+     * 883. Projection Area of 3D Shapes
      */
     @Test
     public void testProjectionArea() throws Exception {
@@ -791,6 +866,37 @@ public class SolutionTest {
         System.out.println(solution.projectionArea(new int[][]{{1,0},{0,2}}));
         System.out.println(solution.projectionArea(new int[][]{{1,1,1},{1,0,1},{1,1,1}}));
         System.out.println(solution.projectionArea(new int[][]{{2,2,2},{2,1,2},{2,2,2}}));
+    }
+
+    /**
+     * 884. Uncommon Words from Two Sentences
+     */
+    @Test
+    public void testUncommonFromSentences() throws Exception {
+        Util.printArray(solution.uncommonFromSentences("this apple is sweet", "this apple is sour"));
+        Util.printArray(solution.uncommonFromSentences("apple apple", "banana"));
+    }
+
+    /**
+     * 888. Fair Candy Swap
+     */
+    @Test
+    public void testFairCandySwap() throws Exception {
+        Util.printArray(solution.fairCandySwap(new int[]{1,1}, new int[]{2,2}));
+        Util.printArray(solution.fairCandySwap(new int[]{1,2}, new int[]{2,3}));
+        Util.printArray(solution.fairCandySwap(new int[]{2}, new int[]{1,3}));
+        Util.printArray(solution.fairCandySwap(new int[]{1,2,5}, new int[]{2,4}));
+    }
+
+    /**
+     * 892. Surface Area of 3D Shapes
+     */
+    @Test
+    public void testSurfaceArea() throws Exception {
+        System.out.println(solution.surfaceArea(new int[][]{{2}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1,2},{3,4}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1,0},{0,2}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1,1,1},{1,0,1},{1,1,1}}));
     }
 }
 
