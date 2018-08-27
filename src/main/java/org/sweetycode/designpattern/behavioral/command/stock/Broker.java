@@ -1,4 +1,4 @@
-package org.sweetycode.designpattern.behavioral.command;
+package org.sweetycode.designpattern.behavioral.command.stock;
 
 import java.util.ArrayList;
 import java.util.List;
