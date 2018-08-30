@@ -1,4 +1,4 @@
-package org.sweetycode.designpattern.behavioral.Interpreter;
+package org.sweetycode.designpattern.behavioral.interpreter;
 
 /**
  * @Auther: sweetycode

@@ -1,4 +1,4 @@
-package org.sweetycode.designpattern.behavioral.Iterator;
+package org.sweetycode.designpattern.behavioral.iterator;
 
 /**
  * @Auther: sweetycode

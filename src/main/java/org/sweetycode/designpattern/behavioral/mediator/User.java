@@ -1,4 +1,4 @@
-package org.sweetycode.designpattern.behavioral.Mediator;
+package org.sweetycode.designpattern.behavioral.mediator;
 
 /**
  * @Auther: sweetycode
