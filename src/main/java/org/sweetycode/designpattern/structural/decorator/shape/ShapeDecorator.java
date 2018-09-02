@@ -1,4 +1,4 @@
-package org.sweetycode.designpattern.structural.decorator;
+package org.sweetycode.designpattern.structural.decorator.shape;
 
 /**
  * @Auther: sweetycode

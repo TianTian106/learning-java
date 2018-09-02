@@ -1,4 +1,4 @@
-package org.sweetycode.designpattern.creational.factory;
+package org.sweetycode.designpattern.creational.factory.shape;
 
 public class Square implements Shape {
     @Override
