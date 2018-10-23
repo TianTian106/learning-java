@@ -163,6 +163,23 @@ public class SolutionTest {
     }
 
     /**
+     * 27. Remove Element
+     */
+    @Test
+    public void testRemoveElement() throws Exception {
+        System.out.println(solution.removeElement(new int[]{4,5}, 4)); // 1
+        System.out.println(solution.removeElement(new int[]{4,5}, 5)); // 1
+        System.out.println(solution.removeElement(new int[]{3,2,2,3}, 3)); // 2
+        System.out.println(solution.removeElement(new int[]{0,1,2,2,3,0,4,2}, 2)); // 5
+    }
+    @Test
+    public void testRemoveElement2() throws Exception {
+        System.out.println(solution.removeElement2(new int[]{4,5}, 4)); // 1
+        System.out.println(solution.removeElement2(new int[]{4,5}, 5)); // 1
+        System.out.println(solution.removeElement2(new int[]{3,2,2,3}, 3)); // 2
+        System.out.println(solution.removeElement2(new int[]{0,1,2,2,3,0,4,2}, 2)); // 5
+    }
+    /**
      * 58. Length of Last Word
      */
     @Test

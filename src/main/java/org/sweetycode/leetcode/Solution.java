@@ -245,6 +245,37 @@ public class Solution {
     }
 
     /**
+     * 27. Remove Element
+     */
+    public int removeElement(int[] nums, int val) {
+        int l = nums.length;
+        int i = 0;
+        int j = l - 1;
+        while (i < j) {
+            while (i < j && nums[i] != val) {
+                i ++;
+            }
+            while (i < j && nums[j] == val) {
+                j --;
+            }
+            if(i < l && j >= 0 && i < j) {
+                nums[i] = nums[j];
+                i ++;
+                j --;
+            }
+        }
+        if (i < l && i <= j && nums[i] != val) i ++;
+        return i;
+    }
+
+    public int removeElement2(int[] nums, int val) {
+        int l = nums.length;
+        int j = 0;
+        // TODO
+        return j;
+    }
+
+    /**
      * 58. Length of Last Word
      */
     public int lengthOfLastWord(String s) {
