@@ -271,7 +271,7 @@ public class Solution {
     public int removeElement2(int[] nums, int val) {
         int l = nums.length;
         int j = 0;
-        // TODO: test 4
+        // TODO: test 5
         return j;
     }
 
