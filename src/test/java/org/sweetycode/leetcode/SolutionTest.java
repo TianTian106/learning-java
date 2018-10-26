@@ -174,11 +174,30 @@ public class SolutionTest {
     }
     @Test
     public void testRemoveElement2() throws Exception {
+        System.out.println(solution.removeElement2(new int[]{}, 4)); // 1
         System.out.println(solution.removeElement2(new int[]{4,5}, 4)); // 1
         System.out.println(solution.removeElement2(new int[]{4,5}, 5)); // 1
         System.out.println(solution.removeElement2(new int[]{3,2,2,3}, 3)); // 2
         System.out.println(solution.removeElement2(new int[]{0,1,2,2,3,0,4,2}, 2)); // 5
     }
+
+    /**
+     * 28. Implement strStr()
+     */
+    @Test
+    public void testStrStr() throws Exception {
+        System.out.println(solution.strStr("Hello", "ll"));
+        System.out.println(solution.strStr("aaaaa", "bba"));
+        System.out.println(solution.strStr("aaaaa", ""));
+    }
+
+    /**
+     * 35. Search Insert Position
+     */
+    @Test
+    public void testSearchInsert() throws Exception {
+    }
+
     /**
      * 58. Length of Last Word
      */

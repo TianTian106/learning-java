@@ -270,9 +270,50 @@ public class Solution {
 
     public int removeElement2(int[] nums, int val) {
         int l = nums.length;
-        int j = 0;
-        // TODO
-        return j;
+        int i = 0;
+        int j = l - 1;
+        while (i <= j) {
+            if(nums[i] == val) {
+                nums[i] = nums[j] ;
+                // reduce array size by one
+                j --;
+            } else {
+                i ++;
+            }
+        }
+        return j + 1;
+    }
+
+    /**
+     * 28. Implement strStr()
+     */
+    public int strStr(String haystack, String needle) {
+        // return haystack.indexOf(needle);
+        int i = 0;
+        int l1 = haystack.length();
+        int l2 = needle.length();
+        if (needle.length() == 0) return 0;
+        while (l1 - i >= l2) {
+            if (haystack.substring(i, i + l2).equals(needle)) {
+                return i;
+            }
+            i ++;
+        }
+        return -1;
+    }
+
+    /**
+     * 35. Search Insert Position
+     */
+    public int searchInsert(int[] nums, int target) {
+        int i = 0;
+        int j = nums.length - 1;
+        while ( i < j ) {
+            // TODO
+
+        }
+
+        return i;
     }
 
     /**
