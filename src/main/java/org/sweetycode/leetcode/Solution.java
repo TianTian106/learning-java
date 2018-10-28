@@ -308,13 +308,93 @@ public class Solution {
     public int searchInsert(int[] nums, int target) {
         int i = 0;
         int j = nums.length - 1;
-        while ( i < j ) {
-            // TODO
+        while ( i <= j ) {
+            int middle = (int) Math.floor((i + j) / 2);
+            int var = nums[middle];
+            if (var == target) return middle;
+            if (var < target) {
+                i = middle + 1;
+            } else {
+                j = middle - 1;
+            }
 
         }
 
         return i;
     }
+
+    /**
+     * 38. Count and Say
+     */
+    public String countAndSay(int n) {
+        if (n == 1) return "1";
+
+        String result = "";    // StringBuilder
+        char[] nums = countAndSay( n - 1 ).toCharArray();
+        char front = nums[0];
+        int count = 0;
+        for (char num: nums) {
+            if (num == front) {
+                count ++;
+            } else {
+                result = result + count + front;
+                front = num;
+                count = 1;
+            }
+        }
+        result = result + count + front;
+        return result;
+    }
+
+    /**
+     * 53. Maximum Subarray
+     */
+    public int maxSubArray(int[] nums) {
+        int l = nums.length;
+        if (l == 1) return nums[0];
+        return maxSubArraySubproblem(nums, 0, nums.length - 1)[0] ;
+    }
+    private int[] maxSubArraySubproblem(int[] nums, int left, int right) {
+        // Divide and Conquer method
+        if (left == right) return new int[]{nums[left], left, right};
+        int middle = (left + right) / 2 ;
+        int[] part1 = maxSubArraySubproblem(nums, left, middle);
+        int[] part2 = maxSubArraySubproblem(nums, middle + 1, right);
+
+        int tmpSum = part1[0];
+        int var = part1[2];
+        for (int m1 = part1[2] + 1; m1 <= right; m1 ++) {
+            tmpSum = tmpSum + nums[m1];
+            if (tmpSum >= part1[0]) {
+                part1[0] = tmpSum;
+                part1[2] = m1;
+            }
+        }
+
+        tmpSum = part2[0];
+        for (int m2 = part2[1] - 1; m2 > var; m2 --) {
+            tmpSum = tmpSum + nums[m2];
+            if (tmpSum >= part2[0]) {
+                part2[0] = tmpSum;
+                part2[1] = m2;
+            }
+        }
+
+        if(part1[0] >= part2[0]) return part1;
+        return part2;
+    }
+
+    // method 2:
+    public int maxSubArray2(int[] nums) {
+        // this method will change the original nums.
+        int result = nums[0];
+        for (int i = 1; i < nums.length; i ++) {
+            nums[i] = nums[i - 1] > 0 ? nums[i - 1] + nums[i] : nums[i] ;
+            if (nums[i] > result) result = nums[i];
+        }
+        return result;
+    }
+
 
     /**
      * 58. Length of Last Word
@@ -362,6 +442,62 @@ public class Solution {
         newArray[0] = 1;
         return newArray;
     }
+
+    /**
+     * 67. Add Binary
+     */
+    public String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        char[] aChar = a.toCharArray();
+        char[] bChar = b.toCharArray();
+
+        int c = 0;
+        int tmp ;
+        int al = a.length();
+        int bl = b.length();
+        for (int i = al - 1; i >= 0; i --) {
+            if (al - i <= bl) {
+                tmp = aChar[i] + bChar[i - al + bl] + c - 96;
+            } else {
+                tmp = aChar[i] + c - 48;
+            }
+            sb.append((char)(tmp % 2 + 48));
+            c = tmp / 2;
+        }
+
+        for (int i = bl - al - 1; i >= 0; i --) {
+            tmp = bChar[i]  + c - 48;
+            sb.append((char)(tmp % 2 + 48));
+            c = tmp / 2;
+        }
+
+        if (c == 1) sb.append('1');
+
+        return sb.reverse().toString();
+    }
+
+    /**
+     * 69. Sqrt(x)
+     */
+    public int mySqrt(int x) {
+        if (x == 0) return 0;
+        if (x == 1) return 1;
+        int left = 0;
+        int right = x;
+        int mid ;
+
+        while (left < right) {
+            mid = ( left + right ) / 2;
+            if (mid <= x / mid) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return left - 1;
+    }
+
 
     /**
      * 104. Maximum Depth of Binary Tree

@@ -8,6 +8,8 @@ import org.junit.After;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Solution Tester.
  *
@@ -196,6 +198,39 @@ public class SolutionTest {
      */
     @Test
     public void testSearchInsert() throws Exception {
+        assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 5), 2);
+        assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 2), 1);
+        assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 7), 4);
+        // assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 0), 0);
+
+    }
+
+    /**
+     * 38. Count and Say
+     */
+    @Test
+    public void testCountAndSay() throws Exception {
+        assertEquals(solution.countAndSay(1), "1");
+        assertEquals(solution.countAndSay(2), "11");
+        assertEquals(solution.countAndSay(3), "21");
+        assertEquals(solution.countAndSay(4), "1211");
+        assertEquals(solution.countAndSay(5), "111221");
+        assertEquals(solution.countAndSay(6), "312211");
+    }
+
+    /**
+     * 53. Maximum Subarray
+     */
+    @Test
+    public void testMaxSubArray() throws Exception {
+        assertEquals(solution.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}), 6);
+        assertEquals(solution.maxSubArray(new int[]{8,-19,5,-4,20}), 21);
+    }
+
+    @Test
+    public void testMaxSubArray2() throws Exception {
+        assertEquals(solution.maxSubArray2(new int[]{-2,1,-3,4,-1,2,1,-5,4}), 6);
+        assertEquals(solution.maxSubArray2(new int[]{8,-19,5,-4,20}), 21);
     }
 
     /**
@@ -214,6 +249,28 @@ public class SolutionTest {
     @Test
     public void testPlusOne() throws Exception {
         System.out.println(Arrays.toString(solution.plusOne(new int[]{9,9,9,9})));
+    }
+
+    /**
+     * 67. Add Binary
+     */
+    @Test
+    public void testAddBinary() throws Exception {
+        assertEquals("100", solution.addBinary("11", "1"));
+        assertEquals("10101", solution.addBinary("1010", "1011"));
+        assertEquals("1000", solution.addBinary("1", "111"));
+    }
+
+    /**
+     * 69. Sqrt(x)
+     */
+    @Test
+    public void testMySqrt() throws Exception {
+        assertEquals(2 , solution.mySqrt(4));
+        assertEquals(2, solution.mySqrt(8));
+        assertEquals(1, solution.mySqrt(1));
+        assertEquals(0, solution.mySqrt(0));
+        assertEquals(46339, solution.mySqrt(2147395599));
     }
 
     /**
