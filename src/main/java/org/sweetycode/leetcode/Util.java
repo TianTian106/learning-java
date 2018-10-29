@@ -26,13 +26,14 @@ public class Util {
         }
     }
 
-    public static void printListNode(ListNode listNode) {
-        if(listNode == null) return;
+    public static String printListNode(ListNode listNode) {
+        if(listNode == null) return "";
         String str = String.valueOf(listNode.val);
         while (listNode.next != null) {
             listNode = listNode.next;
             str = str + "->" + listNode.val;
         }
-        System.out.println(str);
+        return str;
+        // System.out.println(str);
     }
 }

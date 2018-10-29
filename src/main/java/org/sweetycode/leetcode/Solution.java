@@ -498,6 +498,62 @@ public class Solution {
         return left - 1;
     }
 
+    /**
+     * 70. Climbing Stairs
+     */
+    public int climbStairs(int n) {
+        // Dynamic programming
+        // F(n) = F(n-1) + F(n-2)
+        int a = 1;
+        int b = 2;
+
+        if (n == 1) return a;
+        if (n == 2) return b;
+
+        int i = 3;
+        int tmp;
+        while (i <= n) {
+            tmp = a;
+            a = b;
+            b = tmp + a;
+            i ++;
+        }
+        return b;
+    }
+
+    /**
+     * 83. Remove Duplicates from Sorted List
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return null;
+        ListNode pointer = head.next;
+        ListNode preNode = head;
+
+        while (pointer != null) {
+            if (preNode.val == pointer.val) {
+                preNode.next = pointer.next;
+            } else {
+                preNode = preNode.next;
+            }
+            pointer = pointer.next;
+        }
+        return head;
+    }
+
+    /**
+     * 88. Merge Sorted Array
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int pointer = m + n - 1;
+        m --;
+        n --;
+        while (m >= 0 && n >= 0) {
+            nums1[pointer --] = nums1[m] > nums2[n] ? nums1[m --] : nums2[n --];
+        }
+        while (n >= 0) {
+            nums1[pointer --] = nums2[n --];
+        }
+    }
 
     /**
      * 104. Maximum Depth of Binary Tree

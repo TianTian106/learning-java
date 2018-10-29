@@ -274,6 +274,52 @@ public class SolutionTest {
     }
 
     /**
+     * 70. Climbing Stairs
+     */
+    @Test
+    public void testClimbStairs() throws Exception {
+        assertEquals(3, solution.climbStairs(3));
+    }
+    
+    /**
+     * 83. Remove Duplicates from Sorted List
+     */
+    @Test
+    public void testDeleteDuplicates() throws Exception {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(1);
+        ListNode n3 = new ListNode(2);
+        n1.next = n2;
+        n2.next = n3;
+        assertEquals("1->2", Util.printListNode(solution.deleteDuplicates(n1)));
+
+        ListNode v1 = new ListNode(1);
+        ListNode v2 = new ListNode(1);
+        ListNode v3 = new ListNode(2);
+        ListNode v4 = new ListNode(3);
+        ListNode v5 = new ListNode(3);
+        v1.next = v2;
+        v2.next = v3;
+        v3.next = v4;
+        v4.next = v5;
+        assertEquals("1->2->3", Util.printListNode(solution.deleteDuplicates(v1)));
+    }
+
+    /**
+     * 88. Merge Sorted Array
+     */
+    @Test
+    public void testMerge() throws Exception {
+        int[] nums1 = new int[]{1,2,3,0,0,0};
+        solution.merge(nums1, 3, new int[]{2,5,6}, 3);
+        assertEquals(true, Arrays.equals(new int[]{1,2,2,3,5,6},nums1));
+
+        nums1 = new int[]{5,9,10,0,0,0,0};
+        solution.merge(nums1, 3, new int[]{2,4,8,11}, 4);
+        assertEquals(true, Arrays.equals(new int[]{2,4,5,8,9,10,11},nums1));
+    }
+
+    /**
      * 104. Maximum Depth of Binary Tree
      */
     @Test
