@@ -1,3 +1,35 @@
+# 176. Second Highest Salary
+Create table Employee (Id int, Salary int);
+insert into Employee (Id, Salary) values('1', '100');
+insert into Employee (Id, Salary) values('2', '200');
+insert into Employee (Id, Salary) values('3', '300');
+
+# 177. Nth Highest Salary
+Create table Employee (Id int, Salary int);
+insert into Employee (Id, Salary) values('1', '100');
+insert into Employee (Id, Salary) values('2', '200');
+insert into Employee (Id, Salary) values('3', '300');
+
+DELIMITER $$
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+  BEGIN
+    set N = N - 1;
+    RETURN (
+      SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT N, 1
+    );
+  END $$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
 # 262. Trips and Users
 Create table Trips (Id int,Client_Id int, Driver_Id int, City_Id int, Status ENUM('completed','cancelled_by_driver', 'cancelled_by_client'), Request_at varchar(50));
 Create table Users (Users_Id int,Banned varchar(50), Role ENUM('client', 'driver', 'partner'));
