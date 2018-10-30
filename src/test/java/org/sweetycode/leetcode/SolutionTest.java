@@ -320,6 +320,31 @@ public class SolutionTest {
     }
 
     /**
+     * 100. Same Tree
+     */
+    @Test
+    public void testIsSameTree() throws Exception {
+        TreeNode t1 = new TreeNode(1);
+        t1.left = new TreeNode(2);
+
+        TreeNode t2 = new TreeNode(1);
+        t2.right = new TreeNode(2);
+
+        assertEquals(false, solution.isSameTree(t1, t2));
+
+
+        TreeNode s1 = new TreeNode(1);
+        s1.left = new TreeNode(2);
+        s1.right = new TreeNode(1);
+
+        TreeNode s2 = new TreeNode(1);
+        s2.left = new TreeNode(1);
+        s2.right = new TreeNode(2);
+
+        assertEquals(false, solution.isSameTree(s1, s2));
+    }
+
+    /**
      * 104. Maximum Depth of Binary Tree
      */
     @Test
