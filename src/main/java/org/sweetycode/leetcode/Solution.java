@@ -556,6 +556,62 @@ public class Solution {
     }
 
     /**
+     * 100. Same Tree
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if ( p == null &&  q == null ) {
+            return true ;
+        }
+        if ( p == null || q == null ) {
+            return false ;
+        }
+        if ( p.val == q.val ) {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right) ;
+        }
+        return false ;
+    }
+
+    /**
+     * 101. Symmetric Tree
+     */
+    // method 1 : recursively
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
+        return isSymmetric(root.left, root.right);
+
+    }
+    private boolean isSymmetric(TreeNode left, TreeNode right) {
+        if (left == null && right == null) return true;
+        if (left == null || right == null) return false;
+        return left.val == right.val && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    }
+
+    // method 2 : iteratively (双端队列 Deque)
+    public boolean isSymmetric2(TreeNode root) {
+        if (root == null) return true;
+        LinkedList<TreeNode> deque = new LinkedList<>();
+        deque.addFirst(root.left);
+        deque.addLast(root.right);
+
+        TreeNode preNode = null;
+        TreeNode postNode = null;
+        while (!deque.isEmpty()) {
+            preNode = deque.pollFirst();
+            postNode = deque.pollLast();
+
+            if (preNode == null && postNode == null) continue;
+            if (preNode == null || postNode == null) return false;
+            if (preNode.val != postNode.val) return false;
+
+            deque.addFirst(preNode.right);
+            deque.addFirst(preNode.left);
+            deque.addLast(postNode.left);
+            deque.addLast(postNode.right);
+        }
+        return true;
+    }
+
+    /**
      * 104. Maximum Depth of Binary Tree
      */
     public int maxDepth(TreeNode root) {
@@ -601,6 +657,12 @@ public class Solution {
         treeNode.right = sortedArrayToBST(Arrays.copyOfRange(nums,nums.length/2 + 1, nums.length));
         return treeNode;
     }
+
+    /**
+     * 110. Balanced Binary Tree
+     */
+
+
 
     /**
      * 118. Pascal's Triangle

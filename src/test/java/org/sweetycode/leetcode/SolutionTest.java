@@ -320,6 +320,54 @@ public class SolutionTest {
     }
 
     /**
+     * 100. Same Tree
+     */
+    @Test
+    public void testIsSameTree() throws Exception {
+        TreeNode t1 = new TreeNode(1);
+        t1.left = new TreeNode(2);
+
+        TreeNode t2 = new TreeNode(1);
+        t2.right = new TreeNode(2);
+
+        assertEquals(false, solution.isSameTree(t1, t2));
+
+
+        TreeNode s1 = new TreeNode(1);
+        s1.left = new TreeNode(2);
+        s1.right = new TreeNode(1);
+
+        TreeNode s2 = new TreeNode(1);
+        s2.left = new TreeNode(1);
+        s2.right = new TreeNode(2);
+
+        assertEquals(false, solution.isSameTree(s1, s2));
+    }
+
+    /**
+     * 101. Symmetric Tree
+     */
+    @Test
+    public void testIsSymmetric() throws Exception {
+        TreeNode t1 = new TreeNode(1);
+        t1.left = new TreeNode(2);
+        t1.right = new TreeNode(2);
+        t1.left.left = new TreeNode(3);
+        t1.left.right = new TreeNode(4);
+        t1.right.left = new TreeNode(4);
+        t1.right.right = new TreeNode(3);
+        assertEquals(true, solution.isSymmetric(t1));
+
+        TreeNode t2 = new TreeNode(1);
+        t2.left = new TreeNode(2);
+        t2.right = new TreeNode(3);
+        t2.left.left = new TreeNode(3);
+        t2.right.left = new TreeNode(2);
+        assertEquals(false, solution.isSymmetric(t2));
+
+    }
+
+    /**
      * 104. Maximum Depth of Binary Tree
      */
     @Test
@@ -359,6 +407,12 @@ public class SolutionTest {
     public void testSortedArrayToBST() throws Exception {
         TreeNode treeNode =  solution.sortedArrayToBST(new int[]{-10,-3,0,5,9});
     }
+
+    /**
+     * 110. Balanced Binary Tree
+     */
+
+
 
     /**
      * 118. Pascal's Triangle
