@@ -1,15 +1,32 @@
+# 175. Combine Two Tables
+Create table Person (PersonId int, FirstName varchar(20), LastName varchar(20));
+Create table Address (AddressId int, PersonId int, City varchar(20), State varchar(20));
+# method :
+select FirstName, LastName, City, State
+from Person t1
+left outer join Address t2
+on t1.PersonId=t2.PersonId;
+
+
+
 # 176. Second Highest Salary
 Create table Employee (Id int, Salary int);
 insert into Employee (Id, Salary) values('1', '100');
 insert into Employee (Id, Salary) values('2', '200');
 insert into Employee (Id, Salary) values('3', '300');
+# method 1 :
+select ( select Salary from Employee group by Salary order by Salary desc limit 1,1 ) as SecondHighestSalary;
+# method 2 :
+select IFNULL((select Salary from Employee group by Salary order by Salary desc limit 1,1), null ) as SecondHighestSalary
+
+
 
 # 177. Nth Highest Salary
 Create table Employee (Id int, Salary int);
 insert into Employee (Id, Salary) values('1', '100');
 insert into Employee (Id, Salary) values('2', '200');
 insert into Employee (Id, Salary) values('3', '300');
-
+# method :
 DELIMITER $$
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
   BEGIN
@@ -22,9 +39,53 @@ DELIMITER ;
 
 
 
+# 178. Rank Scores
+Create table Scores (Id int,Score DECIMAL(3,2));
+insert into Scores (Id, Score) values ('1','3.5');
+insert into Scores (Id, Score) values ('2','3.65');
+insert into Scores (Id, Score) values ('3','4.0');
+insert into Scores (Id, Score) values ('4','3.85');
+insert into Scores (Id, Score) values ('5','4.0');
+insert into Scores (Id, Score) values ('6','3.65');
+# method 1 :
+select Score,(select count(distinct Score) from Scores t2 where t1.Score<=t2.Score ) Rank from Scores t1 order by Score desc;
+# method 2 :
+# mysql case when 返回第一个符合条件的值
+# (@preValue := Score)>=0 而非 @preValue := Score（当只有一条数据时应返回1而后者返回null）
+SELECT Score, cast(CASE WHEN Score = @preValue THEN @preRank WHEN (@preValue := Score)>=0 THEN @preRank := @preRank + 1 END as unsigned) AS Rank
+FROM Scores, (SELECT @preValue := NULL, @preRank := 0) t
+ORDER BY Score DESC;
 
 
 
+# 180. Consecutive Numbers
+Create table Logs (Id int,Num int);
+insert into Logs (Id, Num) values ('1','1');
+insert into Logs (Id, Num) values ('2','1');
+insert into Logs (Id, Num) values ('3','1');
+insert into Logs (Id, Num) values ('4','2');
+insert into Logs (Id, Num) values ('5','1');
+insert into Logs (Id, Num) values ('6','2');
+insert into Logs (Id, Num) values ('7','2');
+# method 1 :
+select Num as ConsecutiveNums from
+  ( select Num, case when @preValue = Num then @counter := @counter + 1
+                when @preValue := Num then @counter := 1 end var
+    from Logs, (select @preValue := NULL, @counter := 0) t
+  ) a
+where var=3
+group by Num;
+# method 1.1 :
+select distinct num as ConsecutiveNums
+from
+  ( select num, @counter := if(@preValue = num, @counter + 1, 1) as n, @preValue := num
+    from logs, (select @counter := 0, @preValue := null) as a
+  ) as t
+where t.n >= 3;
+
+
+
+# 181. Employees Earning More Than Their Managers
 
 
 
