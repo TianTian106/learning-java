@@ -1,11 +1,13 @@
-package org.sweetycode.leetcode;
+package org.sweetycode.leetcode.util;
+
+import org.sweetycode.leetcode.ListNode;
 
 import java.util.Arrays;
 
 /**
  * Created by tiantian on 21/07/2018.
  */
-public class Util {
+public class PrintUtil {
     public  static <E> void printArray(E[] a) {
         System.out.println(Arrays.toString(a));
     }

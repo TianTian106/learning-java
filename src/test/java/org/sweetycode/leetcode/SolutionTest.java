@@ -4,6 +4,8 @@ package org.sweetycode.leetcode;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+import org.sweetycode.leetcode.util.ConvertUtil;
+import org.sweetycode.leetcode.util.PrintUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -152,7 +154,7 @@ public class SolutionTest {
 
         listNode1.next = listNode2; listNode2.next = listNode4;
         l1.next = l3; l3.next = l4;
-        Util.printListNode(solution.mergeTwoListsNew(listNode1,l1));
+        PrintUtil.printListNode(solution.mergeTwoListsNew(listNode1,l1));
     }
 
     /**
@@ -291,7 +293,7 @@ public class SolutionTest {
         ListNode n3 = new ListNode(2);
         n1.next = n2;
         n2.next = n3;
-        assertEquals("1->2", Util.printListNode(solution.deleteDuplicates(n1)));
+        assertEquals("1->2", PrintUtil.printListNode(solution.deleteDuplicates(n1)));
 
         ListNode v1 = new ListNode(1);
         ListNode v2 = new ListNode(1);
@@ -302,7 +304,7 @@ public class SolutionTest {
         v2.next = v3;
         v3.next = v4;
         v4.next = v5;
-        assertEquals("1->2->3", Util.printListNode(solution.deleteDuplicates(v1)));
+        assertEquals("1->2->3", PrintUtil.printListNode(solution.deleteDuplicates(v1)));
     }
 
     /**
@@ -411,8 +413,39 @@ public class SolutionTest {
     /**
      * 110. Balanced Binary Tree
      */
+    @Test
+    public void testIsBalanced() throws Exception {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[3,9,20,null,null,15,7]");
+        assertEquals(true, solution.isBalanced(t1));
 
+        TreeNode t2 = ConvertUtil.stringToTreeNode("[1,2,2,3,3,null,null,4,4]");
+        assertEquals(false, solution.isBalanced(t2));
 
+        TreeNode t3 = ConvertUtil.stringToTreeNode("[1,2,2,3,null,null,3,4,null,null,4]");
+        assertEquals(false, solution.isBalanced(t3));
+    }
+
+    /**
+     * 111. Minimum Depth of Binary Tree
+     */
+    @Test
+    public void testMinDepth() throws Exception {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[3,9,20,null,null,15,7]");
+        assertEquals(2, solution.minDepth(t1));
+
+        TreeNode t3 = ConvertUtil.stringToTreeNode("[1,2,2,3,null,null,3,4,null,null,4]");
+        assertEquals(4, solution.minDepth(t3));
+    }
+
+    /**
+     * 112. Path Sum
+     */
+    @Test
+    public void testHasPathSum() throws Exception {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[5,4,8,11,null,13,4,7,2,null,null,null,1]");
+        assertEquals(false, solution.hasPathSum(t1, 17));
+        assertEquals(true, solution.hasPathSum(t1, 18));
+    }
 
     /**
      * 118. Pascal's Triangle
@@ -428,6 +461,42 @@ public class SolutionTest {
     @Test
     public void testGetRow() throws Exception {
         System.out.println(solution.getRow(4));
+    }
+
+    /**
+     * 121. Best Time to Buy and Sell Stock
+     */
+    @Test
+    public void testMaxProfit() throws Exception {
+        assertEquals(5, solution.maxProfit(new int[]{7,1,5,3,6,4}));
+        assertEquals(0, solution.maxProfit(new int[]{7,6,4,3,1}));
+        assertEquals(14, solution.maxProfit(new int[]{7,9,14,2,1,15}));
+    }
+
+    /**
+     * 122. Best Time to Buy and Sell Stock II
+     */
+    @Test
+    public void testMaxProfitII() throws Exception {
+        assertEquals(7, solution.maxProfitII(new int[]{7,1,5,3,6,4}));
+        assertEquals(4, solution.maxProfitII(new int[]{1,2,3,4,5}));
+        assertEquals(0, solution.maxProfitII(new int[]{7,6,4,3,1}));
+    }
+    @Test
+    public void testMaxProfitII2() throws Exception {
+        assertEquals(7, solution.maxProfitII2(new int[]{7,1,5,3,6,4}));
+        assertEquals(4, solution.maxProfitII2(new int[]{1,2,3,4,5}));
+        assertEquals(0, solution.maxProfitII2(new int[]{7,6,4,3,1}));
+    }
+
+    /**
+     * 125. Valid Palindrome
+     */
+    @Test
+    public void testIsPalindromeString() throws Exception {
+        assertEquals(true, solution.isPalindrome("A man, a plan, a canal: Panama"));
+        assertEquals(false, solution.isPalindrome("race a car"));
+        assertEquals(true, solution.isPalindrome(" "));
     }
 
     /**
@@ -481,7 +550,7 @@ public class SolutionTest {
         listNode3.next = listNode4;
         listNode4.next = listNode5;
 
-        Util.printListNode(solution.reverseList(listNode1));
+        PrintUtil.printListNode(solution.reverseList(listNode1));
     }
 
     /**
@@ -561,9 +630,9 @@ public class SolutionTest {
      */
     @Test
     public void testIntersection() throws Exception {
-        Util.printArray(solution.intersection(new int[]{1,2,2,1}, new int[]{2,2}));
-        Util.printArray(solution.intersection(new int[]{4,9,5}, new int[]{9,4,9,8,4}));
-        Util.printArray(solution.intersection(new int[]{}, new int[]{}));
+        PrintUtil.printArray(solution.intersection(new int[]{1,2,2,1}, new int[]{2,2}));
+        PrintUtil.printArray(solution.intersection(new int[]{4,9,5}, new int[]{9,4,9,8,4}));
+        PrintUtil.printArray(solution.intersection(new int[]{}, new int[]{}));
     }
 
     /**
@@ -700,7 +769,7 @@ public class SolutionTest {
      */
     @Test
     public void testMatrixReshape() throws Exception {
-        Util.printArray(solution.matrixReshape(new int[][]{{1,2,3},{4,5,6},{7,8,9},{10,11,12}},6,2));
+        PrintUtil.printArray(solution.matrixReshape(new int[][]{{1,2,3},{4,5,6},{7,8,9},{10,11,12}},6,2));
     }
 
     /**
@@ -956,8 +1025,8 @@ public class SolutionTest {
      */
     @Test
     public void testFlipAndInvertImage() throws Exception {
-        Util.printArray(solution.flipAndInvertImage(new int[][]{{1,1,0},{1,0,1},{0,0,0}}));
-        Util.printArray(solution.flipAndInvertImage(new int[][]{{1,1,0,0},{1,0,0,1},{0,1,1,1},{1,0,1,0}}));
+        PrintUtil.printArray(solution.flipAndInvertImage(new int[][]{{1,1,0},{1,0,1},{0,0,0}}));
+        PrintUtil.printArray(solution.flipAndInvertImage(new int[][]{{1,1,0,0},{1,0,0,1},{0,1,1,1},{1,0,1,0}}));
     }
 
     /**
@@ -982,8 +1051,8 @@ public class SolutionTest {
      */
     @Test
     public void testTranspose() throws Exception {
-        Util.printArray(solution.transpose(new int[][]{{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
-        Util.printArray(solution.transpose(new int[][]{{1,2,3},{4,5,6}}));
+        PrintUtil.printArray(solution.transpose(new int[][]{{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
+        PrintUtil.printArray(solution.transpose(new int[][]{{1,2,3},{4,5,6}}));
     }
 
     /**
@@ -1066,8 +1135,8 @@ public class SolutionTest {
      */
     @Test
     public void testUncommonFromSentences() throws Exception {
-        Util.printArray(solution.uncommonFromSentences("this apple is sweet", "this apple is sour"));
-        Util.printArray(solution.uncommonFromSentences("apple apple", "banana"));
+        PrintUtil.printArray(solution.uncommonFromSentences("this apple is sweet", "this apple is sour"));
+        PrintUtil.printArray(solution.uncommonFromSentences("apple apple", "banana"));
     }
 
     /**
@@ -1075,10 +1144,10 @@ public class SolutionTest {
      */
     @Test
     public void testFairCandySwap() throws Exception {
-        Util.printArray(solution.fairCandySwap(new int[]{1,1}, new int[]{2,2}));
-        Util.printArray(solution.fairCandySwap(new int[]{1,2}, new int[]{2,3}));
-        Util.printArray(solution.fairCandySwap(new int[]{2}, new int[]{1,3}));
-        Util.printArray(solution.fairCandySwap(new int[]{1,2,5}, new int[]{2,4}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{1,1}, new int[]{2,2}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{1,2}, new int[]{2,3}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{2}, new int[]{1,3}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{1,2,5}, new int[]{2,4}));
     }
 
     /**

@@ -661,8 +661,51 @@ public class Solution {
     /**
      * 110. Balanced Binary Tree
      */
+    public boolean isBalanced(TreeNode root) {
+        if (getBalancedHeight(root) >=0) return true;
+        return false;
+    }
+
+    private int getBalancedHeight(TreeNode root) {
+        if (root == null) return 0;
+        int lefth = getBalancedHeight(root.left);
+        int righth = getBalancedHeight(root.right);
+        if (lefth < 0 || righth < 0 || Math.abs(lefth - righth) > 1) return -1;
+        return Math.max(lefth, righth) + 1;
+    }
 
 
+    /**
+     * 111. Minimum Depth of Binary Tree
+     */
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+        if (root.left == null || root.right == null) return Math.max(minDepth(root.left), minDepth(root.right)) + 1;
+        return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+    }
+
+    public int minDepth2(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = minDepth(root.left);
+        int rightDepth = minDepth(root.right);
+        if (leftDepth == 0) {
+            return rightDepth + 1;
+        } else if (rightDepth == 0) {
+            return leftDepth + 1;
+        } else {
+            return Math.min(leftDepth, rightDepth) + 1;
+        }
+    }
+
+    /**
+     * 112. Path Sum
+     */
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) return false;
+        if (root.left == null && root.right == null) return root.val == sum;
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
 
     /**
      * 118. Pascal's Triangle
@@ -715,6 +758,69 @@ public class Solution {
 //        }
 //        return ret;
 //    }
+
+
+    /**
+     * 121. Best Time to Buy and Sell Stock
+     */
+    public int maxProfit(int[] prices) {
+        if (prices.length <= 1) return 0;
+        int profit = 0;
+        int premin = prices[0];
+        for (int i = 1; i < prices.length; i ++) {
+            if (prices[i] <= premin) {
+                premin = prices[i];
+            } else {
+                profit = Math.max(prices[i] - premin, profit);
+            }
+        }
+        return profit;
+    }
+
+    /**
+     * 122. Best Time to Buy and Sell Stock II
+     */
+    // sell before depreciation. buy before revaluation
+    public int maxProfitII(int[] prices) {
+        if (prices.length <= 1) return 0;
+        int profit = 0;
+        int premin = prices[0];
+        for (int i = 1; i < prices.length; i ++) {
+            if (prices[i] <= premin) {
+                premin = prices[i];
+            } else if (i == prices.length - 1 || prices[i + 1] < prices[i]) {
+                profit += prices[i] -premin;
+                premin = prices[i];
+            }
+        }
+        return profit;
+    }
+    // better method :
+    public int maxProfitII2(int[] prices) {
+        if (prices.length <= 1) return 0;
+        int profit = 0;
+        for (int i = 1; i < prices.length; i ++) {
+            if (prices[i] > prices[i - 1]) {
+                profit += prices[i] - prices[i -1];
+            }
+        }
+        return profit;
+    }
+
+    /**
+     * 125. Valid Palindrome
+     */
+    public boolean isPalindrome(String s) {
+        // regex is slow.
+        String a = s.toLowerCase().replaceAll("[^a-z0-9]+","");
+        if (a.length() == 0) return true;
+        for (int i = 0; i <= (a.length() - 1) / 2; i ++) {
+            if (a.charAt(i) != a.charAt(a.length() - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * 136. Single Number
