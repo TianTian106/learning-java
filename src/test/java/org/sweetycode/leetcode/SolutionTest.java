@@ -508,6 +508,80 @@ public class SolutionTest {
     }
 
     /**
+     * 141. Linked List Cycle
+     */
+    @Test
+    public void testHasCycle2() throws Exception {
+        assertEquals(false, solution.hasCycle2(ConvertUtil.stringToListNode("[1,2,3,4]")));
+    }
+
+    /**
+     * 155. Min Stack
+     */
+    @Test
+    public void testMinStack() throws Exception {
+        Solution.MinStack minStack = solution.new MinStack();
+
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        assertEquals(-3, minStack.getMin());
+        minStack.pop();
+        assertEquals(0, minStack.top());
+        assertEquals(-2, minStack.getMin());
+
+        Solution.MinStack minStack2 = solution.new MinStack();
+        minStack2.push(512);
+        minStack2.push(-1024);
+        minStack2.push(-1024);
+        minStack2.push(512);
+        minStack2.pop();
+        assertEquals(-1024, minStack2.getMin());
+        minStack2.pop();
+        assertEquals(-1024, minStack2.getMin());
+        minStack2.pop();
+        assertEquals(512, minStack2.getMin());
+    }
+
+    /**
+     * 160. Intersection of Two Linked Lists
+     */
+    @Test
+    public void testGetIntersectionNode() throws Exception {
+        ListNode l3 = ConvertUtil.stringToListNode("[6,7,8]");
+        ListNode l1 = ConvertUtil.stringToListNode("[1,2]");
+        ListNode l2 = ConvertUtil.stringToListNode("[3,4,5]");
+        l1.next.next = l3;
+        l2.next.next.next = l3;
+        assertEquals(6, solution.getIntersectionNode(l1,l2).val);
+    }
+    
+    /**
+     * 167. Two Sum II - Input array is sorted
+     */
+    @Test
+    public void testTwoSumII() throws Exception {
+        assertEquals(Arrays.toString(new int[]{1,2}), Arrays.toString(solution.twoSumII(new int[]{2,7,11,15}, 9)));
+        assertEquals(Arrays.toString(new int[]{1,2}), Arrays.toString(solution.twoSumII(new int[]{-1,0,-1}, -1)));
+    }
+    @Test
+    public void testTwoSumII2() throws Exception {
+        assertEquals(Arrays.toString(new int[]{1,2}), Arrays.toString(solution.twoSumII2(new int[]{2,7,11,15}, 9)));
+
+    }
+
+    /**
+     * 168. Excel Sheet Column Title
+     */
+    @Test
+    public void testConvertToTitle() throws Exception {
+        assertEquals("AAA", solution.convertToTitle(703));
+        assertEquals("ZY", solution.convertToTitle(701));
+        assertEquals("AB", solution.convertToTitle(28));
+        assertEquals("A", solution.convertToTitle(1));
+    }
+
+    /**
      * p169. Majority Element
      */
     @Test
@@ -524,6 +598,32 @@ public class SolutionTest {
     public void testTitleToNumber() throws Exception {
         System.out.println(solution.titleToNumber("ZY"));
         System.out.println(solution.titleToNumber("A"));
+    }
+
+
+    /**
+     * 172. Factorial Trailing Zeroes
+     */
+    @Test
+    public void testTrailingZeroes() throws Exception {
+        assertEquals(0, solution.trailingZeroes(3));
+        assertEquals(1, solution.trailingZeroes(5));
+        assertEquals(3, solution.trailingZeroes(16));
+        assertEquals(249, solution.trailingZeroes(1000));
+    }
+
+    /**
+     * 189. Rotate Array
+     */
+    @Test
+    public void testRotate() throws Exception {
+        int[] a1 = new int[]{1,2,3,4,5,6,7};
+        solution.rotate(a1,3);
+        assertEquals(Arrays.toString(new int[]{5,6,7,1,2,3,4}), Arrays.toString(a1));
+
+        int [] a2 = new int[]{-1,-100,3,99};
+        solution.rotate(a2,2);
+        assertEquals(Arrays.toString(new int[]{3,99,-1,-100}), Arrays.toString(a2));
     }
 
     /**
