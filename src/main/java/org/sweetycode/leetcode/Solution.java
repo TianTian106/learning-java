@@ -1,5 +1,6 @@
 package org.sweetycode.leetcode;
 
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -835,6 +836,163 @@ public class Solution {
     }
 
     /**
+     * 141. Linked List Cycle
+     */
+    // method 1 :
+    public boolean hasCycle(ListNode head) {
+        Set<ListNode> nodeSet = new HashSet<>();
+        while (head != null) {
+            if (nodeSet.contains(head)) {
+                return true;
+            }
+            nodeSet.add(head);
+            head = head.next;
+        }
+        return false;
+    }
+    // method 2 :
+    public boolean hasCycle2(ListNode head) {
+        if (head == null) return false;
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (fast != slow) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return true;
+    }
+
+    /**
+     * 155. Min Stack
+     */
+    class MinStack {
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> minStack = new Stack<>();
+
+        /** initialize your data structure here. */
+        public MinStack() {
+            // method 2 : use LinkedList instead of Stack, and initial stack and minStack here.
+        }
+
+        public void push(int x) {
+            stack.push(x);
+            if (minStack.empty() || minStack.lastElement() >= x) {
+                minStack.push(x);
+            }
+        }
+
+        public void pop() {
+            if (stack.lastElement().equals(minStack.lastElement())) {
+                minStack.pop();
+            }
+            stack.pop();
+
+        }
+
+        public int top() {
+            return stack.lastElement();
+        }
+
+        public int getMin() {
+            return minStack.lastElement();
+        }
+
+    }
+
+    /**
+     * 160. Intersection of Two Linked Lists
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int l1 = 0;
+        int l2 = 0;
+
+        ListNode p1 = headA;
+        ListNode p2 = headB;
+
+        while (p1 != null) {
+            l1 ++;
+            p1 = p1.next;
+        }
+
+        while (p2 != null) {
+            l2 ++;
+            p2 = p2.next;
+        }
+
+        p1 = headA;
+        p2 = headB;
+        for (int i = Math.abs(l1-l2); i > 0; i --) {
+            if (l1 > l2) {
+                p1 = p1.next;
+            } else {
+                p2 = p2.next;
+            }
+        }
+
+        while (p1 != null && p2 != null) {
+            if (p1.val == p2.val) {
+                return p1;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        return null;
+    }
+
+    /**
+     * 167. Two Sum II - Input array is sorted
+     */
+    public int[] twoSumII(int[] numbers, int target) {
+        int l = numbers.length;
+        Map<Integer, Integer> numMap = new HashMap<>();
+        for (int i = 0; i < l; i ++) {
+            numMap.put(numbers[i], i);
+        }
+
+        for (int i = 0; i < l; i ++) {
+            if (numbers[i] > target) return null;
+            if (numMap.containsKey(target - numbers[i])) {
+                return new int[]{i + 1, numMap.get(target - numbers[i]) + 1};
+            }
+        }
+        return null;
+    }
+
+    // method 2 :
+    public int[] twoSumII2(int[] numbers, int target) {
+        int i = 0;
+        int j = numbers.length - 1;
+
+        while (i < j) {
+            if (numbers[i] + numbers[j] == target) {
+                return new int[]{i + 1, j + 1};
+            } else if (numbers[i] + numbers[j] > target) {
+                j --;
+            } else if (numbers[i] + numbers[j] < target) {
+                i ++;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 168. Excel Sheet Column Title
+     */
+    public String convertToTitle(int n) {
+        n = n - 1;
+        String result = "";
+        while (n >= 0) {
+            result = (char)(n % 26 + 65) + result;
+            n = n / 26 -1;
+        }
+        return result;
+    }
+
+    /**
      * p169. Majority Element
      */
     public int majorityElement(int[] nums) {
@@ -866,6 +1024,37 @@ public class Solution {
             result = result + (c[i]-64)*(int)Math.pow(26,c.length - i - 1);
         }
         return result;
+    }
+
+    /**
+     * 172. Factorial Trailing Zeroes
+     * be careful of overflow problem.
+     f(5!) = 1 + f(1!) = 1
+     f(10!) = 2 + f(2!) = 2
+     f(20!) = 4 + f(4!) = 4
+     f(100!) = 20 + f(20!) = 20 + 4 + f(4!) = 24
+     f(1000!) = 200 + f(200!) = 200 + 40 + f(40!) = 240 + 8 + f(8!) = 248 + 1 + f(1) =249
+     *
+     */
+
+    public int trailingZeroes(int n) {
+        int zeroNum = 0;
+        while (n > 0) {
+            zeroNum += n/5;
+            n /= 5;
+        }
+        return zeroNum;
+    }
+
+    public int trailingZeroes2(int n) {
+        return n == 0 ? 0 : n/5 + trailingZeroes(n/5);
+    }
+
+    /**
+     * 189. Rotate Array
+     */
+    public void rotate(int[] nums, int k) {
+        // TODO
     }
 
     /**
