@@ -1054,8 +1054,79 @@ public class Solution {
      * 189. Rotate Array
      */
     public void rotate(int[] nums, int k) {
-        // TODO
+        int l = nums.length;
+        if (l <= 1) return;
+        while (k >= l) {
+            k = k % l;
+        }
+        if (k == 0) return;
+
+        reverse(nums, 0, l - k - 1);
+        reverse(nums, l - k, l - 1);
+        reverse(nums,0, l - 1);
     }
+    // reverse array nums[i...j]
+    private void reverse(int[] nums, int i, int j) {
+        int tmp;
+        while (i < j) {
+            tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+            i ++;
+            j --;
+        }
+    }
+
+    /**
+     * 190. Reverse Bits
+     */
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        int result = 0;
+        int times = 32;
+        while (times > 0) {
+//            result <<= 1;
+//            result += (n & 1);
+            result = (result << 1) | (n & 1);
+            n >>>= 1;
+            times --;
+        }
+        return result;
+    }
+
+
+    /**
+     * 191. Number of 1 Bits
+     */
+    // you need to treat n as an unsigned value
+    public int hammingWeight(Integer n) {
+        int result = 0;
+        while (n != 0) {    // > 0 change to != 0, for input test: 2147483648
+            if ((n & 1) == 1) {
+                result ++;
+            }
+            n >>>= 1;
+        }
+        return result;
+    }
+
+    public int hammingWeight2(int n) {
+        int res = 0;
+        while (n != 0) {
+            n = n & (n - 1);    // 将最右边的一个1置0后返回给n
+            res++;
+        }
+        return res;
+    }
+
+    /**
+     * 198. House Robber
+     */
+    public int rob(int[] nums) {
+        // TODO
+        return 0;
+    }
+
 
     /**
      * 202. Happy Number

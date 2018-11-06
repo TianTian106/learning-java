@@ -7,6 +7,7 @@ import org.junit.After;
 import org.sweetycode.leetcode.util.ConvertUtil;
 import org.sweetycode.leetcode.util.PrintUtil;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -621,9 +622,39 @@ public class SolutionTest {
         solution.rotate(a1,3);
         assertEquals(Arrays.toString(new int[]{5,6,7,1,2,3,4}), Arrays.toString(a1));
 
-        int [] a2 = new int[]{-1,-100,3,99};
+        int[] a2 = new int[]{-1,-100,3,99};
         solution.rotate(a2,2);
         assertEquals(Arrays.toString(new int[]{3,99,-1,-100}), Arrays.toString(a2));
+
+        int[] a3 = new int[]{-1};
+        solution.rotate(a3,2);
+        assertEquals(Arrays.toString(new int[]{-1}), Arrays.toString(a3));
+    }
+
+    /**
+     * 190. Reverse Bits
+     */
+    @Test
+    public void testReverseBits() throws Exception {
+        assertEquals(964176192, solution.reverseBits(43261596));
+    }
+
+    /**
+     * 191. Number of 1 Bits
+     */
+    @Test
+    public void testHammingWeight() throws Exception {
+        assertEquals(3, solution.hammingWeight(11));
+        assertEquals(1, solution.hammingWeight(128));
+        //assertEquals(1,solution.hammingWeight(  2147483648);
+    }
+
+
+    /**
+     * 198. House Robber
+     */
+    @Test
+    public void testRob() throws Exception {
     }
 
     /**
