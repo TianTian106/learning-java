@@ -1941,6 +1941,40 @@ public class Solution {
         return new ArrayList<>(queue);
     }
 
+    // method 2 :
+    public static  List<String> letterCasePermutation2(String S) {
+        int count = 0;
+        char[] str = S.toLowerCase().toCharArray();
+        for (int i=0; i<str.length; i++) {
+            if (Character.isLetter(str[i])) {
+                count++;
+            }
+        }
+
+        int size = 1 << count;
+        return new java.util.AbstractList<String>() {
+            char[] temp = Arrays.copyOf(str,str.length);
+            @Override
+            public String get(int index) {
+                for (int i=0; i<str.length; i++) {
+                    temp[i] = str[i];
+                    if (Character.isLetter(str[i])) {
+                        if ( (index & 1) > 0) {
+                            temp[i] = Character.toUpperCase(str[i]);
+                        }
+                        index >>>= 1;
+                    }
+                }
+                return new String(temp);
+            }
+
+            @Override
+            public int size() {
+                return size;
+            }
+        };
+    }
+
     /**
      * 804. Unique Morse Code Words
      */

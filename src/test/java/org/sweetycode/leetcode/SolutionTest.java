@@ -1035,6 +1035,14 @@ public class SolutionTest {
         assertEquals("[12345]",ConvertUtil.stringListToString(solution.letterCasePermutation("12345")));
         assertEquals("[]",ConvertUtil.stringListToString(solution.letterCasePermutation("")));
     }
+    @Test
+    public void testLetterCasePermutation2() throws Exception {
+        // assertEquals("[c,C]",ConvertUtil.stringListToString(solution.letterCasePermutation2("C")));
+        assertEquals("[a1b2,a1B2,A1b2,A1B2]",ConvertUtil.stringListToString(solution.letterCasePermutation2("a1b2")));
+        assertEquals("[3z4,3Z4]",ConvertUtil.stringListToString(solution.letterCasePermutation2("3z4")));
+        assertEquals("[12345]",ConvertUtil.stringListToString(solution.letterCasePermutation2("12345")));
+        assertEquals("[]",ConvertUtil.stringListToString(solution.letterCasePermutation2("")));
+    }
 
     /**
      * 804. Unique Morse Code Words
