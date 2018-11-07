@@ -1913,6 +1913,34 @@ public class Solution {
         }
         return true;
     }
+
+    /**
+     * 784. Letter Case Permutation
+     * TODO : rank 1 method.
+     */
+    public List<String> letterCasePermutation(String S) {
+        int l = S.length();
+        S = S.toLowerCase();
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(S);
+        int queueSize;
+        String tmp;
+        char s;
+        for (int i = 0; i < l; i ++) {
+            queueSize = queue.size();
+            s = (char)(S.charAt(i) - 32);
+            if (s >= 'A' && s <= 'Z' ) {
+                while (queueSize > 0) {
+                    tmp = queue.poll();
+                    queue.offer(tmp);
+                    queue.offer(tmp.substring(0,i) + s + tmp.substring(i + 1));
+                    queueSize --;
+                }
+            }
+        }
+        return new ArrayList<>(queue);
+    }
+
     /**
      * 804. Unique Morse Code Words
      */

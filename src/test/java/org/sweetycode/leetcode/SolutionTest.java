@@ -10,6 +10,7 @@ import org.sweetycode.leetcode.util.PrintUtil;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -327,24 +328,13 @@ public class SolutionTest {
      */
     @Test
     public void testIsSameTree() throws Exception {
-        TreeNode t1 = new TreeNode(1);
-        t1.left = new TreeNode(2);
+        String t1 = "[1,2,null,null,null]";
+        String t2 = "[1,null,2,null,null]";
+        assertEquals(false, solution.isSameTree(ConvertUtil.stringToTreeNode(t1), ConvertUtil.stringToTreeNode(t2)));
 
-        TreeNode t2 = new TreeNode(1);
-        t2.right = new TreeNode(2);
-
-        assertEquals(false, solution.isSameTree(t1, t2));
-
-
-        TreeNode s1 = new TreeNode(1);
-        s1.left = new TreeNode(2);
-        s1.right = new TreeNode(1);
-
-        TreeNode s2 = new TreeNode(1);
-        s2.left = new TreeNode(1);
-        s2.right = new TreeNode(2);
-
-        assertEquals(false, solution.isSameTree(s1, s2));
+        String s1 ="[1,2,1,null,null,null,null]";
+        String s2 = "[1,1,2,null,null,null,null]";
+        assertEquals(false, solution.isSameTree(ConvertUtil.stringToTreeNode(s1), ConvertUtil.stringToTreeNode(s2)));
     }
 
     /**
@@ -352,22 +342,8 @@ public class SolutionTest {
      */
     @Test
     public void testIsSymmetric() throws Exception {
-        TreeNode t1 = new TreeNode(1);
-        t1.left = new TreeNode(2);
-        t1.right = new TreeNode(2);
-        t1.left.left = new TreeNode(3);
-        t1.left.right = new TreeNode(4);
-        t1.right.left = new TreeNode(4);
-        t1.right.right = new TreeNode(3);
-        assertEquals(true, solution.isSymmetric(t1));
-
-        TreeNode t2 = new TreeNode(1);
-        t2.left = new TreeNode(2);
-        t2.right = new TreeNode(3);
-        t2.left.left = new TreeNode(3);
-        t2.right.left = new TreeNode(2);
-        assertEquals(false, solution.isSymmetric(t2));
-
+        assertEquals(true, solution.isSymmetric(ConvertUtil.stringToTreeNode("[1,2,2,3,4,4,3]")));
+        assertEquals(false, solution.isSymmetric(ConvertUtil.stringToTreeNode("[1,2,2,null,3,null,3]")));
     }
 
     /**
@@ -375,14 +351,8 @@ public class SolutionTest {
      */
     @Test
     public void testMaxDepth() throws Exception {
-        TreeNode treeNode = new TreeNode(4);
-        treeNode.left = new TreeNode(2);
-        treeNode.right = new TreeNode(7);
-        treeNode.left.left = new TreeNode(1);
-        treeNode.left.right = new TreeNode(3);
-        treeNode.right.left = new TreeNode(6);
-        treeNode.right.right = new TreeNode(9);
-        System.out.println(solution.maxDepth(treeNode));
+        assertEquals(3, solution.maxDepth(ConvertUtil.stringToTreeNode("[3,9,20,null,null,15,7]")));
+        assertEquals(3, solution.maxDepth(ConvertUtil.stringToTreeNode("[4,2,7,1,3,6,9]")));
     }
 
     /**
@@ -390,17 +360,8 @@ public class SolutionTest {
      */
     @Test
     public void testLevelOrderBottom() throws Exception {
-        TreeNode treeNode3 = new TreeNode(3);
-        TreeNode treeNode9 = new TreeNode(9);
-        TreeNode treeNode20 = new TreeNode(20);
-        TreeNode treeNode15 = new TreeNode(15);
-        TreeNode treeNode7 = new TreeNode(7);
-        treeNode3.left = treeNode9;
-        treeNode3.right = treeNode20;
-        treeNode20.left = treeNode15;
-        treeNode20.right = treeNode7;
-        System.out.println(solution.levelOrderBottom(treeNode3));
-
+        String root = "[3,9,20,null,null,15,7]";
+        assertEquals("[[15, 7],[9, 20],[3]]",ConvertUtil.int2dListToString(solution.levelOrderBottom(ConvertUtil.stringToTreeNode(root))));
     }
 
     /**
@@ -408,7 +369,8 @@ public class SolutionTest {
      */
     @Test
     public void testSortedArrayToBST() throws Exception {
-        TreeNode treeNode =  solution.sortedArrayToBST(new int[]{-10,-3,0,5,9});
+        int[] nums  = new int[]{-10,-3,0,5,9};
+        assertEquals("[0, -3, 9, -10, null, 5, null, null, null, null, null]", ConvertUtil.treeNodeToString(solution.sortedArrayToBST(nums)));
     }
 
     /**
@@ -689,13 +651,9 @@ public class SolutionTest {
      */
     @Test
     public void testInvertTree() throws Exception {
-        TreeNode treeNode = new TreeNode(4);
-        treeNode.left = new TreeNode(2);
-        treeNode.right = new TreeNode(7);
-        treeNode.left.left = new TreeNode(1);
-        treeNode.left.right = new TreeNode(3);
-        treeNode.right.left = new TreeNode(6);
-        treeNode.right.right = new TreeNode(9);
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[4,2,7,1,3,6,9]");
+        TreeNode t2 = ConvertUtil.stringToTreeNode("[4,7,2,9,6,3,1]");
+        assertEquals(ConvertUtil.treeNodeToString(t2), ConvertUtil.treeNodeToString(solution.invertTree(t1)));
     }
 
     /**
@@ -710,16 +668,8 @@ public class SolutionTest {
      */
     @Test
     public void testBinaryTreePaths() throws Exception {
-        TreeNode treeNode1 = new TreeNode(1);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode3 = new TreeNode(3);
-        TreeNode treeNode5 = new TreeNode(5);
-
-        treeNode1.left = treeNode2;
-        treeNode1.right = treeNode3;
-        treeNode2.right = treeNode5;
-
-        System.out.println(solution.binaryTreePaths(treeNode1));
+        TreeNode root = ConvertUtil.stringToTreeNode("[1,2,3,null,5]");
+        assertEquals("[1->2->5,1->3]", ConvertUtil.stringListToString(solution.binaryTreePaths(root)));
     }
 
     /**
@@ -954,16 +904,9 @@ public class SolutionTest {
      */
     @Test
     public void testAverageOfLevels() throws Exception {
-        TreeNode treeNode15 = new TreeNode(15);
-        TreeNode treeNode7 = new TreeNode(7);
-        TreeNode treeNode20 = new TreeNode(20);
-        treeNode20.left = treeNode15;
-        treeNode20.right = treeNode7;
-        TreeNode treeNode9 = new TreeNode(9);
-        TreeNode treeNode3 = new TreeNode(3);
-        treeNode3.left = treeNode9;
-        treeNode3.right = treeNode20;
-        System.out.println(solution.averageOfLevels(treeNode3));
+        List<Double> expected = new ArrayList<>();
+        expected.add(3.0); expected.add(14.5); expected.add(11.0);
+        assertEquals(true, expected.equals(solution.averageOfLevels(ConvertUtil.stringToTreeNode("[3,9,20,null,null,15,7]"))));
     }
 
     /**
@@ -990,17 +933,7 @@ public class SolutionTest {
      */
     @Test
     public void testTrimBST() throws Exception {
-        TreeNode treeNode1 = new TreeNode(1);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode0 = new TreeNode(0);
-        TreeNode treeNode4 = new TreeNode(4);
-        TreeNode treeNode3 = new TreeNode(3);
-        treeNode2.left = treeNode1;
-        treeNode0.right = treeNode2;
-        treeNode3.left = treeNode0;
-        treeNode3.right = treeNode4;
-        System.out.println(solution.trimBST(treeNode3,1,3));
-        System.out.println("pause");
+        assertEquals("[3, 2, null, 1, null, null, null]", ConvertUtil.treeNodeToString(solution.trimBST(ConvertUtil.stringToTreeNode("[3,0,4,null,2,null,null,1,null]"), 1, 3)));
     }
 
     /**
@@ -1083,12 +1016,24 @@ public class SolutionTest {
      */
     @Test
     public void testIsToeplitzMatrix() throws Exception {
-        System.out.println(solution.isToeplitzMatrix(new int[][]{{1,2,3,4},{5,1,2,3},{9,5,1,2}}));// true
-        System.out.println(solution.isToeplitzMatrix(new int[][]{{1,2},{2,2}})); // false
-        System.out.println(solution.isToeplitzMatrix(new int[][]{{36,59,71,15,26,82,87},{56,36,59,71,15,26,82},{15,0,36,59,71,15,26}})); // false
-        System.out.println(solution.isToeplitzMatrix(new int[][]{{18},{66}})); //true
-        System.out.println(solution.isToeplitzMatrix(new int[][]{{18},{66},{57}})); //true
-        System.out.println(solution.isToeplitzMatrix(new int[][]{{44,35,39},{15,44,35},{17,15,44},{80,17,15},{43,80,0},{77,43,80}})); //false
+        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{1,2,3,4},{5,1,2,3},{9,5,1,2}}));// true
+        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{1,2},{2,2}})); // false
+        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{36,59,71,15,26,82,87},{56,36,59,71,15,26,82},{15,0,36,59,71,15,26}})); // false
+        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{18},{66}})); //true
+        assertEquals(true,solution.isToeplitzMatrix(new int[][]{{18},{66},{57}})); //true
+        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{44,35,39},{15,44,35},{17,15,44},{80,17,15},{43,80,0},{77,43,80}})); //false
+    }
+
+    /**
+     * 784. Letter Case Permutation
+     */
+    @Test
+    public void testLetterCasePermutation() throws Exception {
+        assertEquals("[c,C]",ConvertUtil.stringListToString(solution.letterCasePermutation("C")));
+        assertEquals("[a1b2,a1B2,A1b2,A1B2]",ConvertUtil.stringListToString(solution.letterCasePermutation("a1b2")));
+        assertEquals("[3z4,3Z4]",ConvertUtil.stringListToString(solution.letterCasePermutation("3z4")));
+        assertEquals("[12345]",ConvertUtil.stringListToString(solution.letterCasePermutation("12345")));
+        assertEquals("[]",ConvertUtil.stringListToString(solution.letterCasePermutation("")));
     }
 
     /**
@@ -1199,26 +1144,9 @@ public class SolutionTest {
      */
     @Test
     public void testLeafSimilar() throws Exception {
-        TreeNode treeNode3 = new TreeNode(3);
-        TreeNode treeNode5 = new TreeNode(5);
-        TreeNode treeNode1 = new TreeNode(1);
-        TreeNode treeNode6 = new TreeNode(6);
-        TreeNode treeNode2 = new TreeNode(2);
-        TreeNode treeNode7 = new TreeNode(7);
-        TreeNode treeNode4 = new TreeNode(4);
-        TreeNode treeNode9 = new TreeNode(9);
-        TreeNode treeNode8 = new TreeNode(8);
-
-        treeNode3.left = treeNode5;
-        treeNode3.right = treeNode1;
-        treeNode5.left = treeNode6;
-        treeNode5.right = treeNode2;
-        treeNode2.left = treeNode7;
-        treeNode2.right = treeNode4;
-        treeNode1.left = treeNode9;
-        treeNode1.right = treeNode8;
-
-        System.out.println(solution.leafSimilar(treeNode3,treeNode3));
+        String t1 = "[3,5,1,6,2,9,8,null,null,7,4,null,null,null,null,null,null,null,null]";
+        String t2 = "[3,1,2,6,7,4,0,null,null,null,null,null,null,9,8,null,null,null,null]";
+        assertEquals(true, solution.leafSimilar(ConvertUtil.stringToTreeNode(t1), ConvertUtil.stringToTreeNode(t2)));
     }
 
     /**

@@ -4,6 +4,7 @@ import org.sweetycode.leetcode.ListNode;
 import org.sweetycode.leetcode.TreeNode;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -82,6 +83,68 @@ public class ConvertUtil {
             ptr = ptr.next;
         }
         return dummyRoot.next;
+    }
+
+    public static String treeNodeToString(TreeNode root) {
+        if (root == null) {
+            return "[]";
+        }
+
+        String output = "";
+        Queue<TreeNode> nodeQueue = new LinkedList<>();
+        nodeQueue.add(root);
+        while(!nodeQueue.isEmpty()) {
+            TreeNode node = nodeQueue.remove();
+
+            if (node == null) {
+                output += "null, ";
+                continue;
+            }
+
+            output += String.valueOf(node.val) + ", ";
+            nodeQueue.add(node.left);
+            nodeQueue.add(node.right);
+        }
+        return "[" + output.substring(0, output.length() - 2) + "]";
+    }
+
+    public static String integerArrayListToString(List<Integer> nums, int length) {
+        if (length == 0) {
+            return "[]";
+        }
+
+        String result = "";
+        for(int index = 0; index < length; index++) {
+            Integer number = nums.get(index);
+            result += Integer.toString(number) + ", ";
+        }
+        return "[" + result.substring(0, result.length() - 2) + "]";
+    }
+
+    public static String integerArrayListToString(List<Integer> nums) {
+        return integerArrayListToString(nums, nums.size());
+    }
+
+    public static String int2dListToString(List<List<Integer>> nums) {
+        StringBuilder sb = new StringBuilder("[");
+        for (List<Integer> list: nums) {
+            sb.append(integerArrayListToString(list));
+            sb.append(",");
+        }
+
+        sb.setCharAt(sb.length() - 1, ']');
+        return sb.toString();
+    }
+
+    public static String stringListToString(List<String> stringList) {
+        StringBuilder sb = new StringBuilder("[");
+        for (String item : stringList) {
+            sb.append(item);
+            sb.append(",");
+        }
+
+        sb.setCharAt(sb.length() - 1, ']');
+        return sb.toString();
     }
 
 }
