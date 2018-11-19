@@ -1121,10 +1121,25 @@ public class Solution {
 
     /**
      * 198. House Robber
+     * Dynamic Programming
+     * F(n) = max( nums[i] + F(n-2), F(n-1) )
+     * F(0) = nums[0]
+     * F(1) = max( nums[1], nums[0] )
      */
     public int rob(int[] nums) {
-        // TODO
-        return 0;
+        int l = nums.length;
+        int f0 = 0;
+        if (l == 0) return f0;
+        int f1 = nums[0];
+        int tmp;
+        int i = 1;
+        while ( i < l ) {
+            tmp = f1;
+            f1 = Math.max(nums[i] + f0, f1);
+            f0 = tmp;
+            i ++;
+        }
+        return f1;
     }
 
 
