@@ -1162,6 +1162,42 @@ public class Solution {
     }
 
     /**
+     * 203. Remove Linked List Elements
+     */
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode pre = new ListNode(val);
+        pre.next = head;
+        ListNode pointer = pre;
+        while (pointer.next != null) {
+            if (pointer.next.val == val) {
+                pointer.next = pointer.next.next;
+            } else {
+                pointer = pointer.next;
+            }
+        }
+        return pre.next;
+    }
+    // method2: recursion
+    public ListNode removeElements2(ListNode head, int val) {
+        if (null == head)
+            return null;
+        ListNode ret = removeElements(head.next, val);
+        head.next = ret;
+        if (head.val == val)
+            return ret;
+        else
+            return head;
+    }
+
+    /**
+     * 204. Count Primes
+     */
+    public int countPrimes(int n) {
+        // TODO
+        return 0;
+    }
+
+    /**
      * 206. Reverse Linked List
      */
     public ListNode reverseList(ListNode head) {

@@ -631,6 +631,22 @@ public class SolutionTest {
     }
 
     /**
+     * 203. Remove Linked List Elements
+     */
+    @Test
+    public void testRemoveElements() throws Exception {
+        assertEquals("1->2->3->4->5", PrintUtil.printListNode(solution.removeElements(ConvertUtil.stringToListNode("[1,2,6,3,4,5,6]"),6)));
+    }
+
+    /**
+     * 204. Count Primes
+     */
+    @Test
+    public void testCountPrimes() throws Exception {
+
+    }
+
+    /**
      * 206. Reverse Linked List
      */
     @Test
