@@ -1193,8 +1193,33 @@ public class Solution {
      * 204. Count Primes
      */
     public int countPrimes(int n) {
-        // TODO
-        return 0;
+        if (n < 3) return 0;
+        boolean[] isComposite = new boolean[n];
+        isComposite[0] = true;
+        isComposite[1] = true;
+        for (int i = 2; i < n; i ++) {
+            if (!isComposite[i]) {
+                for (int j = i * 2; j < n; j += i) {
+                    isComposite[j] = true;
+                }
+            }
+        }
+
+        int rst = 0;
+        for (boolean x: isComposite) {
+            if (!x) {
+                rst ++;
+            }
+        }
+        return rst;
+    }
+
+    /**
+     * 205. Isomorphic Strings
+     */
+    public boolean isIsomorphic(String s, String t) {
+        // TODO:
+        return true;
     }
 
     /**

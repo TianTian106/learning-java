@@ -643,7 +643,19 @@ public class SolutionTest {
      */
     @Test
     public void testCountPrimes() throws Exception {
+        assertEquals(4, solution.countPrimes(10));
+        assertEquals(7, solution.countPrimes(19));
+    }
 
+    /**
+     * 205. Isomorphic Strings
+     */
+    @Test
+    public void testIsIsomorphic() throws Exception {
+        //assertEquals(true, solution.isIsomorphic("egg", "add"));
+        //assertEquals(false, solution.isIsomorphic("foo", "bar"));
+        //assertEquals(true, solution.isIsomorphic("paper", "title"));
+        assertEquals(false, solution.isIsomorphic("ab", "aa"));
     }
 
     /**
