@@ -652,10 +652,11 @@ public class SolutionTest {
      */
     @Test
     public void testIsIsomorphic() throws Exception {
-        //assertEquals(true, solution.isIsomorphic("egg", "add"));
-        //assertEquals(false, solution.isIsomorphic("foo", "bar"));
-        //assertEquals(true, solution.isIsomorphic("paper", "title"));
+        assertEquals(true, solution.isIsomorphic("egg", "add"));
+        assertEquals(false, solution.isIsomorphic("foo", "bar"));
+        assertEquals(true, solution.isIsomorphic("paper", "title"));
         assertEquals(false, solution.isIsomorphic("ab", "aa"));
+        assertEquals(true, solution.isIsomorphic("13", "42"));
     }
 
     /**
@@ -675,6 +676,29 @@ public class SolutionTest {
         listNode4.next = listNode5;
 
         PrintUtil.printListNode(solution.reverseList(listNode1));
+    }
+
+    /**
+     * 217. Contains Duplicate
+     */
+    @Test
+    public void testContainsDuplicate() throws Exception {
+        assertEquals(true, solution.containsDuplicate(new int[]{1,2,3,1}));
+        assertEquals(false, solution.containsDuplicate(new int[]{1,2,3,4}));
+        assertEquals(true, solution.containsDuplicate(new int[]{1,1,1,3,3,4,3,2,4,2}));
+    }
+
+    /**
+     * 219. Contains Duplicate II
+     */
+    @Test
+    public void testContainsNearbyDuplicate() throws Exception {
+        assertEquals(true, solution.containsNearbyDuplicate(new int[]{1,2,3,1}, 3));
+        assertEquals(true, solution.containsNearbyDuplicate(new int[]{1,0,1,1}, 1));
+        assertEquals(false, solution.containsNearbyDuplicate(new int[]{1,2,3,1,2,3}, 2));
+        assertEquals(true, solution.containsNearbyDuplicate(new int[]{99,99}, 2));
+        assertEquals(false, solution.containsNearbyDuplicate(new int[]{}, 0));
+        assertEquals(false, solution.containsNearbyDuplicate(new int[]{99,98}, 2));
     }
 
     /**

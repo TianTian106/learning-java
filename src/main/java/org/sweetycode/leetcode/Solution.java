@@ -1218,7 +1218,14 @@ public class Solution {
      * 205. Isomorphic Strings
      */
     public boolean isIsomorphic(String s, String t) {
-        // TODO:
+        int[] m = new int[512];
+        for (int i = 0; i < s.length(); i++) {
+            if (m[s.charAt(i)] != m[t.charAt(i)+256]) {
+                return false;
+            }
+            m[s.charAt(i)] = i + 1;
+            m[t.charAt(i)+256] = i + 1;
+        }
         return true;
     }
 
@@ -1237,6 +1244,36 @@ public class Solution {
             cur = head;
         }
         return head;
+    }
+
+    /**
+     * 217. Contains Duplicate
+     */
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> numSet = new HashSet<>();
+        for (int num: nums) {
+            if (numSet.contains(num)) {
+                return true;
+            }
+            numSet.add(num);
+        }
+        return false;
+    }
+
+    /**
+     * 219. Contains Duplicate II
+     */
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, Integer> numMap = new HashMap<>();
+        for (int i = 0; i < nums.length ; i ++) {
+            if (numMap.containsKey(nums[i])) {
+                if (i - numMap.get(nums[i]) <= k){
+                    return true;
+                }
+            }
+            numMap.put(nums[i], i);
+        }
+        return false;
     }
 
     /**
