@@ -702,6 +702,22 @@ public class SolutionTest {
     }
 
     /**
+     * 225. Implement Stack using Queues
+     */
+    @Test
+    public void testMyStack() throws Exception {
+        Solution.MyStack myStack = solution.new MyStack();
+        assertEquals(true, myStack.empty());
+        myStack.push(10);
+        assertEquals(false, myStack.empty());
+        myStack.push(9);
+        assertEquals(9, myStack.top());
+        assertEquals(9, myStack.pop());
+        assertEquals(10, myStack.pop());
+        assertEquals(true, myStack.empty());
+    }
+
+    /**
      * 226. Invert Binary Tree
      */
     @Test
@@ -709,6 +725,18 @@ public class SolutionTest {
         TreeNode t1 = ConvertUtil.stringToTreeNode("[4,2,7,1,3,6,9]");
         TreeNode t2 = ConvertUtil.stringToTreeNode("[4,7,2,9,6,3,1]");
         assertEquals(ConvertUtil.treeNodeToString(t2), ConvertUtil.treeNodeToString(solution.invertTree(t1)));
+    }
+
+    /**
+     * 231. Power of Two
+     */
+    @Test
+    public void testIsPowerOfTwo() throws Exception {
+        assertEquals(true, solution.isPowerOfTwo(1));
+        assertEquals(true, solution.isPowerOfTwo(16));
+        assertEquals(false, solution.isPowerOfTwo(218));
+        assertEquals(false, solution.isPowerOfTwo(0));
+        assertEquals(false, solution.isPowerOfTwo(-16));
     }
 
     /**

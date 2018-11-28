@@ -1277,6 +1277,38 @@ public class Solution {
     }
 
     /**
+     * 225. Implement Stack using Queues
+     */
+    class MyStack {
+
+        LinkedList<Integer> queue ;
+        /** Initialize your data structure here. */
+        public MyStack() {
+            queue = new LinkedList<>();
+        }
+
+        /** Push element x onto stack. */
+        public void push(int x) {
+            queue.add(x);
+        }
+
+        /** Removes the element on top of the stack and returns that element. */
+        public int pop() {
+            return queue.removeLast();
+        }
+
+        /** Get the top element. */
+        public int top() {
+            return queue.getLast();
+        }
+
+        /** Returns whether the stack is empty. */
+        public boolean empty() {
+            return queue.isEmpty();
+        }
+    }
+
+    /**
      * 226. Invert Binary Tree
      */
     public TreeNode invertTree(TreeNode root) {
@@ -1288,6 +1320,26 @@ public class Solution {
             root.right = invertTree(tmp);
         }
         return root;
+    }
+
+    /**
+     * 231. Power of Two
+     */
+    public boolean isPowerOfTwo(int n) {
+        if (n <= 0) return false;
+        while (n > 1) {
+            if (n % 2 != 0) return false;
+            n >>>= 1;
+        }
+        return true;
+    }
+
+    public boolean isPowerOfTwo2(int n) {
+        if (n <= 0) return false;
+        if ((n & (n-1)) == 0){
+            return true;
+        }
+        return false;
     }
 
     /**
