@@ -740,6 +740,30 @@ public class SolutionTest {
     }
 
     /**
+     * 232. Implement Queue using Stacks
+     */
+    @Test
+    public void testMyQueue() throws Exception {
+        Solution.MyQueue myQueue = solution.new MyQueue();
+        assertEquals(true, myQueue.empty());
+        myQueue.push(1);
+        assertEquals(false, myQueue.empty());
+        myQueue.push(2);
+        assertEquals(1, myQueue.peek());  // 返回 1
+        assertEquals(1, myQueue.pop());   // 返回 1
+        assertEquals(false, myQueue.empty()); // 返回 false
+    }
+
+    /**
+     * 234. Palindrome Linked List
+     */
+    @Test
+    public void testIsPalindromeListNode() throws Exception {
+        assertEquals(false, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,3,4]")));
+        //assertEquals(true, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,2,1]")));
+    }
+
+    /**
      * 237. Delete Node in a Linked List
      */
     @Test

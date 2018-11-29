@@ -1343,12 +1343,50 @@ public class Solution {
     }
 
     /**
+     * 232. Implement Queue using Stacks
+     */
+    class MyQueue {
+        LinkedList<Integer> stacks;
+        /** Initialize your data structure here. */
+        public MyQueue() {
+            stacks = new LinkedList<>();
+        }
+
+        /** Push element x to the back of queue. */
+        public void push(int x) {
+            stacks.addFirst(x);
+        }
+
+        /** Removes the element from in front of queue and returns that element. */
+        public int pop() {
+            return stacks.removeLast();
+        }
+
+        /** Get the front element. */
+        public int peek() {
+            return stacks.getLast();
+        }
+
+        /** Returns whether the queue is empty. */
+        public boolean empty() {
+            return stacks.isEmpty();
+        }
+    }
+
+    /**
+     * 234. Palindrome Linked List
+     */
+    public boolean isPalindrome(ListNode head) {
+        // TODO
+        return false;
+    }
+
+    /**
      * 237. Delete Node in a Linked List
      */
     public void deleteNode(ListNode node) {
         node.val = node.next.val;
         node.next = node.next.next;
-
     }
 
     /**
