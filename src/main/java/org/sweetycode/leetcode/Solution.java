@@ -1377,8 +1377,110 @@ public class Solution {
      * 234. Palindrome Linked List
      */
     public boolean isPalindrome(ListNode head) {
-        // TODO
+        Stack<Integer> stack = new Stack<>();
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head.next;
+
+        while (fast.next != null && fast.next.next != null) {
+            stack.push(slow.val);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        stack.push(slow.val);
+        if (fast.next != null) {
+            // odd num
+            slow = slow.next;
+        }
+        while (!stack.isEmpty() && slow.next != null) {
+            if (stack.pop() != slow.next.val) {
+                return false;
+            }
+            slow = slow.next;
+        }
+        return stack.isEmpty();
+    }
+
+    public boolean isPalindrome2(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head.next;
+
+        ListNode tmp;
+        ListNode bck = null;
+
+        while (fast.next != null && fast.next.next != null) {
+            tmp = slow.next;
+            slow.next = bck;
+            bck = slow;
+            slow = tmp;
+            fast = fast.next.next;
+        }
+        tmp = slow.next;
+        slow.next = bck;
+        bck = slow;
+        slow = tmp;
+        if (fast.next != null) {
+            // odd num
+            slow = slow.next;
+        }
+        while (bck != null && slow != null) {
+            if (bck.val != slow.val) {
+                return false;
+            }
+            slow = slow.next;
+            bck = bck.next;
+        }
+        return true;
+    }
+
+    // TODO: efficiency?
+    public boolean isPalindrome3(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        if (head.next.next == null) {
+            return head.val == head.next.val;
+        }
+
+        ListNode fast = head.next;
+        ListNode slow = head;
+
+        while (fast.next != null) {
+            if (fast.next.val == slow.val) {
+                if (fast.next.next != null) {
+                    return false;
+                }
+                fast.next = null;
+                slow = slow.next;
+                fast = slow.next;
+                if (fast == null || fast.val == slow.val) {
+                    return true;
+                }
+            } else {
+                fast = fast.next;
+            }
+        }
         return false;
+    }
+
+    /**
+     * 235. Lowest Common Ancestor of a Binary Search Tree
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (p.val < root.val && q.val < root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else if (p.val > root.val && q.val > root.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        return root;
     }
 
     /**
@@ -1387,6 +1489,41 @@ public class Solution {
     public void deleteNode(ListNode node) {
         node.val = node.next.val;
         node.next = node.next.next;
+    }
+
+    /**
+     * 242. Valid Anagram
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+        HashMap<String, Integer> map = new HashMap<>();
+        for (char s0: s.toCharArray()) {
+            // TODO: map.compute
+            map.computeIfPresent(String.valueOf(s0), (key, val) -> val + 1);
+            map.putIfAbsent(String.valueOf(s0), 1);
+        }
+
+        for (char t0: t.toCharArray()) {
+            if (!map.containsKey(String.valueOf(t0)) || map.get(String.valueOf(t0)) == 0) return false;
+            map.computeIfPresent(String.valueOf(t0), (key, val) -> val - 1);
+        }
+        return true;
+    }
+
+    // only english alphabet supported.
+    public boolean isAnagram2(String s, String t) {
+        int l = s.length();
+        if (l != t.length()) return false;
+        int[] counter = new int[26];
+        for (int i = 0; i < l; i ++) {
+            counter[s.charAt(i) - 'a'] ++;
+            counter[t.charAt(i) - 'a'] --;
+        }
+
+        for (int i: counter) {
+            if (i != 0) return false;
+        }
+        return true;
     }
 
     /**
@@ -1427,6 +1564,87 @@ public class Solution {
     }
 
     /**
+     * 263. Ugly Number
+     */
+    public boolean isUgly(int num) {
+        if (num <= 0) return false;  // Ugly numbers are positive numbers !!!
+        while (num % 2 == 0) {
+            num /= 2;
+        }
+        while (num % 3 == 0) {
+            num /= 3;
+        }
+        while (num % 5 == 0) {
+            num /= 5;
+        }
+
+        return num == 1;
+    }
+
+    /**
+     * 268. Missing Number
+     */
+    public int missingNumber(int[] nums) {
+        boolean missingZero = true;
+        int max = 0;
+        int sum = 0;
+        for (int num: nums) {
+            sum += num;
+            max = Math.max(max, num);
+            if (missingZero && num == 0) missingZero = false;
+        }
+        if (missingZero) return 0;
+        int tmp = (1 + max) * max / 2 - sum;
+        return tmp == 0 ? max + 1: tmp;
+    }
+
+    public int missingNumber2(int[] nums) {
+        int n = nums.length;
+        int sum = n * (n + 1) / 2;
+        for(int num :nums) {
+            sum -= num;
+        }
+        return sum;
+    }
+
+    public int missingNumber3(int[] nums) {
+        // prevent overflow
+        int l = nums.length;
+        int sum = 0;
+        for (int i = 0; i < l; i ++) {
+            sum = sum + i - nums[i];
+        }
+        return sum + l;
+    }
+
+    /**
+     * 278. First Bad Version
+     */
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+        int middle ;
+        while (left < right) {
+            // becareful of overflow
+            middle = left + (right - left) / 2;
+            if (isBadVersion(middle)) {
+                right = middle ;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return right ;
+    }
+
+    int FIRST_BAD_VERSION;
+    public void setFIRST_BAD_VERSION(int FIRST_BAD_VERSION) {
+        this.FIRST_BAD_VERSION = FIRST_BAD_VERSION;
+    }
+    boolean isBadVersion(int version) {
+        return version >= FIRST_BAD_VERSION;
+    }
+
+    /**
      * 283. Move Zeroes
      */
     public void moveZeroes(int[] nums) {
@@ -1444,10 +1662,87 @@ public class Solution {
     }
 
     /**
+     * 290. Word Pattern
+     * bijection: 既是单射又是满射的映射称为双射，亦称“一一映射”。
+     */
+    public boolean wordPattern(String pattern, String str) {
+        String[] words = str.split(" ");
+        if (pattern.length() != words.length) return false;
+
+        HashMap<String, String> v1 = new HashMap<>();
+        HashMap<String, String> v2 = new HashMap<>();
+
+        String p0;
+        for (int i = 0; i < words.length; i ++) {
+            p0 = String.valueOf(pattern.charAt(i));
+            if (v1.containsKey(p0) && !v1.get(p0).equals(words[i])) {
+                return false;
+            }
+            if (v2.containsKey(words[i]) && !v2.get(words[i]).equals(p0)) {
+                return false;
+            }
+
+            v1.put(p0, words[i]);
+            v2.put(words[i], p0);
+        }
+        return true;
+    }
+
+    // good method.
+    public boolean wordPattern2(String pattern, String str) {
+        String[] words = str.split(" ");
+        if (words.length != pattern.length())
+            return false;
+        Map index = new HashMap();
+        for (Integer i = 0; i < words.length; i ++)
+            if (index.put(pattern.charAt(i), i) != index.put(words[i], i))
+                return false;
+        return true;
+    }
+
+    /**
      * 292. Nim Game
      */
     public boolean canWinNim(int n) {
         return n % 4 != 0;
+    }
+
+    /**
+     * 303. Range Sum Query - Immutable
+     */
+    class NumArray {
+
+        int[] nums;
+
+        public NumArray(int[] nums) {
+            // Immutable
+            if (nums.length == 0) return;
+            this.nums = new int[nums.length];
+            this.nums[0] = nums[0];
+            for (int i = 1; i < nums.length; i ++) {
+                this.nums[i] = this.nums[i - 1] + nums[i];
+            }
+        }
+
+        public int sumRange(int i, int j) {
+            return i == 0? nums[j] : nums[j] - nums[i - 1];
+        }
+    }
+
+    /**
+     * 326. Power of Three
+     */
+    public boolean isPowerOfThree(int n) {
+        // 3^((int)log3(MAXINT)) =  1162261467
+        return n > 0 && 1162261467 % n == 0 ;
+    }
+
+    /**
+     * 342. Power of Four
+     */
+    public boolean isPowerOfFour(int num) {
+        // 4的幂数开根号就是2的幂数。
+        return num > 0 && (Math.sqrt(num) - (int)Math.sqrt(num)) < 1e-9 && 32768 % (int)Math.sqrt(num) == 0 ;
     }
 
     /**
@@ -1460,6 +1755,32 @@ public class Solution {
             sb.append(c[i]);
         }
         return sb.toString();
+    }
+
+    /**
+     * 345. Reverse Vowels of a String
+     */
+    public String reverseVowels(String s) {
+        char[] s0 = s.toCharArray();
+        int i = 0;
+        int j = s.length() - 1;
+        char tmp;
+        while (i < j) {
+            if (s0[i] != 'a' && s0[i] != 'e' && s0[i] != 'i' && s0[i] != 'o' && s0[i] != 'u' && s0[i] != 'A' && s0[i] != 'E' && s0[i] != 'I' && s0[i] != 'O' && s0[i] != 'U') {
+                i ++;
+                continue;
+            }
+            if (s0[j] != 'a' && s0[j] != 'e' && s0[j] != 'i' && s0[j] != 'o' && s0[j] != 'u' && s0[j] != 'A' && s0[j] != 'E' && s0[j] != 'I' && s0[j] != 'O' && s0[j] != 'U') {
+                j --;
+                continue;
+            }
+            tmp = s0[i];
+            s0[i] = s0[j];
+            s0[j] = tmp;
+            i ++;
+            j --;
+        }
+        return new String(s0);
     }
 
     /**
@@ -1478,6 +1799,14 @@ public class Solution {
             }
         }
         return Arrays.copyOf(nums1, i);
+    }
+
+    /**
+     * 350. Intersection of Two Arrays II
+     */
+    public int[] intersect(int[] nums1, int[] nums2) {
+        // TODO
+        return null;
     }
 
     /**

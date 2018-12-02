@@ -760,7 +760,30 @@ public class SolutionTest {
     @Test
     public void testIsPalindromeListNode() throws Exception {
         assertEquals(false, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,3,4]")));
-        //assertEquals(true, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,2,1]")));
+        assertEquals(true, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,2,1]")));
+        assertEquals(true, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,3,2,1]")));
+        assertEquals(false, solution.isPalindrome(ConvertUtil.stringToListNode("[1,2,2,1,5]")));
+    }
+
+    @Test
+    public void testIsPalindromeListNode2() throws Exception {
+        assertEquals(false, solution.isPalindrome2(ConvertUtil.stringToListNode("[1,2,3,4]")));
+        assertEquals(true, solution.isPalindrome2(ConvertUtil.stringToListNode("[1,2,2,1]")));
+        assertEquals(true, solution.isPalindrome2(ConvertUtil.stringToListNode("[1,2,3,2,1]")));
+        assertEquals(false, solution.isPalindrome2(ConvertUtil.stringToListNode("[1,2,2,1,5]")));
+    }
+
+
+    /**
+     * 235. Lowest Common Ancestor of a Binary Search Tree
+     */
+    @Test
+    public void testLowestCommonAncestor() throws Exception {
+        TreeNode t = ConvertUtil.stringToTreeNode("[6,2,8,0,4,7,9,null,null,3,5]");
+        assertEquals(t, solution.lowestCommonAncestor(t, t.left, t.right));
+        assertEquals(t.left, solution.lowestCommonAncestor(t, t.left, t.left.right));
+        assertEquals(t.left, solution.lowestCommonAncestor(t, t.left.right, t.left));
+
     }
 
     /**
@@ -770,6 +793,23 @@ public class SolutionTest {
     public void testDeleteNode() throws Exception {
     }
 
+
+    /**
+     * 242. Valid Anagram
+     */
+    @Test
+    public void testIsAnagram() throws Exception {
+        assertEquals(true, solution.isAnagram("anagram", "nagaram"));
+        assertEquals(false, solution.isAnagram("rat", "car"));
+        assertEquals(true, solution.isAnagram("我爱你", "你爱我"));
+    }
+
+    @Test
+    public void testIsAnagram2() throws Exception {
+        assertEquals(true, solution.isAnagram2("anagram", "nagaram"));
+        assertEquals(false, solution.isAnagram2("rat", "car"));
+        //assertEquals(true, solution.isAnagram("我爱你", "你爱我"));
+    }
     /**
      * 257. Binary Tree Paths
      */
@@ -788,6 +828,64 @@ public class SolutionTest {
     }
 
     /**
+     * 263. Ugly Number
+     */
+    @Test
+    public void testIsUgly() throws Exception {
+        assertEquals(true, solution.isUgly(6));
+        assertEquals(true, solution.isUgly(8));
+        assertEquals(false, solution.isUgly(14));
+        assertEquals(false, solution.isUgly(-2147483648));
+        assertEquals(false, solution.isUgly(-1000));
+    }
+
+
+    /**
+     * 268. Missing Number
+     */
+    @Test
+    public void testMissingNumber() throws Exception {
+        assertEquals(2, solution.missingNumber(new int[]{3,0,1}));
+        assertEquals(8, solution.missingNumber(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(1, solution.missingNumber(new int[]{0}));
+        assertEquals(2, solution.missingNumber(new int[]{0,1}));
+        assertEquals(1, solution.missingNumber(new int[]{0,2}));
+        assertEquals(0, solution.missingNumber(new int[]{1}));
+    }
+
+    @Test
+    public void testMissingNumber2() throws Exception {
+        assertEquals(2, solution.missingNumber2(new int[]{3,0,1}));
+        assertEquals(8, solution.missingNumber2(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(1, solution.missingNumber2(new int[]{0}));
+        assertEquals(2, solution.missingNumber2(new int[]{0,1}));
+        assertEquals(1, solution.missingNumber2(new int[]{0,2}));
+        assertEquals(0, solution.missingNumber2(new int[]{1}));
+    }
+
+    @Test
+    public void testMissingNumber3() throws Exception {
+        assertEquals(2, solution.missingNumber3(new int[]{3,0,1}));
+        assertEquals(8, solution.missingNumber3(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(1, solution.missingNumber3(new int[]{0}));
+        assertEquals(2, solution.missingNumber3(new int[]{0,1}));
+        assertEquals(1, solution.missingNumber3(new int[]{0,2}));
+        assertEquals(0, solution.missingNumber3(new int[]{1}));
+    }
+
+    /**
+     * 278. First Bad Version
+     */
+    @Test
+    public void testFirstBadVersion() throws Exception {
+        int n = 65;
+        int firstBadVersion = (int)(Math.random() * (n + 1));
+        solution.setFIRST_BAD_VERSION(firstBadVersion);
+        assertEquals(firstBadVersion, solution.firstBadVersion(n));
+
+    }
+
+    /**
      * 283. Move Zeroes
      */
     @Test
@@ -798,6 +896,25 @@ public class SolutionTest {
     }
 
     /**
+     * 290. Word Pattern
+     */
+    @Test
+    public void testWordPattern() throws Exception {
+        assertEquals(true, solution.wordPattern("abba", "dog cat cat dog"));
+        assertEquals(false, solution.wordPattern("abba", "dog cat cat fish"));
+        assertEquals(false, solution.wordPattern("aaaa", "dog cat cat dog"));
+        assertEquals(false, solution.wordPattern("abba", "dog dog dog dog"));
+    }
+
+    @Test
+    public void testWordPattern2() throws Exception {
+        assertEquals(true, solution.wordPattern2("abba", "dog cat cat dog"));
+        assertEquals(false, solution.wordPattern2("abba", "dog cat cat fish"));
+        assertEquals(false, solution.wordPattern2("aaaa", "dog cat cat dog"));
+        assertEquals(false, solution.wordPattern2("abba", "dog dog dog dog"));
+        assertEquals(true, solution.wordPattern2("abba", "dog a a dog"));
+    }
+    /**
      * 292. Nim Game
      */
     @Test
@@ -806,11 +923,71 @@ public class SolutionTest {
     }
 
     /**
+     * 303. Range Sum Query - Immutable
+     */
+    @Test
+    public void testNumArray() throws Exception {
+        Solution.NumArray numArray = solution.new NumArray(new int[]{-2,0,3,-5,2,-1});
+        assertEquals(1, numArray.sumRange(0, 2));
+        assertEquals(-1, numArray.sumRange(2, 5));
+        assertEquals(-3, numArray.sumRange(0, 5));
+    }
+
+    /**
+     * 326. Power of Three
+     */
+    @Test
+    public void testIsPowerOfThree() throws Exception {
+        assertEquals(true, solution.isPowerOfThree(27));
+        assertEquals(false, solution.isPowerOfThree(0));
+        assertEquals(true, solution.isPowerOfThree(9));
+        assertEquals(false, solution.isPowerOfThree(45));
+
+//        int num = 1;
+//        while (num <= 2147483647/3) {
+//            num = num * 3;
+//        }
+//        System.out.println(num);
+
+    }
+
+    /**
+     * 342. Power of Four
+     */
+    @Test
+    public void testIsPowerOfFour() throws Exception {
+        assertEquals(true, solution.isPowerOfFour(16));
+        assertEquals(false, solution.isPowerOfFour(5));
+        assertEquals(false, solution.isPowerOfFour(2));
+        assertEquals(true, solution.isPowerOfFour(1));
+        assertEquals(false, solution.isPowerOfFour(8));
+
+//        int num = 1;
+//        while (num <= Math.sqrt(2147483647)/2) {
+//            num = num * 2;
+//        }
+//        System.out.println(num);
+    }
+
+    /**
      * 344. Reverse String
      */
     @Test
     public void testReverseString() throws Exception {
-        System.out.println(solution.reverseString("Hello Tian !"));
+        assertEquals("! naiT olleH", solution.reverseString("Hello Tian !"));
+        assertEquals("amanaP :lanac a ,nalp a ,nam A", solution.reverseString("A man, a plan, a canal: Panama"));
+    }
+
+
+    /**
+     * 345. Reverse Vowels of a String
+     */
+    @Test
+    public void testReverseVowels() throws Exception {
+        assertEquals("holle", solution.reverseVowels("hello"));
+        assertEquals("leotcede", solution.reverseVowels("leetcode"));
+        assertEquals(".,", solution.reverseVowels(".,"));
+
     }
 
     /**
@@ -821,6 +998,14 @@ public class SolutionTest {
         PrintUtil.printArray(solution.intersection(new int[]{1,2,2,1}, new int[]{2,2}));
         PrintUtil.printArray(solution.intersection(new int[]{4,9,5}, new int[]{9,4,9,8,4}));
         PrintUtil.printArray(solution.intersection(new int[]{}, new int[]{}));
+    }
+
+
+    /**
+     * 350. Intersection of Two Arrays II
+     */
+    @Test
+    public void testIntersect() throws Exception {
     }
 
     /**
