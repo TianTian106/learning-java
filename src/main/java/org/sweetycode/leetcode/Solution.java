@@ -1805,8 +1805,92 @@ public class Solution {
      * 350. Intersection of Two Arrays II
      */
     public int[] intersect(int[] nums1, int[] nums2) {
-        // TODO
-        return null;
+        if (nums1.length > nums2.length) {
+            return intersect(nums2, nums1);
+        }
+        Map<Integer, Integer> map1 = new HashMap<>();
+        int[] rst = new int[nums1.length];
+        int l = 0;
+        for (int num1: nums1) {
+            map1.compute(num1, (k, v) -> (v == null) ? 1 : v + 1);
+        }
+        for (int num2: nums2) {
+            if(map1.size()>0 && null != map1.compute(num2, (k, v) -> (v == null || v == 0)? null : v - 1)){
+                rst[l] = num2;
+                l ++;
+            }
+        }
+        return Arrays.copyOfRange(rst, 0, l);
+    }
+
+    public int[] intersect2(int[] nums1, int[] nums2) {
+        int len = 0;
+        int pointer = 0;
+        int tmp;
+        for (int i = 0 ; i < nums2.length && len < nums1.length ; i ++) {
+            if ((pointer = find(nums1, nums2[i], pointer)) != -1) {
+                tmp = nums1[pointer];
+                nums1[pointer] = nums1[len];
+                nums1[len ++] = tmp;
+            }
+            pointer = len;
+        }
+        return Arrays.copyOfRange(nums1, 0, len);
+    }
+
+    private int find(int[] nums, int val, int start) {
+        for (; start < nums.length; start ++) {
+            if (nums[start] == val) {
+                return start;
+            }
+        }
+        return -1;
+    }
+
+    // top answer.
+    public int[] intersect3(int[] nums1, int[] nums2) {
+        if(nums1.length == 0 || nums2.length == 0)   {
+            return new int[0];
+        }
+        int[] ret1 = new int[Math.max(nums1.length, nums2.length)];
+        int len1 = 0;
+        boolean[] bl1 = new boolean[ret1.length];
+        for (int i=0; i < nums2.length; i++) {
+            int start = 0;
+            while( (start = find(nums1, nums2[i], start)) != -1 ) {
+                if(bl1[start] == false) {
+                    ret1[len1++] = nums2[i];
+                    bl1[start] = true;
+                    break;
+                }
+                start++;
+            }
+        }
+        return Arrays.copyOfRange(ret1, 0, len1);
+    }
+
+    /**
+     * 367. Valid Perfect Square
+     */
+    public boolean isPerfectSquare(int num) {
+        if (num == 1) return true;
+        int left = 0;
+        int right = num;
+        double middle;
+        while (right - left >=1) {
+            middle = (left + right)/2;
+            if (myAbs(middle - num/middle) < 1e-9) {
+                return true;
+            } else if (middle < num/middle) {
+                left = (int)middle + 1;
+            } else {
+                right = (int)middle;
+            }
+        }
+        return false;
+    }
+    private double myAbs(double num) {
+        return num < 0 ? - num : num;
     }
 
     /**
@@ -1822,6 +1906,107 @@ public class Solution {
     }
 
     /**
+     * 374. Guess Number Higher or Lower
+     */
+    public int guessNumber(int n) {
+        int left = 1;
+        int right = n;
+        int middle;
+        int tmp;
+        while (left <= right) {
+            middle = left - (left - right)/2;
+            tmp = guess(middle);
+            if (tmp == 0) {
+                return middle;
+            } else if (tmp > 0) {
+                left = middle + 1;
+            } else {
+                right = middle - 1;
+            }
+        }
+        return -1;
+    }
+
+    int MY_NUMBER;
+    public void setMY_NUMBER(int MY_NUMBER) {
+        this.MY_NUMBER = MY_NUMBER;
+        System.out.println("My number is : " + MY_NUMBER);
+    }
+
+    int guess(int num) {
+        return MY_NUMBER == num ? 0 : (MY_NUMBER - num)/Math.abs(MY_NUMBER - num);
+    }
+
+    /**
+     * 383. Ransom Note
+     */
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (magazine.length() < ransomNote.length()) return false;
+        char[] ransomArr = ransomNote.toCharArray();
+        char[] magazineArr = magazine.toCharArray();
+
+        int pointer ;
+        char tmp;
+        for (int i = 0 ; i < ransomArr.length ; i ++) {
+            pointer = i;
+            if ((pointer = find(magazineArr, ransomArr[i], pointer)) != -1) {
+                tmp = magazineArr[pointer];
+                magazineArr[pointer] = magazineArr[i];
+                magazineArr[i] = tmp;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+    private int find(char[] chars, int val, int start) {
+        for (; start < chars.length; start ++) {
+            if (chars[start] == val) {
+                return start;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 387. First Unique Character in a String
+     * Note: You may assume the string contain only lowercase letters.
+     */
+    public int firstUniqChar(String s) {
+        char[] chars = s.toCharArray();
+        int[] alphabet = new int[26];  // record times of each letter
+        char[] index = new char[Math.min(26, s.length())]; // record letter order.
+        int[] position = new int[index.length];
+
+        int counter = 0;
+        for (int i = 0; i < chars.length; i ++) {
+            alphabet[chars[i]-97] += 1;
+            if (alphabet[chars[i]-97] == 1) {
+                index[counter] = chars[i];
+                position[counter] = i;
+                counter ++;
+            }
+        }
+        for (int i = 0; i < counter; i ++) {
+            if (alphabet[index[i] - 97] == 1) return position[i];
+        }
+        return -1;
+    }
+
+    // top answer
+    public int firstUniqChar1(String s) {
+        int res = -1;
+        int index;
+        for (int i = 'a'; i <= 'z'; i ++) {
+            index = s.indexOf(i);
+            if (index != -1 && index == s.lastIndexOf(i)) {
+                res = (res == -1 || index < res) ? index : res;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 389. Find the Difference
      */
     public char findTheDifference(String s, String t) {
@@ -1834,6 +2019,14 @@ public class Solution {
             result += c;
         }
         return result;
+    }
+
+    /**
+     * 400. Nth Digit
+     */
+    public int findNthDigit(int n) {
+        // TODO
+        return -1;
     }
 
     /**

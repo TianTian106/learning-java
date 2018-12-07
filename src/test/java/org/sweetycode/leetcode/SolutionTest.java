@@ -1006,6 +1006,19 @@ public class SolutionTest {
      */
     @Test
     public void testIntersect() throws Exception {
+        assertEquals("[2, 2]", Arrays.toString(solution.intersect2(new int[]{1,2,2,1}, new int[]{2,2})));
+        assertEquals("[9, 4]", Arrays.toString(solution.intersect2(new int[]{4,9,5}, new int[]{9,4,9,8,4})));
+    }
+
+    /**
+     * 367. Valid Perfect Square
+     */
+    @Test
+    public void testIsPerfectSquare() throws Exception {
+        assertEquals(true, solution.isPerfectSquare(1));
+        assertEquals(true, solution.isPerfectSquare(4));
+        assertEquals(true, solution.isPerfectSquare(16));
+        assertEquals(false, solution.isPerfectSquare(14));
     }
 
     /**
@@ -1017,11 +1030,50 @@ public class SolutionTest {
     }
 
     /**
+     * 374. Guess Number Higher or Lower
+     */
+    @Test
+    public void testGuessNumber() throws Exception {
+
+        int n = 65;
+        int myNumber = (int)(Math.random() * (n + 1));
+        solution.setMY_NUMBER(myNumber);
+        assertEquals(myNumber, solution.guessNumber(n));
+    }
+    
+    /**
+     * 383. Ransom Note
+     */
+    @Test
+    public void testCanConstruct() throws Exception {
+        assertEquals(false, solution.canConstruct("a", "b"));
+        assertEquals(false, solution.canConstruct("aa", "ab"));
+        assertEquals(true, solution.canConstruct("aa" ,"aab"));
+    }
+
+    /**
+     * 387. First Unique Character in a String
+     */
+    @Test
+    public void testFirstUniqChar() throws Exception {
+        assertEquals(2, solution.firstUniqChar("loveleetcode"));
+        assertEquals(8, solution.firstUniqChar("dddccdbba"));
+        assertEquals(0, solution.firstUniqChar("leetcode"));
+    }
+
+    /**
      * 389. Find the Difference
      */
     @Test
     public void testFindTheDifference() throws Exception {
         System.out.println(solution.findTheDifference("afbcfd","ffabcd"));
+    }
+
+    /**
+     * 400. Nth Digit
+     */
+    @Test
+    public void testFindNthDigit() throws Exception {
     }
 
     /**
