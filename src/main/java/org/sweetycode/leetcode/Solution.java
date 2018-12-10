@@ -2025,8 +2025,69 @@ public class Solution {
      * 400. Nth Digit
      */
     public int findNthDigit(int n) {
-        // TODO
-        return -1;
+        if (n <= 9) return n;
+        int b = 2;
+        int counter = 9;
+        while ((n - counter) / (9.0 * b) > Math.pow(10, b - 1)) {
+            counter += 9 * b * Math.pow(10, b - 1);
+            b++;
+        }
+        double tmp = (n - counter - 1) / b + Math.pow(10, b - 1);
+        return (int) tmp / (int) Math.pow(10, b - (n - counter - 1) % b - 1) % 10;
+    }
+
+    // top answer
+    public int findNthDigit2(int n) {
+        int len = 1;
+        int base = 1;
+        while (n > 9L * base * len) {
+            n -= 9 * base * len;
+            len ++;
+            base *= 10;
+        }
+        int curNum = (n - 1)/len + base;
+        int digit = 0;
+        for( int i = (n - 1) % len; i < len; ++ i) {
+            digit = curNum % 10;
+            curNum /= 10;
+        }
+        return digit;
+    }
+
+    /**
+     * 401. Binary Watch
+     */
+    public List<String> readBinaryWatch(int num) {
+        List<String> timeList = new ArrayList<>();
+
+        int[][] hour = new int[4][];
+        hour[0] = new int[]{0};
+        hour[1] = new int[]{1, 2, 4, 8};
+        hour[2] = new int[]{3, 5, 6, 9, 10};
+        hour[3] = new int[]{7, 11};
+
+        int[][] minute = new int[6][];
+        minute[0] = new int[]{0};
+        minute[1] = new int[]{1, 2, 4, 8, 16, 32};
+        minute[2] = new int[]{3, 5, 6, 9, 10, 12, 17, 18, 20, 24, 33, 34, 36, 40, 48};
+        minute[3] = new int[]{7, 11, 19, 35, 13, 21, 37, 25, 41, 49, 14, 22, 38, 26, 42, 50, 28, 44, 52, 56};
+        minute[4] = new int[]{58, 57, 54, 53, 51, 46, 45, 43, 39, 30, 29, 27, 23, 15};
+        minute[5] = new int[]{31, 47, 55, 59};
+
+        int m;
+        for (int h = Math.max(0, num - 5); h <= Math.min(num, 3); h ++) {
+            m = num - h;
+            for (int i = 0; i < hour[h].length; i ++) {
+                for (int j = 0; j < minute[m].length; j ++) {
+                    if (minute[m][j] < 10) {
+                        timeList.add(hour[h][i] + ":0" + minute[m][j]);
+                    } else {
+                        timeList.add(hour[h][i] + ":" + minute[m][j]);
+                    }
+                }
+            }
+        }
+        return timeList;
     }
 
     /**

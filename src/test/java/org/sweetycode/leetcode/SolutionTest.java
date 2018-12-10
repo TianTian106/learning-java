@@ -1074,6 +1074,18 @@ public class SolutionTest {
      */
     @Test
     public void testFindNthDigit() throws Exception {
+        assertEquals(0, solution.findNthDigit(11));
+        assertEquals(9, solution.findNthDigit(189));
+        assertEquals(1, solution.findNthDigit(196));
+        assertEquals(1, solution.findNthDigit(10));
+    }
+
+    /**
+     * 401. Binary Watch
+     */
+    @Test
+    public void testReadBinaryWatch() throws Exception {
+        System.out.println(solution.readBinaryWatch(1));
     }
 
     /**
