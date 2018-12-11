@@ -1089,6 +1089,14 @@ public class SolutionTest {
     }
 
     /**
+     * 404. Sum of Left Leaves
+     */
+    @Test
+    public void testSumOfLeftLeaves() throws Exception {
+        assertEquals(24, solution.sumOfLeftLeaves(ConvertUtil.stringToTreeNode("[3,9,20,null,null,15,7]")));
+    }
+
+    /**
      * 412. Fizz Buzz
      */
     @Test
