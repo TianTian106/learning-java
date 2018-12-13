@@ -2103,6 +2103,45 @@ public class Solution {
     }
 
     /**
+     * 405. Convert a Number to Hexadecimal
+     */
+    public String toHex(int num) {
+        if (num == 0) return "0";
+        String rst = "";
+        char[] hexBit = new char[]{'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+        while (num != 0) {
+            rst = hexBit[num & 0xf] + rst;
+            num >>>= 4;
+        }
+        return rst;
+    }
+
+    /**
+     * 409. Longest Palindrome
+     */
+    public int longestPalindrome(String s) {
+        int[] letters = new int[52];
+        int counter = 0;
+        int index ;
+        for (char c: s.toCharArray()) {
+            index = c >='a' ? c - 97 : c - 39;
+            if (letters[index] == 1) {
+                counter += 2;
+                letters[index] --;
+            } else {
+                letters[index] ++;
+            }
+        }
+        for (int letter: letters) {
+            if (letter == 1) {
+                counter ++;
+                break;
+            }
+        }
+        return counter;
+    }
+
+    /**
      * 412. Fizz Buzz
      */
     public List<String> fizzBuzz(int n) {
@@ -2116,6 +2155,15 @@ public class Solution {
             result.add(tmp);
         }
         return result;
+    }
+
+    /**
+     * 414. Third Maximum Number
+     * nums: non-empty array of integers
+     */
+    public int thirdMax(int[] nums) {
+        // TODO
+        return 0;
     }
 
     /**

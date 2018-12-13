@@ -1097,11 +1097,38 @@ public class SolutionTest {
     }
 
     /**
+     * 405. Convert a Number to Hexadecimal
+     */
+    @Test
+    public void testToHex() throws Exception {
+        assertEquals("ffffffff", solution.toHex(-1));
+        assertEquals("1a", solution.toHex(26));
+    }
+
+    /**
+     * 409. Longest Palindrome
+     */
+    @Test
+    public void testLongestPalindrome() throws Exception {
+        assertEquals(7, solution.longestPalindrome("abccccdd"));
+        assertEquals(1, solution.longestPalindrome("Aa"));
+        assertEquals(0, solution.longestPalindrome(""));
+    }
+
+    /**
      * 412. Fizz Buzz
      */
     @Test
     public void testFizzBuzz() throws Exception {
         System.out.println(solution.fizzBuzz(16));
+    }
+    
+    /**
+     * 414. Third Maximum Number
+     */
+    @Test
+    public void testThirdMax() throws Exception {
+
     }
 
     /**
