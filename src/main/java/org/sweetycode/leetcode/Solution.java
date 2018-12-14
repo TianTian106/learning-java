@@ -2162,8 +2162,54 @@ public class Solution {
      * nums: non-empty array of integers
      */
     public int thirdMax(int[] nums) {
-        // TODO
-        return 0;
+        long max1 = Long.MIN_VALUE;
+        long max2 = Long.MIN_VALUE;
+        long max3  = Long.MIN_VALUE;
+
+        for (int num: nums) {
+            if (num <= max3 || num == max2 || num == max1) {
+                continue;
+            } else if (num < max2) {
+                max3 = num;
+            } else if (num < max1) {
+                max3 = max2;
+                max2 = num;
+            } else {
+                max3 = max2;
+                max2 = max1;
+                max1 = num;
+            }
+        }
+
+        if (max3 != Long.MIN_VALUE) {
+            return (int)max3;
+        } else {
+            return (int)max1;
+        }
+    }
+
+    /**
+     * 415. Add Strings
+     */
+    public String addStrings(String num1, String num2) {
+        if (num1.length() > num2.length()) return addStrings(num2, num1);
+        int ldif = num2.length() - num1.length();
+        int carry = 0;
+        int bitsum ;
+        StringBuilder sb = new StringBuilder();
+        for (int i = num1.length() - 1; i >= 0; i --) {
+            bitsum = num1.charAt(i) + num2.charAt(i + ldif) + carry - 96;
+            sb.insert(0, bitsum % 10 + "");
+            carry = bitsum / 10;
+        }
+
+        for (int i = ldif - 1; i >= 0; i --) {
+            bitsum = num2.charAt(i) + carry - 48;
+            sb.insert(0, bitsum % 10 + "");
+            carry = bitsum / 10;
+        }
+        if (carry > 0) sb.insert(0, carry);
+        return sb.toString();
     }
 
     /**
