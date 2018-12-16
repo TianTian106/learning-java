@@ -2213,6 +2213,40 @@ public class Solution {
     }
 
     /**
+     * 427. Construct Quad Tree
+     */
+    public QuadTreeNode construct(int[][] grid) {
+        return constructQuadTree(grid, 0, grid.length - 1, 0, grid.length - 1);
+    }
+
+    private QuadTreeNode constructQuadTree(int[][] grid, int l1, int l2, int h1, int h2) {
+        QuadTreeNode root = new QuadTreeNode();
+
+        if (l1 == l2) {
+            root = new QuadTreeNode();
+            root.val = grid[h1][l1] == 1;
+            root.isLeaf = true;
+            return root;
+        }
+        QuadTreeNode topLeft = constructQuadTree(grid, l1, (l1 + l2) / 2, h1, (h1 + h2) / 2);
+        QuadTreeNode topRight = constructQuadTree(grid, (l1 + l2) / 2 + 1, l2, h1, (h1 + h2) / 2);
+        QuadTreeNode bottomLeft = constructQuadTree(grid, l1, (l1 + l2) / 2, (h1 + h2) / 2 + 1, h2);
+        QuadTreeNode bottomRight = constructQuadTree(grid, (l1 + l2) / 2 + 1, l2, (h1 + h2) / 2 + 1, h2);
+
+        if (topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf && topLeft.val == topRight.val && topLeft.val == bottomLeft.val && topLeft.val == bottomRight.val) {
+            root.isLeaf = true;
+            root.val = topLeft.val;
+        } else {
+            root.topLeft = topLeft;
+            root.topRight = topRight;
+            root.bottomLeft = bottomLeft;
+            root.bottomRight = bottomRight;
+        }
+
+        return root;
+    }
+
+    /**
      * 429. N-ary Tree Level Order Traversal
      */
     public List<List<Integer>> levelOrder(Node root) {
@@ -2234,6 +2268,29 @@ public class Solution {
             size = queue.size();
         }
         return result;
+    }
+
+    /**
+     * 434. Number of Segments in a String
+     */
+    public int countSegments(String s) {
+//        s = s.trim();
+//        if (s.length() == 0) return 0;
+//        return s.split("\\s+").length;
+        int count = 0;
+        boolean flag = true;
+        for (char c: s.toCharArray()) {
+            if (c == ' ') {
+                flag = true;
+                continue;
+            }
+
+            if (flag) {
+                count ++;
+                flag = false;
+            }
+        }
+        return count;
     }
 
     /**

@@ -1142,11 +1142,36 @@ public class SolutionTest {
         assertEquals("1098", solution.addStrings("999", "99"));
     }
 
+
+    /**
+     * 427. Construct Quad Tree
+     */
+    @Test
+    public void testConstruct() throws Exception {
+        int[][] t1 = ConvertUtil.stringToIntegerDyadicArray("[[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]]");
+        QuadTreeNode r1 = solution.construct(t1);
+
+        int[][] t2 = ConvertUtil.stringToIntegerDyadicArray("[[1,1,0,0,0,0,0,0],[1,1,0,0,0,0,0,0],[1,1,0,0,0,0,1,1],[1,1,0,0,0,0,1,1],[0,0,0,0,0,0,1,1],[0,0,0,0,0,0,1,1],[1,1,1,1,1,1,0,0],[1,1,1,1,1,1,0,0]]");
+        QuadTreeNode r2 = solution.construct(t2);
+    }
+
     /**
      * 429. N-ary Tree Level Order Traversal
      */
     @Test
     public void testLevelOrder() throws Exception {
+    }
+
+
+    /**
+     * 434. Number of Segments in a String
+     */
+    @Test
+    public void testCountSegments() throws Exception {
+        assertEquals(5, solution.countSegments("Hello, my name is John"));
+        assertEquals(5, solution.countSegments("Hello,  my name is John"));
+        assertEquals(0, solution.countSegments(""));
+        assertEquals(0, solution.countSegments("  "));
     }
 
     /**

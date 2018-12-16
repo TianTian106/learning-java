@@ -71,6 +71,24 @@ public class ConvertUtil {
         return output;
     }
 
+    public static int[][] stringToIntegerDyadicArray(String input) {
+        input = input.trim();
+        input = input.substring(1, input.length() - 1);
+        if (input.length() == 0) {
+            return new int[0][0];
+        }
+
+        String[] parts = input.split("],");
+        int[][] output = new int[parts.length][];
+        for(int index = 0; index < parts.length - 1; index++) {
+            String part = parts[index].trim() + "]";
+            output[index] = stringToIntegerArray(part);
+        }
+        String part = parts[parts.length - 1].trim();
+        output[parts.length - 1] = stringToIntegerArray(part);
+        return output;
+    }
+
     public static ListNode stringToListNode(String input) {
         // Generate array from the input
         int[] nodeValues = stringToIntegerArray(input);
