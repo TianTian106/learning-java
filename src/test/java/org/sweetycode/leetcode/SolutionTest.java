@@ -1173,6 +1173,64 @@ public class SolutionTest {
         assertEquals(0, solution.countSegments(""));
         assertEquals(0, solution.countSegments("  "));
     }
+    
+    /**
+     * 437. Path Sum III
+     */
+    @Test
+    public void testPathSum() throws Exception {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[-1,9,8,1,3,6,1,null,-1]");
+        assertEquals(4, solution.pathSum(t1, 8));
+        TreeNode t2 = ConvertUtil.stringToTreeNode("[10,5,-3,3,2,null,11,3,-2,null,1]");
+        assertEquals(3, solution.pathSum(t2, 8));
+    }
+
+    /**
+     * 438. Find All Anagrams in a String
+     */
+    @Test
+    public void testFindAnagrams() throws Exception {
+        assertEquals("[0, 1, 2]",ConvertUtil.integerArrayListToString(solution.findAnagrams("abab","ab")));
+        assertEquals("[0, 6]",ConvertUtil.integerArrayListToString(solution.findAnagrams("cbaebabacd","abc")));
+
+    }
+
+    /**
+     * 441. Arranging Coins
+     */
+    @Test
+    public void testArrangeCoins() throws Exception {
+        assertEquals(1, solution.arrangeCoins(2));
+        assertEquals(2, solution.arrangeCoins(3));
+        assertEquals(3, solution.arrangeCoins(6));
+        assertEquals(3, solution.arrangeCoins(8));
+    }
+
+    @Test
+    public void testArrangeCoins2() throws Exception {
+        assertEquals(60070, solution.arrangeCoins2(1804289383));
+    }
+
+    /**
+     * 443. String Compression
+     */
+    @Test
+    public void testCompress() throws Exception {
+        assertEquals(6, solution.compress(new char[]{'a','a','b','b','c','c','c'}));
+        assertEquals(4, solution.compress(new char[]{'a','a','b','c'}));
+        assertEquals(5, solution.compress(new char[]{'a','a','b','b','c'}));
+        assertEquals(1, solution.compress(new char[]{'a'}));
+        assertEquals(4, solution.compress(new char[]{'a','b','b','b','b','b','b','b','b','b','b','b','b'}));
+    }
+
+    /**
+     * 447. Number of Boomerangs
+     */
+    @Test
+    public void testNumberOfBoomerangs() throws Exception {
+        int[][] points = ConvertUtil.stringToIntegerDyadicArray("[[0,0],[1,0],[2,0]]");
+        assertEquals(2, solution.numberOfBoomerangs(points));
+    }
 
     /**
      * 461. Hamming Distance

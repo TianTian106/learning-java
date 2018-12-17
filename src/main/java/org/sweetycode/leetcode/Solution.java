@@ -1,5 +1,7 @@
 package org.sweetycode.leetcode;
 
+import org.sweetycode.leetcode.util.PrintUtil;
+
 import java.math.BigInteger;
 import java.util.*;
 
@@ -2291,6 +2293,121 @@ public class Solution {
             }
         }
         return count;
+    }
+
+    /**
+     * 437. Path Sum III
+     */
+    public int pathSum(TreeNode root, int sum) {
+        if (root == null) return 0;
+        return pathSumSub(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+    }
+    private int pathSumSub(TreeNode root, int sum) {
+        if (root == null) return 0;
+        int num = 0;
+        if (root.val == sum) num ++;
+        num += pathSumSub(root.left, sum - root.val);
+        num += pathSumSub(root.right, sum - root.val);
+        return num;
+    }
+
+    /**
+     * 438. Find All Anagrams in a String
+     * lowercase English letters only.
+     * Solution 1: Brute Force : O((|s| - |p|) * |p|) = O(n^2)
+     * Solution 2: Sliding Window : O(n)
+     */
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+        int[] hash = new int[26];
+        for (char c: p.toCharArray()) {
+            hash[c - 97] ++;
+        }
+        char[] ss = s.toCharArray();
+        int lp = p.length();
+        int ls = s.length();
+        int left = 0;
+        int right = 0;
+        while (right < ls) {
+            if (hash[ss[right] - 97] > 0) {
+                hash[ss[right] - 97] --;
+                right ++;
+                if (right - left == lp) {
+                    result.add(left);
+                    hash[ss[left] - 97] ++;
+                    left ++;
+                }
+            } else {
+                if (left == right) {
+                    right ++;
+                } else {
+                    hash[ss[left] - 97] ++;
+                }
+                left ++;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 441. Arranging Coins
+     */
+    public int arrangeCoins(int n) {
+        int lines = 0;
+        while (n >= lines) {
+            lines ++;
+            n -= lines;
+        }
+        return n >=0 ? lines: lines - 1;
+    }
+
+    // method 2:
+    public int arrangeCoins2(int n) {
+        return (int)(Math.sqrt(0.25 + 2L * n) - 0.5) ;
+    }
+
+    /**
+     * 443. String Compression
+     * TODO: less code.
+     */
+    public int compress(char[] chars) {
+        int l = chars.length;
+        if (l <= 1) return l;
+        char pre = chars[0];
+        int point = 1;
+        int counter = 1;
+        char[] tmp;
+        for (int i = 1; i < l; i++) {
+            if (chars[i] == pre) {
+                counter ++;
+            } else {
+                if (counter != 1) {
+                    tmp = String.valueOf(counter).toCharArray();
+                    for (char c: tmp) {
+                        chars[point ++] = c;
+                    }
+                }
+                chars[point ++] = chars[i];
+                pre = chars[i];
+                counter = 1;
+            }
+        }
+
+        if (counter != 1) {
+            tmp = String.valueOf(counter).toCharArray();
+            for (char c: tmp) {
+                chars[point ++] = c;
+            }
+        }
+        return point ;
+    }
+
+    /**
+     * 447. Number of Boomerangs
+     */
+    public int numberOfBoomerangs(int[][] points) {
+        // TODO
+        return 2;
     }
 
     /**
