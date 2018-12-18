@@ -2470,8 +2470,43 @@ public class Solution {
      * 455. Assign Cookies
      */
     public int findContentChildren(int[] g, int[] s) {
+        int num = 0;
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int i = 0;
+        int j = 0;
+        while (i < g.length && j < s.length) {
+            if (g[i] <= s[j]) {
+                num ++;
+                i ++;
+            }
+            j ++;
+        }
+        return num;
+    }
+
+    /**
+     * 458. Poor Pigs
+     *  TODO thinking
+     */
+    public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+        if (buckets == 1) return 0;
+        int num = 1;
+        int times = minutesToTest / minutesToDie + 1;
+        while (buckets > times) {
+            buckets /= times;
+            num ++;
+        }
+        return num;
+    }
+
+    /**
+     * 459. Repeated Substring Pattern
+     */
+    public boolean repeatedSubstringPattern(String s) {
         // TODO
-        return 0;
+        return false;
+
     }
 
     /**

@@ -1258,7 +1258,26 @@ public class SolutionTest {
      */
     @Test
     public void testFindContentChildren() throws Exception {
+        assertEquals(1, solution.findContentChildren(new int[]{1,2,3}, new int[]{1,1}));
+        assertEquals(2, solution.findContentChildren(new int[]{1,2}, new int[]{1,2,3}));
 
+    }
+
+    /**
+     * 458. Poor Pigs
+     */
+    @Test
+    public void testPoorPigs() throws Exception {
+        assertEquals(5, solution.poorPigs(1000, 15, 60));
+        assertEquals(0, solution.poorPigs(1, 1, 1));
+        assertEquals(1, solution.poorPigs(2, 1, 1));
+    }
+
+    /**
+     * 459. Repeated Substring Pattern
+     */
+    @Test
+    public void testRepeatedSubstringPattern() throws Exception {
     }
 
     /**
