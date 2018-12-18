@@ -2404,10 +2404,74 @@ public class Solution {
 
     /**
      * 447. Number of Boomerangs
+     * Given n points in the plane that are all pairwise distinct.
+     * coordinates of points range [-10000, 10000] (inclusive).
      */
     public int numberOfBoomerangs(int[][] points) {
+        int result = 0;
+        int num = points.length;
+        Map<Integer,Integer> map = new HashMap<>();
+        for (int i = 0; i < num; i ++) {
+            map.clear();
+            for (int j = 0; j < num; j ++) {
+                map.compute((points[i][0] - points[j][0]) * (points[i][0] - points[j][0]) + (points[i][1] - points[j][1]) * (points[i][1] - points[j][1]), (k, v) -> (v == null) ? 1 : v + 1);
+            }
+            for (Integer val: map.values()) {
+                if (val >= 2) {
+                    result += val * (val - 1);
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 448. Find All Numbers Disappeared in an Array
+     */
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> result = new ArrayList<>();
+        int l = nums.length;
+        int point;
+        for (int i = 0; i < l; i ++) {
+            point = Math.abs(nums[i]) - 1;
+            if (nums[point] > 0) {
+                nums[point] *= -1;
+            }
+        }
+
+        for (int i = 0; i < l; i ++) {
+            if (nums[i] > 0) {
+                result.add(i + 1);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 453. Minimum Moves to Equal Array Elements
+     * min n - 1 elements plus 1 equal max val minus 1
+     */
+    public int minMoves(int[] nums) {
+        int l = nums.length;
+        int minVal = nums[0];
+        int result = 0;
+        for (int i = 1; i < l; i ++) {
+            if (nums[i] < minVal) {
+                result += (minVal - nums[i]) * i;
+                minVal = nums[i];
+            } else if (nums[i] > minVal) {
+                result += nums[i] - minVal;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 455. Assign Cookies
+     */
+    public int findContentChildren(int[] g, int[] s) {
         // TODO
-        return 2;
+        return 0;
     }
 
     /**

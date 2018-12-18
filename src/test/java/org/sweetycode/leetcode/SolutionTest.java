@@ -1233,6 +1233,35 @@ public class SolutionTest {
     }
 
     /**
+     * 448. Find All Numbers Disappeared in an Array
+     */
+    @Test
+    public void testFindDisappearedNumbers() throws Exception {
+        assertEquals("[5, 6]", ConvertUtil.integerArrayListToString(solution.findDisappearedNumbers(new int[]{4,3,2,7,8,2,3,1})));
+
+    }
+
+    /**
+     * 453. Minimum Moves to Equal Array Elements
+     */
+    @Test
+    public void testMinMoves() throws Exception {
+        assertEquals(3, solution.minMoves(new int[]{1,2,3}));
+        assertEquals(0, solution.minMoves(new int[]{0}));
+        assertEquals(1, solution.minMoves(new int[]{1,2}));
+        assertEquals(2147483646, solution.minMoves(new int[]{1,1,2147483647}));
+        assertEquals(2, solution.minMoves(new int[]{1,1,2,2}));
+    }
+
+    /**
+     * 455. Assign Cookies
+     */
+    @Test
+    public void testFindContentChildren() throws Exception {
+
+    }
+
+    /**
      * 461. Hamming Distance
      */
     @Test
