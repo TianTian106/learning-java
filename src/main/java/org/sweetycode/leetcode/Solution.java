@@ -2504,9 +2504,44 @@ public class Solution {
      * 459. Repeated Substring Pattern
      */
     public boolean repeatedSubstringPattern(String s) {
-        // TODO
-        return false;
+        if (s.length() <= 1) return false;
+        int point = 0;
+        int l = 1;
+        char[] c = s.toCharArray();
+        for (int i = 1; i < c.length; i ++) {
+            if (c[i] != c[point]) {
+                i = i - point;
+                point = 0;
+                l = l + 1;
+            } else {
+                point ++;
+            }
+            if (l > s.length()/2) {
+                return false;
+            }
+        }
+        return c.length % l == 0;
+    }
 
+    /**
+     * KMP Algorithm
+     * ref : https://www.cnblogs.com/liziran/p/6129336.html
+     */
+    public boolean repeatedSubstringPattern1(String s) {
+        char[] c = s.toCharArray();
+        int l = c.length;
+        if (l <= 1) return false;
+        int[] next = new int[l + 1];
+        next[0] = -1;
+        int k ;
+        for (int j = 1; j <= l; j ++) {
+            k = next[j - 1];
+            while (k != -1 && c[j - 1] != c[k]) {
+                k = next[k];
+            }
+            next[j] = k + 1;
+        }
+        return next[l] > 0 && next[l] % (l - next[l]) == 0;
     }
 
     /**
@@ -2542,6 +2577,14 @@ public class Solution {
             }
         }
         return result;
+    }
+
+    /**
+     * 475. Heaters
+     */
+    public int findRadius(int[] houses, int[] heaters) {
+        // TODO
+        return -1;
     }
 
     /**

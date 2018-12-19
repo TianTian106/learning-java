@@ -1278,6 +1278,15 @@ public class SolutionTest {
      */
     @Test
     public void testRepeatedSubstringPattern() throws Exception {
+        assertEquals(false, solution.repeatedSubstringPattern("babbbbaabbababbaaaaababbaaabbbbaaabbbababbbbabaabababaabaaabbbabababbbabababaababaaaaabbabaaaabaaaab"));
+        assertEquals(false, solution.repeatedSubstringPattern("babbbbaabb"));
+        assertEquals(true, solution.repeatedSubstringPattern("abacababacab"));
+        assertEquals(false, solution.repeatedSubstringPattern("aabaaba"));
+        assertEquals(true, solution.repeatedSubstringPattern("abab"));
+        assertEquals(false, solution.repeatedSubstringPattern("aba"));
+        assertEquals(true, solution.repeatedSubstringPattern("abcabcabcabc"));
+        assertEquals(false, solution.repeatedSubstringPattern("a"));
+        assertEquals(true, solution.repeatedSubstringPattern("aa"));
     }
 
     /**
@@ -1294,7 +1303,19 @@ public class SolutionTest {
     @Test
     public void testIslandPerimeter() throws Exception {
         System.out.println(solution.islandPerimeter(new int[][]{{0,1,0,0},{1,1,1,0},{0,1,0,0},{1,1,0,0}}));
+    }
 
+    /**
+     * 475. Heaters
+     */
+    @Test
+    public void testFindRadius() throws Exception {
+        assertEquals(3, solution.findRadius(new int[]{1.5}, new int[]{2o}));
+        assertEquals(0, solution.findRadius(new int[]{1}, new int[]{1}));
+        assertEquals(1, solution.findRadius(new int[]{1,2}, new int[]{1}));
+        assertEquals(0, solution.findRadius(new int[]{1,2}, new int[]{1,2}));
+        assertEquals(1, solution.findRadius(new int[]{1,2,3}, new int[]{2}));
+        assertEquals(1, solution.findRadius(new int[]{1,2,3,4}, new int[]{1,4}));
 
     }
 
