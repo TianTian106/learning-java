@@ -1310,7 +1310,8 @@ public class SolutionTest {
      */
     @Test
     public void testFindRadius() throws Exception {
-        assertEquals(3, solution.findRadius(new int[]{1.5}, new int[]{2o}));
+        assertEquals(498, solution.findRadius(new int[]{1,1,1,1,1,1,999,999,999,999,999}, new int[]{499,500,501}));
+        assertEquals(3, solution.findRadius(new int[]{1,5}, new int[]{2}));
         assertEquals(0, solution.findRadius(new int[]{1}, new int[]{1}));
         assertEquals(1, solution.findRadius(new int[]{1,2}, new int[]{1}));
         assertEquals(0, solution.findRadius(new int[]{1,2}, new int[]{1,2}));
@@ -1327,6 +1328,32 @@ public class SolutionTest {
         System.out.println(solution.findComplement(5));
         System.out.println(solution.findComplement(1));
 
+    }
+    
+    /**
+     * 479. Largest Palindrome Product
+     */
+    @Test
+    public void testLargestPalindrome() throws Exception {
+    }
+
+    /**
+     * 482. License Key Formatting
+     */
+    @Test
+    public void testLicenseKeyFormatting() throws Exception {
+        assertEquals("5F3Z-2E9W", solution.licenseKeyFormatting("5F3Z-2e-9-w", 4));
+        assertEquals("2-5G-3J", solution.licenseKeyFormatting("2-5g-3-J", 2));
+    }
+
+    /**
+     * 485. Max Consecutive Ones
+     */
+    @Test
+    public void testFindMaxConsecutiveOnes() throws Exception {
+        assertEquals(2, solution.findMaxConsecutiveOnes(new int[]{1,0,1,1,0,1}));
+        assertEquals(1, solution.findMaxConsecutiveOnes(new int[]{1}));
+        assertEquals(3, solution.findMaxConsecutiveOnes(new int[]{1,1,0,1,1,1}));
     }
 
     /**

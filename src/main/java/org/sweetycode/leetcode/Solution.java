@@ -2,6 +2,7 @@ package org.sweetycode.leetcode;
 
 import org.sweetycode.leetcode.util.PrintUtil;
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -2583,8 +2584,23 @@ public class Solution {
      * 475. Heaters
      */
     public int findRadius(int[] houses, int[] heaters) {
-        // TODO
-        return -1;
+        Arrays.sort(houses);
+        Arrays.sort(heaters);
+        int radius = 0;
+        int j = 0;
+        for (int house: houses) {
+            while (j < heaters.length - 1 && heaters[j + 1] < house) {
+                j ++;
+            }
+
+            if (j < heaters.length - 1 ) {
+                radius = Math.max(radius, Math.min(Math.abs(heaters[j] - house), Math.abs(heaters[j + 1] - house)));
+
+            } else {
+                radius = Math.max(radius, Math.abs(heaters[j] - house));
+            }
+        }
+        return radius;
     }
 
     /**
@@ -2599,6 +2615,45 @@ public class Solution {
             mask <<= 1;
         }
         return (mask-1)^num;
+    }
+
+    /**
+     * 479. Largest Palindrome Product
+     */
+    public int largestPalindrome(int n) {
+        // TODO
+        return -1;
+    }
+
+    /**
+     * 482. License Key Formatting
+     */
+    public String licenseKeyFormatting(String S, int K) {
+        S = S.toUpperCase().replace("-","");
+        int i = S.length() - K;
+        StringBuilder sb = new StringBuilder(S);
+        while (i > 0) {
+            sb.insert(i, '-');
+            i -= K;
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 485. Max Consecutive Ones
+     */
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int result = 0;
+        int tmp = 0;
+        for (int num: nums) {
+            if (num == 1) {
+                tmp ++;
+            } else {
+                result = result > tmp ? result : tmp;
+                tmp = 0;
+            }
+        }
+        return result > tmp ? result : tmp;
     }
 
     /**
