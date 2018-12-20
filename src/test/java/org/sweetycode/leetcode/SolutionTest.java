@@ -1417,6 +1417,15 @@ public class SolutionTest {
     }
 
     /**
+     * 507. Perfect Number
+     */
+    @Test
+    public void testCheckPerfectNumber() throws Exception {
+        assertEquals(false, solution.checkPerfectNumber(1));  // except itself.
+        assertEquals(true, solution.checkPerfectNumber(28));
+    }
+
+    /**
      * 520. Detect Capital
      */
     @Test
@@ -1435,6 +1444,29 @@ public class SolutionTest {
     @Test
     public void testFindLUSlength() throws Exception {
         System.out.println(solution.findLUSlength("aba", "cdc"));
+    }
+
+    /**
+     * 530. Minimum Absolute Difference in BST
+     */
+    @Test
+    public void testGetMinimumDifference() throws Exception {
+        assertEquals(1, solution.getMinimumDifference(ConvertUtil.stringToTreeNode("[1,null,3,2]")));
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[1,null,2,2]");
+        assertEquals(0, solution.getMinimumDifference(t1));
+        TreeNode t2 = ConvertUtil.stringToTreeNode("[10,9,18,5,10,15,18,1,5,null,null,10,16,18,20,1,1,null,null,10,11]");
+        assertEquals(0, solution.getMinimumDifference(t2));
+    }
+
+    /**
+     * 532. K-diff Pairs in an Array
+     */
+    @Test
+    public void testFindPairs() throws Exception {
+        assertEquals(2, solution.findPairs(new int[]{3,1,4,1,5}, 2));
+        assertEquals(4, solution.findPairs(new int[]{1,2,3,4,5}, 1));
+        assertEquals(1, solution.findPairs(new int[]{1,3,1,5,4}, 0));
+        assertEquals(0, solution.findPairs(new int[]{1,2,3,4,5}, -1));
     }
 
     /**

@@ -2891,6 +2891,24 @@ public class Solution {
     }
 
     /**
+     * 507. Perfect Number
+     */
+    public boolean checkPerfectNumber(int num) {
+        // return num == 6 || num == 28 || num == 496 || num == 8128 || num == 33550336;
+        if (num <= 1) return false;
+        int sum = 1;
+        int i = 2;
+        int tmp;
+        while (true) {
+            tmp = num / i;
+            if (tmp < i) break;
+            if (num % i == 0) sum += (i + tmp);
+            i ++;
+        }
+        return num == sum;
+    }
+
+    /**
      * 520. Detect Capital
      */
     public boolean detectCapitalUse(String word) {
@@ -2909,6 +2927,77 @@ public class Solution {
      */
     public int findLUSlength(String a, String b) {
         return a.equals(b) ? -1 : Math.max(a.length(),b.length());
+    }
+
+    /**
+     * 530. Minimum Absolute Difference in BST
+     */
+    public int getMinimumDifference(TreeNode root) {
+        int result = Integer.MAX_VALUE;
+
+        if (root == null) {
+            return -1;
+        }
+
+        TreeNode current = root;
+        TreeNode pre ;
+        Integer tmp = null ;
+        while (current != null) {
+            if (current.left == null) {
+                // visit current
+                if (tmp != null) {
+                    result = Math.min(result, Math.abs(tmp - current.val));
+                }
+                tmp = current.val;
+                current = current.right;
+            } else {
+                pre = current.left;
+                while (pre.right != null && pre.right != current) {
+                    pre = pre.right;
+                }
+
+                if (pre.right == null) {
+                    pre.right = current;
+                    current = current.left;
+                } else {
+                    // visit current
+                    if (tmp != null) {
+                        result = Math.min(result, Math.abs(tmp - current.val));
+                    }
+                    tmp = current.val;
+                    pre.right = null;
+                    current = current.right;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 532. K-diff Pairs in an Array
+     * TODO: optimize
+     */
+    public int findPairs(int[] nums, int k) {
+        if (k < 0) return 0;
+        Set<Integer> set = new HashSet<>();
+        int counter = 0;
+        for (int i = 0; i < nums.length; i ++) {
+            for (int j = i + 1; j < nums.length; j ++) {
+                if (nums[i] - nums[j] == k) {
+                    if (!set.contains(nums[i])) {
+                        counter ++;
+                        set.add(nums[i]);
+                    }
+                } else if (nums[j] - nums[i] == k) {
+                    if (!set.contains(nums[j])) {
+                        counter ++;
+                        set.add(nums[j]);
+                    }
+                }
+            }
+        }
+        return counter;
     }
 
 
