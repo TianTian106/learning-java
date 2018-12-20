@@ -1357,6 +1357,15 @@ public class SolutionTest {
     }
 
     /**
+     * 492. Construct the Rectangle
+     */
+    @Test
+    public void testConstructRectangle() throws Exception {
+        assertEquals("[2, 2]", Arrays.toString(solution.constructRectangle(4)));
+        assertEquals("[5, 2]", Arrays.toString(solution.constructRectangle(10)));
+    }
+
+    /**
      * 496. Next Greater Element I
      */
     @Test
@@ -1372,6 +1381,39 @@ public class SolutionTest {
     @Test
     public void testFindWords() throws Exception {
         System.out.println(Arrays.toString(solution.findWords(new String[]{"Hello", "Alaska", "Dad", "Peace"})));
+    }
+
+    /**
+     * 501. Find Mode in Binary Search Tree
+     */
+    @Test
+    public void testFindMode() throws Exception {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[1,null,2,2]");
+        assertEquals("[2]", Arrays.toString(solution.findMode(t1)));
+        TreeNode t2 = ConvertUtil.stringToTreeNode("[10,9,18,5,10,15,18,1,5,null,null,10,16,18,20,1,1,null,null,10,11]");
+        assertEquals("[10]", Arrays.toString(solution.findMode(t2)));
+        TreeNode t3 = ConvertUtil.stringToTreeNode("[]");
+        assertEquals("[]", Arrays.toString(solution.findMode(t3)));
+    }
+
+    /**
+     * 504. Base 7
+     */
+    @Test
+    public void testConvertToBase7() throws Exception {
+        assertEquals("-11", solution.convertToBase7(-8));
+        assertEquals("202", solution.convertToBase7(100));
+        assertEquals("-10", solution.convertToBase7(-7));
+        assertEquals("-5", solution.convertToBase7(-5));
+        assertEquals("0", solution.convertToBase7(0));
+    }
+    
+    /**
+     * 506. Relative Ranks
+     */
+    @Test
+    public void testFindRelativeRanks() throws Exception {
+        assertEquals("[Gold Medal, Silver Medal, Bronze Medal, 4, 5]", Arrays.toString(solution.findRelativeRanks(new int[]{5, 4, 3, 2, 1})));
     }
 
     /**

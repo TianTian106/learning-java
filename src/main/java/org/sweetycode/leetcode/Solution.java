@@ -1,6 +1,7 @@
 package org.sweetycode.leetcode;
 
 import org.sweetycode.leetcode.util.PrintUtil;
+import sun.reflect.generics.tree.Tree;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
@@ -2657,6 +2658,20 @@ public class Solution {
     }
 
     /**
+     * 492. Construct the Rectangle
+     */
+    public int[] constructRectangle(int area) {
+        int w = (int)Math.sqrt(area);
+        while (w >= 1) {
+            if (area % w == 0) {
+                return new int[]{area / w, w};
+            }
+            w --;
+        }
+        return new int[]{area,1};
+    }
+
+    /**
      * 496. Next Greater Element I
      */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -2711,6 +2726,168 @@ public class Solution {
         }
 
         return resultList.toArray(new String[resultList.size()]);
+    }
+
+    /**
+     * 501. Find Mode in Binary Search Tree
+     * Morris Inorder Traversal
+     * TODO: simplify code
+     */
+    public int[] findMode(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Integer tmp = null;
+        int counter = 0;
+        int max = 0;
+
+        if (root == null) return new int[0];
+        TreeNode pre;
+        TreeNode current;
+
+        current = root;
+        while (current != null) {
+            if (current.left == null) {
+                if (tmp == null || tmp != current.val) {
+                    if (tmp != null && counter >= max) {
+                        if (counter > max) {
+                            result.clear();
+                            max = counter;
+                        }
+                        result.add(tmp);
+                    }
+                    tmp = current.val;
+                    counter = 0;
+                }
+                counter ++;
+                current = current.right;
+            } else {
+                pre = current.left;
+                while (pre.right != null && pre.right != current) {
+                    pre = pre.right;
+                }
+
+                if (pre.right == null) {
+                    pre.right = current;
+                    current = current.left;
+                } else {
+                    pre.right = null;
+                    if (tmp == null || tmp != current.val) {
+                        if (tmp != null && counter >= max) {
+                            if (counter > max) {
+                                result.clear();
+                                max = counter;
+                            }
+                            result.add(tmp);
+                        }
+                        tmp = current.val;
+                        counter = 0;
+                    }
+                    counter ++;
+                    current = current.right;
+                }
+
+            }
+        }
+
+        if (counter > max) {
+            return new int[]{tmp};
+        }
+        if (counter == max) {
+            result.add(tmp);
+        }
+
+        int[] resutArr = new int[result.size()];
+        int i = 0;
+        for (int num: result) {
+            resutArr[i] = num;
+            i ++;
+        }
+
+        return resutArr;
+    }
+
+    /**
+     * 504. Base 7
+     */
+    public String convertToBase7(int num) {
+        // return Integer.toString(num, 7);
+        if (num == 0) return "0";
+        String flag = "";
+        if (num < 0) {
+            num = -num;
+            flag = "-";
+        }
+        String result = "";
+        while (num != 0) {
+            result = num % 7 + result;
+            num /= 7;
+        }
+        return flag + result;
+    }
+
+    /**
+     * 506. Relative Ranks
+     */
+    public String[] findRelativeRanks(int[] nums) {
+        int l = nums.length;
+        Map<Integer, Integer> index = new HashMap<>();
+        for (int i = 0; i < l; i ++) {
+            index.put(nums[i], i);
+        }
+        Arrays.sort(nums);
+        String[] result = new String[l];
+        int i = l - 1;
+        if (i >= 0){
+            result[index.get(nums[i])] = "Gold Medal";
+            i --;
+        }
+        if (i >= 0){
+            result[index.get(nums[i])] = "Silver Medal";
+            i --;
+        }
+        if (i >= 0){
+            result[index.get(nums[i])] = "Bronze Medal";
+            i --;
+        }
+
+        while (i >= 0){
+            result[index.get(nums[i])] = l - i + "";
+            i --;
+        }
+        return result;
+    }
+
+    // method 2:
+    public String[] findRelativeRanks2(int[] nums) {
+        int l = nums.length;
+        String[] result = new String[l];
+        if (l == 0) return result;
+        int max = nums[0];
+        for (int num: nums) {
+            if (num > max) max = num;
+        }
+
+        int[] index = new int[max + 1];
+        for (int i = 0; i < l; i ++) {
+            index[nums[i]] = i + 1;
+        }
+
+        int rank = 1;
+        for (int i = index.length - 1; i >=0; i --) {
+            if (index[i] != 0) {
+                if (rank == 1) {
+                    result[index[i] - 1] = "Gold Medal";
+                } else if (rank == 2) {
+                    result[index[i] - 1] = "Silver Medal";
+                } else if (rank == 3) {
+                    result[index[i] - 1] = "Bronze Medal";
+                } else {
+                    result[index[i] - 1] = rank + "";
+                }
+                rank ++;
+            }
+        }
+
+        return result;
     }
 
     /**
