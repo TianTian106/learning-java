@@ -1468,6 +1468,15 @@ public class SolutionTest {
         assertEquals(1, solution.findPairs(new int[]{1,3,1,5,4}, 0));
         assertEquals(0, solution.findPairs(new int[]{1,2,3,4,5}, -1));
     }
+    
+    /**
+     * 538. Convert BST to Greater Tree
+     */
+    @Test
+    public void testConvertBST() throws Exception {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[5,2,13]");
+        assertEquals("[18, 20, 13, null, null, null, null]",ConvertUtil.treeNodeToString(solution.convertBST(t1)));
+    }
 
     /**
      * 557. Reverse Words in a String III

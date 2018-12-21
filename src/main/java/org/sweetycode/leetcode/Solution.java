@@ -3000,6 +3000,51 @@ public class Solution {
         return counter;
     }
 
+    /**
+     * 538. Convert BST to Greater Tree
+     */
+    public TreeNode convertBST(TreeNode root) {
+        TreeNode current ;
+        TreeNode pre ;
+        int sum = 0;
+        int tmp;
+        for (int i = 0; i < 2; i ++){
+            current = root;
+            while (current != null) {
+                if (current.left == null) {
+                    if (i == 0) {
+                        sum += current.val;
+                    } else {
+                        tmp = current.val;
+                        current.val = sum;
+                        sum -= tmp;
+                    }
+                    current = current.right;
+                } else {
+                    pre = current.left;
+                    while (pre.right != null && pre.right != current) {
+                        pre = pre.right;
+                    }
+
+                    if (pre.right == null) {
+                        pre.right = current;
+                        current = current.left;
+                    } else {
+                        if (i == 0) {
+                            sum += current.val;
+                        } else {
+                            tmp = current.val;
+                            current.val = sum;
+                            sum -= tmp;
+                        }
+                        pre.right = null;
+                        current = current.right;
+                    }
+                }
+            }
+        }
+        return root;
+    }
 
     /**
      * 557. Reverse Words in a String III
