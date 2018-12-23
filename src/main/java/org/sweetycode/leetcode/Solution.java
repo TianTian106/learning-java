@@ -3990,5 +3990,532 @@ public class Solution {
         return result;
     }
 
+    /**
+     * 893. Groups of Special-Equivalent Strings
+     */
+    public int numSpecialEquivGroups(String[] A) {
+        return -1;
+    }
+
+
+    /**
+     * 896. Monotonic Array
+     */
+    public boolean isMonotonic(int[] A) {
+        int l = A.length;
+        boolean isAsc = A[l - 1] > A[0];
+
+        for (int i = 1; i < A.length; i++) {
+            if (isAsc) {
+                if (A[i] < A[i - 1]) return false;
+            } else {
+                if (A[i] > A[i - 1]) return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 897. Increasing Order Search Tree
+     */
+    public TreeNode increasingBST(TreeNode root) {
+        TreeNode t = new TreeNode(-1);
+        TreeNode pointer = t;
+
+        if (root == null) return null;
+        TreeNode pre;
+        TreeNode current = root;
+
+        while (current != null) {
+            if (current.left == null) {
+                // visit current.
+                pointer.right = new TreeNode(current.val);
+                pointer = pointer.right;
+                current = current.right;
+            } else {
+                pre = current.left;
+                while (pre.right != null && pre.right != current) {
+                    pre = pre.right;
+                }
+
+                if (pre.right == null) {
+                    pre.right = current;
+                    current = current.left;
+                } else {
+                    // visit current.
+                    pointer.right = new TreeNode(current.val);
+                    pointer = pointer.right;
+                    pre.right = null;
+                    current = current.right;
+                }
+            }
+        }
+
+        return t.right;
+    }
+
+    /**
+     * 905. Sort Array By Parity
+     */
+    public int[] sortArrayByParity(int[] A) {
+        int i = 0;
+        int j = A.length - 1;
+        int tmp;
+        while (i < j) {
+            if ((A[i] & 1) == 0) {
+                i ++;
+                continue;
+            }
+            if ((A[j] & 1) == 1) {
+                j --;
+                continue;
+            }
+            tmp = A[i];
+            A[i ++] = A[j];
+            A[j --] = tmp;
+        }
+        return A;
+    }
+
+    /**
+     * 908. Smallest Range I
+     */
+    public int smallestRangeI(int[] A, int K) {
+        return -1;
+    }
+
+    /**
+     * 914. X of a Kind in a Deck of Cards
+     * relatively prime
+     */
+    public boolean hasGroupsSizeX(int[] deck) {
+        if (deck.length < 2) return false;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : deck) {
+            map.compute(i, (k, v) -> v == null ? 1 : v + 1);
+        }
+
+        for (Integer a : map.values()) {
+            if (a == 1) return false;
+            for (Integer b : map.values()) {
+                if(isRelativelyPrime(a, b)) return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isRelativelyPrime(int a, int b) {
+        if (b > a) return isRelativelyPrime(b, a);
+        int tmp;
+        while ((tmp = a % b) != 0) {
+            a = b;
+            b = tmp;
+        }
+        return b == 1;
+    }
+
+    // top answer
+    public boolean hasGroupsSizeX2(int[] deck) {
+        int l = deck.length;
+        if (l < 2) return false;
+        int[] count = new int[10000];
+        for (int c: deck)
+            count[c]++;
+
+        List<Integer> values = new ArrayList();
+        for (int i = 0; i < 10000; ++i)
+            if (count[i] > 0)
+                values.add(count[i]);
+
+        tag : for (int i = 2; i <= l; i ++) {
+            if (l % i == 0) {
+                for (int v : values)
+                    if (v % i != 0)
+                        continue tag;
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 917. Reverse Only Letters
+     */
+    public String reverseOnlyLetters(String S) {
+        char[] c = S.toCharArray();
+        int i = 0;
+        int j = c.length - 1;
+        char tmp;
+        while (i < j) {
+            if (c[i] < 'A' || c[i] > 'z' || (c[i] > 'Z' && c[i] < 'a')) {
+                i ++;
+                continue;
+            }
+            if (c[j] < 'A' || c[j] > 'z' || (c[j] > 'Z' && c[j] < 'a')) {
+                j --;
+                continue;
+            }
+            tmp = c[i];
+            c[i ++] = c[j];
+            c[j --] = tmp;
+        }
+
+        return new String(c);
+    }
+
+    /**
+     * 922. Sort Array By Parity II
+     */
+    public int[] sortArrayByParityII(int[] A) {
+        int[] result = new int[A.length];
+        int even = 0;
+        int odd = 1;
+        for (int a: A) {
+            if ((a & 1) == 0) {
+                result[even] = a;
+                even += 2;
+            } else {
+                result[odd] = a;
+                odd += 2;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 925. Long Pressed Name
+     */
+    public boolean isLongPressedName(String name, String typed) {
+        char[] a1 = name.toCharArray();
+        char[] a2 = typed.toCharArray();
+
+        int l1 = a1.length;
+        int l2 = a2.length;
+
+        if (l1 > l2 || (l1 == 0 && l2 != 0)) return false;
+        if (l1 == l2 ) {
+            if (name.equals(typed)) return true;
+            return false;
+        }
+
+        if (a1[0] != a2[0]) return false;
+        int j = 1;
+        for (int i = 1; i < l1; i ++) {
+            while (j < l2 && a1[i] != a2[j]) {
+                if (a2[j] != a1[i - 1]) return false;
+                j ++;
+            }
+            if (j >= l2) return false;
+            j ++;
+        }
+
+        while (j < l2) {
+            if (a2[j] != a1[l1 -1]) return false;
+            j ++;
+        }
+
+        return true;
+    }
+
+    /**
+     * 929. Unique Email Addresses
+     */
+    public int numUniqueEmails(String[] emails) {
+        Set<String> unique = new HashSet<>();
+        String[] tmp;
+        String local;
+        String domain;
+        for (String email : emails) {
+            tmp = email.split("@");
+            local = tmp[0];
+            domain = tmp[1];
+            unique.add(local.split("\\+")[0].replace(".", "") + "@" + domain);
+        }
+        return unique.size();
+    }
+
+    /**
+     * 933. Number of Recent Calls
+     */
+    class RecentCounter {
+
+        private List<Integer> vector;
+
+        public RecentCounter() {
+            vector = new ArrayList<>();
+        }
+
+        public int ping(int t) {
+            vector.add(t);
+            while (vector.get(0) < t - 3000) {
+                vector.remove(0);
+            }
+            return vector.size();
+        }
+    }
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
+
+    /**
+     * 937. Reorder Log Files
+     */
+    public String[] reorderLogFiles(String[] logs) {
+        String[] result = new String[logs.length];
+        List<String> letter = new ArrayList<>();
+        List<String> digit = new ArrayList<>();
+        String[] tmp;
+        for (String log: logs) {
+            tmp = log.split(" ");
+            if (tmp[1].charAt(0) <= '9') {
+                digit.add(log);
+            } else {
+                tmp = log.split(" ", 2);
+                letter.add(tmp[1] + " " + tmp[0]);
+            }
+        }
+
+        letter.sort(null);
+        int index;
+        int i = 0;
+        for (String log: letter) {
+            index = log.lastIndexOf(" ");
+            result[i] = log.substring(index + 1) + " " + log.substring(0, index);
+            i ++;
+        }
+        for (String log: digit) {
+            result[i] = log;
+            i ++;
+        }
+        return result;
+    }
+
+    // top answer
+    public String[] reorderLogFiles2(String[] logs) {
+        ArrayList<String> digits = new ArrayList<>();
+        ArrayList<String> letters = new ArrayList<>();
+        for (int i = 0; i < logs.length; i++) {
+            String str = logs[i];
+            int index = str.indexOf(' ');
+            char c = str.charAt(index + 1);
+            if (c >= '0' && c <= '9') {
+                digits.add(str);
+            } else {
+                letters.add(str);
+            }
+        }
+        Collections.sort(letters, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int index1 = o1.indexOf(' ');
+                int index2 = o2.indexOf(' ');
+                while (index1 < o1.length() && index2 < o2.length()) {
+                    char c1 = o1.charAt(index1++);
+                    char c2 = o2.charAt(index2++);
+                    if (c1 > c2) {
+                        return 1;
+                    } else if (c1 < c2) {
+                        return -1;
+                    }
+                }
+                if (index1 < o1.length()) {
+                    return 1;
+                } else if (index2 < o2.length()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        String[] rst = new String[logs.length];
+        int index = 0;
+        for (int i = 0; i < letters.size(); i++) {
+            rst[index++] = letters.get(i);
+        }
+        for (int i = 0; i < digits.size(); i++) {
+            rst[index++] = digits.get(i);
+        }
+        return rst;
+    }
+
+    /**
+     * 941. Valid Mountain Array
+     */
+    public boolean validMountainArray(int[] A) {
+        if (A.length < 3) return false;
+        boolean flag = true;
+        int peak = 0;
+        for (int i = 1; i < A.length; i ++) {
+            if (A[i] == A[i - 1]) return false;
+            if (flag) {
+                if (A[i] < A[i - 1]) {
+                    flag = false;
+                    peak = i - 1;
+                }
+            } else {
+                if (A[i] > A[i - 1]) {
+                    return false;
+                }
+            }
+        }
+
+        return peak > 0 && peak < A.length - 1;
+    }
+
+    public boolean validMountainArray2(int[] A) {
+        if (A.length < 3) return false;
+        int i = 0;
+        while (A[i] < A[i+1] && i < A.length - 2) {
+            ++ i;
+        }
+        if (i == A.length - 1 || i == 0) return false;
+        for(; i<A.length - 1; ++ i){
+            if (A[i] <= A[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * 942. DI String Match
+     */
+    public int[] diStringMatch(String S) {
+        int l = S.length() + 1;
+        int[] result = new int[l];
+        int i = 0;
+        int a1 = 0;
+        int a2 = l - 1;
+        for (char c: S.toCharArray()) {
+            if (c == 'I') {
+                result[i] = a1 ++;
+            } else {
+                result[i] = a2 --;
+            }
+
+            i ++;
+        }
+        result[i] = a1;
+        return result;
+    }
+
+    /**
+     * 944. Delete Columns to Make Sorted
+     */
+    public int minDeletionSize(String[] A) {
+        if (A.length <= 1) return 0;
+        int result = 0;
+        char pre;
+        char tmp;
+        for (int i = 0; i < A[0].length(); i ++) {
+            pre = 'a';
+            for (String a : A) {
+                tmp = a.charAt(i);
+                if (tmp < pre) {
+                    result ++;
+                    break;
+                }
+                pre = tmp;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 949. Largest Time for Given Digits
+     */
+    public String largestTimeFromDigits(int[] A) {
+        // 00:00 ~ 23:59
+        String result = "";
+        result = getLargestTime(result, getTime(A[0],A[1],A[2],A[3]));
+        result = getLargestTime(result, getTime(A[0],A[1],A[3],A[2]));
+        result = getLargestTime(result, getTime(A[0],A[2],A[1],A[3]));
+        result = getLargestTime(result, getTime(A[0],A[2],A[3],A[1]));
+        result = getLargestTime(result, getTime(A[0],A[3],A[1],A[2]));
+        result = getLargestTime(result, getTime(A[0],A[3],A[2],A[1]));
+        result = getLargestTime(result, getTime(A[1],A[0],A[2],A[3]));
+        result = getLargestTime(result, getTime(A[1],A[0],A[3],A[2]));
+        result = getLargestTime(result, getTime(A[1],A[2],A[0],A[3]));
+        result = getLargestTime(result, getTime(A[1],A[2],A[3],A[0]));
+        result = getLargestTime(result, getTime(A[1],A[3],A[0],A[2]));
+        result = getLargestTime(result, getTime(A[1],A[3],A[2],A[0]));
+        result = getLargestTime(result, getTime(A[2],A[0],A[1],A[3]));
+        result = getLargestTime(result, getTime(A[2],A[0],A[3],A[1]));
+        result = getLargestTime(result, getTime(A[2],A[1],A[0],A[3]));
+        result = getLargestTime(result, getTime(A[2],A[1],A[3],A[0]));
+        result = getLargestTime(result, getTime(A[2],A[3],A[0],A[1]));
+        result = getLargestTime(result, getTime(A[2],A[3],A[1],A[0]));
+        result = getLargestTime(result, getTime(A[3],A[0],A[1],A[2]));
+        result = getLargestTime(result, getTime(A[3],A[0],A[2],A[1]));
+        result = getLargestTime(result, getTime(A[3],A[1],A[0],A[2]));
+        result = getLargestTime(result, getTime(A[3],A[1],A[2],A[0]));
+        result = getLargestTime(result, getTime(A[3],A[2],A[0],A[1]));
+        result = getLargestTime(result, getTime(A[3],A[2],A[1],A[0]));
+
+        return result;
+    }
+
+    private String getLargestTime(String t1, String t2) {
+        return t1.compareTo(t2) > 0 ? t1 : t2;
+    }
+
+    private String getTime (int a1, int a2, int a3, int a4) {
+        if (10 * a1 + a2 > 23) return "";
+        if (10 * a3 + a4 > 59) return "";
+        return "" + a1 + a2 + ":" + a3 + a4;
+    }
+
+    /**
+     * 953. Verifying an Alien Dictionary
+     */
+    private Map<Character, Character> alienDic = new HashMap<>();
+    public boolean isAlienSorted(String[] words, String order) {
+        char i = 1;
+        for (char c: order.toCharArray()) {
+            alienDic.put(c, i ++);
+        }
+
+        for (int j = 1; j < words.length ; j ++ ) {
+            if (compareString(words[j], words[j - 1]) < 0) return false;
+        }
+        return true;
+    }
+
+    private int compareString(String s1, String s2) {
+        int len1 = s1.length();
+        int len2 = s2.length();
+        int lim = Math.min(len1, len2);
+        char v1[] = s1.toCharArray();
+        char v2[] = s2.toCharArray();
+
+        int k = 0;
+        while (k < lim) {
+            char c1 = alienDic.get(v1[k]);
+            char c2 = alienDic.get(v2[k]);
+            if (c1 != c2) {
+                return c1 - c2;
+            }
+            k++;
+        }
+        return len1 - len2;
+    }
+
+    /**
+     * 961. N-Repeated Element in Size 2N Array
+     */
+    public int repeatedNTimes(int[] A) {
+        int target = A.length / 2;
+        int[] counter = new int[10000];
+        for (int a: A) {
+            counter[a] ++;
+            if (counter[a] == target) {
+                return a;
+            }
+        }
+        return -1;
+    }
+
 }
 

@@ -1891,5 +1891,195 @@ public class SolutionTest {
         System.out.println(solution.surfaceArea(new int[][]{{1,0},{0,2}}));
         System.out.println(solution.surfaceArea(new int[][]{{1,1,1},{1,0,1},{1,1,1}}));
     }
+
+    /**
+     * 893. Groups of Special-Equivalent Strings
+     */
+    @Test
+    public void testNumSpecialEquivGroups() throws Exception {
+    }
+
+    /**
+     * 896. Monotonic Array
+     */
+    @Test
+    public void testIsMonotonic() throws Exception {
+        assertEquals(true, solution.isMonotonic(new int[]{1,2,2,3}));
+        assertEquals(true, solution.isMonotonic(new int[]{6,5,4,4}));
+        assertEquals(false, solution.isMonotonic(new int[]{1,3,2}));
+        assertEquals(true, solution.isMonotonic(new int[]{1,2,4,5}));
+        assertEquals(true, solution.isMonotonic(new int[]{1,1,1}));
+    }
+
+    /**
+     * 897. Increasing Order Search Tree
+     */
+    @Test
+    public void testIncreasingBST() throws Exception {
+        assertEquals("[1, null, 2, null, 3, null, 4, null, 5, null, 6, null, 7, null, 8, null, 9, null, null]", ConvertUtil.treeNodeToString(solution.increasingBST(ConvertUtil.stringToTreeNode("[5,3,6,2,4,null,8,1,null,null,null,7,9]"))));
+
+    }
+
+    /**
+     * 905. Sort Array By Parity
+     */
+    @Test
+    public void testSortArrayByParity() throws Exception {
+        PrintUtil.printArray(solution.sortArrayByParity(new int[]{3,1,2,4}));
+    }
+
+    /**
+     * 908. Smallest Range I
+     */
+    @Test
+    public void testSmallestRangeI() throws Exception {
+    }
+
+    /**
+     * 914. X of a Kind in a Deck of Cards
+     */
+    @Test
+    public void testHasGroupsSizeX() throws Exception {
+        assertEquals(true, solution.hasGroupsSizeX(new int[]{1,2,3,4,4,3,2,1}));
+        assertEquals(false, solution.hasGroupsSizeX(new int[]{1,1,1,2,2,2,3,3}));
+        assertEquals(false, solution.hasGroupsSizeX(new int[]{1}));
+        assertEquals(true, solution.hasGroupsSizeX(new int[]{1,1}));
+    }
+
+    @Test
+    public void testHasGroupsSizeX2() throws Exception {
+        assertEquals(true, solution.hasGroupsSizeX2(new int[]{1,2,3,4,4,3,2,1}));
+        assertEquals(false, solution.hasGroupsSizeX2(new int[]{1,1,1,2,2,2,3,3}));
+        assertEquals(false, solution.hasGroupsSizeX2(new int[]{1}));
+        assertEquals(true, solution.hasGroupsSizeX2(new int[]{1,1}));
+    }
+
+    /**
+     * 917. Reverse Only Letters
+     */
+    @Test
+    public void testReverseOnlyLetters() throws Exception {
+        assertEquals("dc-ba", solution.reverseOnlyLetters("ab-cd"));
+        assertEquals("j-Ih-gfE-dCba", solution.reverseOnlyLetters("a-bC-dEf-ghIj"));
+        assertEquals("Qedo1ct-eeLg=ntse-T!", solution.reverseOnlyLetters("Test1ng-Leet=code-Q!"));
+    }
+
+    /**
+     * 922. Sort Array By Parity II
+     */
+    @Test
+    public void testSortArrayByParityII() throws Exception {
+        PrintUtil.printArray(solution.sortArrayByParityII(new int[]{4,2,5,7}));
+    }
+
+    /**
+     * 925. Long Pressed Name
+     */
+    @Test
+    public void testIsLongPressedName() throws Exception {
+        assertEquals(true, solution.isLongPressedName("alex", "aaleex"));
+        assertEquals(false, solution.isLongPressedName("saeed", "ssaaedd"));
+        assertEquals(true, solution.isLongPressedName("leelee", "lleeelee"));
+        assertEquals(true, solution.isLongPressedName("laiden", "laidenn"));
+        assertEquals(false, solution.isLongPressedName("laiden", "laidenm"));
+    }
+
+    /**
+     * 929. Unique Email Addresses
+     */
+    @Test
+    public void testNumUniqueEmails() throws Exception {
+        assertEquals(2, solution.numUniqueEmails(new String[]{"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"}));
+    }
+
+    /**
+     * 933. Number of Recent Calls
+     */
+    @Test
+    public void testRecentCounter() throws Exception {
+         Solution.RecentCounter obj = solution.new RecentCounter();
+         assertEquals(1, obj.ping(1));
+         assertEquals(2, obj.ping(100));
+         assertEquals(3, obj.ping(3001));
+         assertEquals(3, obj.ping(3002));
+    }
+
+    /**
+     * 937. Reorder Log Files
+     */
+    @Test
+    public void testReorderLogFiles() throws Exception {
+        String[] logs = new String[]{"a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"};
+        assertEquals("[g1 act car, a8 act zoo, ab1 off key dog, a1 9 2 3 1, zo4 4 7]", Arrays.toString(solution.reorderLogFiles(logs)));
+    }
+
+    /**
+     * 941. Valid Mountain Array
+     */
+    @Test
+    public void testValidMountainArray() throws Exception {
+        assertEquals(false, solution.validMountainArray(new int[]{3,5,5}));
+        assertEquals(true, solution.validMountainArray(new int[]{0,3,2,1}));
+        assertEquals(false, solution.validMountainArray(new int[]{2,1}));
+    }
+
+    /**
+     * 942. DI String Match
+     */
+    @Test
+    public void testDiStringMatch() throws Exception {
+        assertEquals("[0, 4, 1, 3, 2]", Arrays.toString(solution.diStringMatch("IDID")));
+        assertEquals("[0, 1, 2, 3]", Arrays.toString(solution.diStringMatch("III")));
+        assertEquals("[3, 2, 0, 1]", Arrays.toString(solution.diStringMatch("DDI")));
+    }
+
+    /**
+     * 944. Delete Columns to Make Sorted
+     */
+    @Test
+    public void testMinDeletionSize() throws Exception {
+        assertEquals(1, solution.minDeletionSize(new String[]{"cba", "daf", "ghi"}));
+        assertEquals(0, solution.minDeletionSize(new String[]{"a", "b"}));
+        assertEquals(3, solution.minDeletionSize(new String[]{"zyx", "wvu", "tsr"}));
+    }
+
+    /**
+     * 949. Largest Time for Given Digits
+     */
+    @Test
+    public void testLargestTimeFromDigits() throws Exception {
+        assertEquals("04:00", solution.largestTimeFromDigits(new int[]{0,4,0,0}));
+        assertEquals("00:00", solution.largestTimeFromDigits(new int[]{0,0,0,0}));
+        assertEquals("23:41", solution.largestTimeFromDigits(new int[]{1,2,3,4}));
+        assertEquals("", solution.largestTimeFromDigits(new int[]{5,5,5,5}));
+    }
+
+    /**
+     * 953. Verifying an Alien Dictionary
+     */
+    @Test
+    public void testIsAlienSorted() throws Exception {
+        assertEquals(true, solution.isAlienSorted(new String[]{"kuvp","q"}, "ngxlkthsjuoqcpavbfdermiywz"));
+        assertEquals(true, solution.isAlienSorted(new String[]{"hello","leetcode"}, "hlabcdefgijkmnopqrstuvwxyz"));
+        assertEquals(false, solution.isAlienSorted(new String[]{"word","world","row"}, "worldabcefghijkmnpqstuvxyz"));
+        assertEquals(false, solution.isAlienSorted(new String[]{"apple","app"}, "abcdefghijklmnopqrstuvwxyz"));
+    }
+
+    /**
+     * 961. N-Repeated Element in Size 2N Array
+     */
+    @Test
+    public void testRepeatedNTimes() throws Exception {
+        assertEquals(3, solution.repeatedNTimes(new int[]{1,2,3,3}));
+        assertEquals(2, solution.repeatedNTimes(new int[]{2,1,2,5,3,2}));
+        assertEquals(5, solution.repeatedNTimes(new int[]{5,1,5,2,5,3,5,4}));
+
+    }
 }
+
+/**
+ 4 <= A.length <= 10000
+ 0 <= A[i] < 10000
+ A.length is even
+ */
 
