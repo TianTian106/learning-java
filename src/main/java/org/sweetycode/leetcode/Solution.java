@@ -3446,6 +3446,55 @@ public class Solution {
     }
 
     /**
+     * 733. Flood Fill
+     */
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        return new int[0][0];
+    }
+
+    /**
+     * 743. Network Delay Time
+     */
+    public int networkDelayTime(int[][] times, int N, int K) {
+        return -1;
+    }
+
+    /**
+     * 744. Find Smallest Letter Greater Than Target
+     */
+    public char nextGreatestLetter(char[] letters, char target) {
+        return 0;
+    }
+
+    /**
+     * 746. Min Cost Climbing Stairs
+     */
+    public int minCostClimbingStairs(int[] cost) {
+        return -1;
+    }
+
+    /**
+     * 747. Largest Number At Least Twice of Others
+     */
+    public int dominantIndex(int[] nums) {
+        return -1;
+    }
+
+    /**
+     * 748. Shortest Completing Word
+     */
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        return "";
+    }
+
+    /**
+     * 754. Reach a Number
+     */
+    public int reachNumber(int target) {
+        return -1;
+    }
+
+    /**
      * 762. Prime Number of Set Bits in Binary Representation
      */
     public int countPrimeSetBits(int L, int R) {

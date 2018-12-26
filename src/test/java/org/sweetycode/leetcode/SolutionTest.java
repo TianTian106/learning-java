@@ -1668,6 +1668,55 @@ public class SolutionTest {
     }
 
     /**
+     * 733. Flood Fill
+     */
+    @Test
+    public void testFloodFill() throws Exception {
+    }
+
+    /**
+     * 743. Network Delay Time
+     */
+    @Test
+    public void testNetworkDelayTime() throws Exception {
+    }
+
+    /**
+     * 744. Find Smallest Letter Greater Than Target
+     */
+    @Test
+    public void testNextGreatestLetter() throws Exception {
+    }
+
+    /**
+     * 746. Min Cost Climbing Stairs
+     */
+    @Test
+    public void testMinCostClimbingStairs() throws Exception {
+    }
+
+    /**
+     * 747. Largest Number At Least Twice of Others
+     */
+    @Test
+    public void testDominantIndex() throws Exception {
+    }
+
+    /**
+     * 748. Shortest Completing Word
+     */
+    @Test
+    public void testShortestCompletingWord() throws Exception {
+    }
+
+    /**
+     * 754. Reach a Number
+     */
+    @Test
+    public void testReachNumber() throws Exception {
+    }
+
+    /**
      * 762. Prime Number of Set Bits in Binary Representation
      */
     @Test
@@ -2076,10 +2125,3 @@ public class SolutionTest {
 
     }
 }
-
-/**
- 4 <= A.length <= 10000
- 0 <= A[i] < 10000
- A.length is even
- */
-
