@@ -1672,6 +1672,12 @@ public class SolutionTest {
      */
     @Test
     public void testFloodFill() throws Exception {
+        int[][] image1 = ConvertUtil.stringToIntegerDyadicArray("[[1,1,1],[1,1,0],[1,0,1]]");
+        solution.floodFill(image1, 1, 1, 2);
+        PrintUtil.printArray(image1);
+        int[][] image2 = ConvertUtil.stringToIntegerDyadicArray("[[0,0,0],[0,1,1]]");
+        solution.floodFill(image2, 1, 1, 1);
+        PrintUtil.printArray(image2);
     }
 
     /**

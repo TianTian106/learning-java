@@ -3449,7 +3449,31 @@ public class Solution {
      * 733. Flood Fill
      */
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-        return new int[0][0];
+        int target = image[sr][sc];
+        if (newColor == target) return image;
+        int r = image.length;
+        int c = image[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{sr,sc});
+        int[] tmp;
+        while (queue.size() > 0) {
+            tmp = queue.remove();
+            image[tmp[0]][tmp[1]] = newColor;
+            if (tmp[0] > 0 && image[tmp[0] - 1][tmp[1]] == target) {
+                queue.add(new int[]{tmp[0]-1, tmp[1]});
+            }
+            if (tmp[0] < r - 1 && image[tmp[0] + 1][tmp[1]] == target) {
+                queue.add(new int[]{tmp[0] + 1, tmp[1]});
+            }
+            if (tmp[1] > 0 && image[tmp[0]][tmp[1] - 1] == target) {
+                queue.add(new int[]{tmp[0], tmp[1] - 1});
+            }
+            if (tmp[1] < c - 1 && image[tmp[0]][tmp[1] + 1] == target) {
+                queue.add(new int[]{tmp[0], tmp[1] + 1});
+            }
+        }
+
+        return image;
     }
 
     /**
