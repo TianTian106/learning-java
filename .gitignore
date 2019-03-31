@@ -1,5 +1,6 @@
 
 .idea/*
+doc/*
 *.iml
 target/*
 src/main/resources/work/keyword/*
