@@ -3,6 +3,7 @@ package org.sweetycode.designpattern.creational.prototype;
 import java.io.Serializable;
 
 public class DeepAttr implements Serializable{
+    private static final long serialVersionUID = -8471042111603526119L;
     private String name;
     private Integer age;
 
