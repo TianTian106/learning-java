@@ -1,5 +1,8 @@
 package org.sweetycode.designpattern.creational.abstractfactory;
 
+/**
+ * 抽象工厂模式中我们可以定义实现不止一个接口，一个工厂也可以生成不止一个产品类。
+ */
 public class AbstractFactoryPatternDemo {
     public static void main(String[] args) {
         AbstractFactory shapeFactory = FactoryProducer.getFactory("shape");

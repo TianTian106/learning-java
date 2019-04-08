@@ -1,5 +1,8 @@
 package org.sweetycode.designpattern.creational.builder;
 
+/**
+ * 封装一个对象的构造过程，并允许按步骤构造。如：StringBuilder，StringBuffer
+ */
 public class BuilderPatternDemo {
     public static void main(String[] args) {
         MealBuilder mealBuilder = new MealBuilder();
