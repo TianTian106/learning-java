@@ -3,7 +3,7 @@ package org.sweetycode.designpattern.creational.prototype;
 import java.io.*;
 
 public abstract class Shape implements Cloneable,Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8493456657505211132L; // idea 安装GenerateSerialVersionUID插件自动生成。
 
     private String id;
     protected String type;
