@@ -71,4 +71,14 @@ public abstract class Shape implements Cloneable,Serializable {
 
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", deepAttr=" + deepAttr + '\'' +
+                ", hashcode='" + this.hashCode() +
+                '}';
+    }
 }

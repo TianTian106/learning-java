@@ -21,15 +21,11 @@ public class PrototypePatternDemo {
         // 浅拷贝会跟着变，而深拷贝不会变化
         ShapeCache.changeAttr();
 
-        System.out.println(clonedShape1.getDeepAttr() + ": Shape: " + clonedShape1.getType() + ": " + clonedShape1.hashCode());
-        System.out.println(deepClonedShape1.getDeepAttr() + ": Shape: " + deepClonedShape1.getType() + ": " + deepClonedShape1.hashCode());
-
-        System.out.println(clonedShape2.getDeepAttr() + ": Shape: " + clonedShape2.getType() + ": " + clonedShape2.hashCode());
-        System.out.println(deepClonedShape2.getDeepAttr() + ": Shape: " + deepClonedShape2.getType() + ": " + deepClonedShape2.hashCode());
-
-        System.out.println(clonedShape3.getDeepAttr() + ": Shape: " + clonedShape3.getType() + ": " + clonedShape3.hashCode());
-        System.out.println(deepClonedShape3.getDeepAttr() + ": Shape: " + deepClonedShape3.getType() + ": " + deepClonedShape3.hashCode());
-
+        System.out.println(clonedShape1);
+        System.out.println(deepClonedShape1);
+        System.out.println(clonedShape2);
+        System.out.println(deepClonedShape2);
+        System.out.println(clonedShape3);
 
     }
 }
