@@ -873,6 +873,16 @@ public class SolutionTest {
         assertEquals(0, solution.missingNumber3(new int[]{1}));
     }
 
+    @Test
+    public void testMissingNumber4() throws Exception {
+        assertEquals(2, solution.missingNumber4(new int[]{3,0,1}));
+        assertEquals(8, solution.missingNumber4(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(1, solution.missingNumber4(new int[]{0}));
+        assertEquals(2, solution.missingNumber4(new int[]{0,1}));
+        assertEquals(1, solution.missingNumber4(new int[]{0,2}));
+        assertEquals(0, solution.missingNumber4(new int[]{1}));
+    }
+
     /**
      * 278. First Bad Version
      */
@@ -967,6 +977,16 @@ public class SolutionTest {
 //            num = num * 2;
 //        }
 //        System.out.println(num);
+    }
+
+    @Test
+    public void testIsPowerOfFour1() throws Exception {
+        assertEquals(true, solution.isPowerOfFour1(16));
+        assertEquals(false, solution.isPowerOfFour1(5));
+        assertEquals(false, solution.isPowerOfFour1(2));
+        assertEquals(true, solution.isPowerOfFour1(1));
+        assertEquals(false, solution.isPowerOfFour1(8));
+
     }
 
     /**
@@ -1614,7 +1634,13 @@ public class SolutionTest {
      */
     @Test
     public void testHasAlternatingBits() throws Exception {
-        System.out.println(solution.hasAlternatingBits(10));
+        assertEquals(true, solution.hasAlternatingBits1(10));
+    }
+
+    @Test
+    public void testHasAlternatingBits1() throws Exception {
+        assertEquals(true, solution.hasAlternatingBits1(10));
+        assertEquals(false, solution.hasAlternatingBits1(7));
     }
 
     /**
@@ -1761,6 +1787,20 @@ public class SolutionTest {
         assertEquals("[3z4,3Z4]",ConvertUtil.stringListToString(solution.letterCasePermutation2("3z4")));
         assertEquals("[12345]",ConvertUtil.stringListToString(solution.letterCasePermutation2("12345")));
         assertEquals("[]",ConvertUtil.stringListToString(solution.letterCasePermutation2("")));
+    }
+
+    /**
+     * 785. Is Graph Bipartite?
+     */
+    @Test
+    public void testIsBipartite() throws Exception {
+        assertEquals(true, solution.isBipartite(new int[][]{{1,3},{0,2},{1,3},{0,2}}));
+        assertEquals(false, solution.isBipartite(new int[][]{{1,2,3},{0,2},{0,1,3},{0,2}}));
+        assertEquals(false, solution.isBipartite(new int[][]{{},{2,4,6},{1,4,8,9},{7,8},{1,2,8,9},{6,9},{1,5,7,8,9},{3,6,9},{2,3,4,6,9},{2,4,5,6,7,8}}));
+        assertEquals(true, solution.isBipartite(new int[][]{{},{3},{},{1},{}}));
+        assertEquals(true, solution.isBipartite(new int[][]{{},{},{}}));
+        // multiple graph:
+        assertEquals(false, solution.isBipartite(new int[][]{{2,4},{2,3,4},{0,1},{1},{0,1},{7},{9},{5},{},{6},{12,14},{},{10},{},{10},{19},{18},{},{16},{15},{23},{23},{},{20,21},{},{},{27},{26},{},{},{34},{33,34},{},{31},{30,31},{38,39},{37,38,39},{36},{35,36},{35,36},{43},{},{},{40},{},{49},{47,48,49},{46,48,49},{46,47,49},{45,46,47,48}}));
     }
 
     /**

@@ -1621,6 +1621,15 @@ public class Solution {
         return sum + l;
     }
 
+    public int missingNumber4(int[] nums) {
+        int result = 0;
+        int i = 0;
+        while ( i  < nums.length) {
+            result = result ^ nums[i] ^ i;
+            i ++;
+        }
+        return result ^ i;
+    }
     /**
      * 278. First Bad Version
      */
@@ -1747,6 +1756,11 @@ public class Solution {
     public boolean isPowerOfFour(int num) {
         // 4的幂数开根号就是2的幂数。
         return num > 0 && (Math.sqrt(num) - (int)Math.sqrt(num)) < 1e-9 && 32768 % (int)Math.sqrt(num) == 0 ;
+    }
+
+    public boolean isPowerOfFour1(int num) {
+        // return num > 0 && (num & (num - 1)) == 0 && (num & 0b01010101010101010101010101010101) != 0;
+        return num > 0 && (num & (num - 1)) == 0 && (num & 0b10101010101010101010101010101010) == 0;
     }
 
     /**
@@ -3360,6 +3374,11 @@ public class Solution {
         return true;
     }
 
+    public boolean hasAlternatingBits1(int n) {
+        int var = n ^ (n >> 1);
+        return (var & (var + 1)) == 0;
+    }
+
     /**
      * 695. Max Area of Island
      */
@@ -3620,6 +3639,66 @@ public class Solution {
                 return size;
             }
         };
+    }
+
+    /**
+     * 785. Is Graph Bipartite?
+     */
+    public boolean isBipartite(int[][] graph) {
+        int l = graph.length;
+        int[] colors = new int[l];
+        int[] queue = new int[l];
+        int p = 0;
+        int q = 0;
+        for (int i = 0; i < l ; i ++) {
+            if (colors[i] == 0) {
+                colors[i] = -1;
+                queue[q ++] = i;
+                while (p < q) {
+                    int e = queue[p ++];
+                    for (int n: graph[e]) {
+                        if (colors[n] == colors[e]) {
+                            return false;
+                        } else if (colors[n] == 0) {
+                            colors[n] = -colors[e];
+                            queue[q ++] = n;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isBipartite1(int[][] graph) {
+        int l = graph.length;
+        int flag = 1;
+        int[] colors = new int[l];
+        Queue<Integer> queue = new LinkedList<>(); // slow
+        colors[0] = -1;
+        queue.add(0);
+        int count = l - 1;
+        while (count > 0) {
+            while (!queue.isEmpty()) {
+                int e = queue.remove();
+                for (int n: graph[e]) {
+                    if (colors[n] == colors[e]) {
+                        return false;
+                    } else if (colors[n] == 0) {
+                        colors[n] = -colors[e];
+                        queue.add(n);
+                        count --;
+                    }
+                }
+            }
+            if (count == 0) return true;
+            // find next graph
+            while (colors[flag] != 0) flag ++;
+            colors[flag] = -1;
+            queue.add(flag ++);
+            count --;
+        }
+        return true;
     }
 
     /**
