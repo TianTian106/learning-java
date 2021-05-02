@@ -1,11 +1,17 @@
 package org.sweetycode.leetcode;
 
+import com.google.common.collect.Lists;
+import com.sun.jmx.snmp.tasks.ThreadService;
 import org.sweetycode.leetcode.util.PrintUtil;
 import sun.reflect.generics.tree.Tree;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.IntConsumer;
 
 /**
  * Created by tiantian on 2017/9/21.
@@ -88,13 +94,120 @@ public class Solution {
 
     /**
      * 4. Median of Two Sorted Arrays
+     * You may assume nums1 and nums2 cannot be both empty.
      */
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-
-        return 0;
+        int l1 = nums1.length;
+        int l2 = nums2.length;
+        int p1 = 0;
+        int p2 = 0;
+        int pre = l1 == 0 ? nums2[0] : (l2 == 0 ? nums1[0] : Math.min(nums1[0], nums2[0]));
+        int cur = pre;
+        for (int i = 0; i <= (l1 + l2) / 2; i ++) {
+            pre = cur;
+            if (p1 <  l1 && p2 < l2) {
+                if (nums1[p1] < nums2[p2]) {
+                    cur = nums1[p1];
+                    p1 ++;
+                } else {
+                    cur = nums2[p2];
+                    p2 ++;
+                }
+            } else if (p1 < l1) {
+                cur = nums1[p1];
+                p1 ++;
+            } else {
+                cur = nums2[p2];
+                p2 ++;
+            }
+        }
+        if ((l1 + l2) % 2 == 1) {
+            return cur;
+        }
+        return (pre + cur) / 2.0;
     }
 
+    /**
+     * 5. Longest Palindromic Substring
+     * method 1 :  dynamic program
+     * i < j
+     * F(i,j) =
+     * 1. i == j, true
+     * 2. i == j - 1 && c[i] == c[j], true
+     * 3. F(i + 1, j - 1) == true && c[i] == c[j], true
+     */
+    public String longestPalindromeSubstring(String s) {
+        if (s == null || s.length() <= 1) return s;
+        int max = -1;
+        int start = 0;
+        int end = 0;
+        char[] c = s.toCharArray();
+        int l = s.length();
+        boolean[][] t = new boolean[l][l];
+        for (int g = 0; g < l; g ++) { // gap
+            for (int i = 0; i < l - g; i ++) {
+                int j = i + g;
+                if (i == j || (c[i] == c[j] && (i == j - 1 || t[i + 1][j - 1]))) {
+                    t[i][j] = true;
+                    if (g + 1 > max) {
+                        max = g + 1;
+                        start = i;
+                        end = j;
+                    }
+                }
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    /**
+     * 5. Longest Palindromic Substring
+     * method 2 :  中心扩展算法
+     */
+    public String longestPalindromeSubstring1(String s) {
+        if (s == null || s.length() <= 1) return s;
+        int max = 1;
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < s.length() - 1; i ++) {
+            int a = expandAroundCenter(s, i, i);
+            int b = expandAroundCenter(s, i, i + 1);
+            int c = Math.max(a, b);
+            if (a > max || b > max) {
+                max = c;
+                start = i - (c - 1) / 2;
+                end = i + c / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private int expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left --;
+            right ++;
+        }
+        return right - left - 1;
+    }
+
+    /**
+     * 6. ZigZag Conversion
+     */
+    public String convert(String s, int numRows) {
+        if (numRows == 1 || numRows >= s.length()) return s;
+        int c = numRows + Math.max(numRows - 2, 0); // 6
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < numRows; i ++) {
+            for (int j = i; j < s.length(); j += c) {
+                sb.append(s.charAt(j));
+                if (i != 0 && i != numRows - 1 && j + c - 2 * i < s.length()) {
+                    sb.append(s.charAt(j + c - 2 * i));
+                }
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * 7. Reverse Integer
@@ -117,6 +230,43 @@ public class Solution {
     }
 
     /**
+     * 8. String to Integer (atoi)
+     */
+    public int myAtoi(String str) {
+        str = str.trim();
+        if (str == null || str.length() == 0) return 0;
+        int coef = 1;
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            coef = -1;
+            i = 1;
+        } else if (str.charAt(0) == '+') {
+            i = 1;
+        }
+        while (i < str.length() && str.charAt(i) == '0') {
+            i ++;
+        }
+        int start = i;
+        while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+            i ++;
+        }
+        String numStr = str.substring(start, i);
+        int l = numStr.length();
+        if (l <= 0) return 0;
+        if (coef == 1) {
+            if (l > 10 || (l == 10 && numStr.compareTo("2147483647") >= 0)) {
+                return Integer.MAX_VALUE;
+            }
+            return Integer.parseInt(numStr);
+        } else {
+            if (l > 10 || (l == 10 && numStr.compareTo("2147483648") >= 0)) {
+                return Integer.MIN_VALUE;
+            }
+            return -1 * Integer.parseInt(numStr);
+        }
+    }
+
+    /**
      *  9. Palindrome Number
      */
     public boolean isPalindrome(int x) {
@@ -130,6 +280,65 @@ public class Solution {
             }
         }
         return false;
+    }
+
+    /**
+     * 11. Container With Most Water
+     */
+    public int maxArea1(int[] height) {
+        int max = 0;
+        for (int i = 0; i < height.length; i ++) {
+            for (int j = 0; j < i; j ++) {
+                if (height[j] >= height[i]) {
+                    max = Math.max(height[i] * (i - j), max);
+                    break;
+                }
+            }
+            for (int k = height.length - 1; k > i; k --) {
+                if (height[k] >= height[i]) {
+                    max = Math.max(height[i] * (k - i), max);
+                    break;
+                }
+            }
+        }
+        return max;
+    }
+    // method 2 : 双指针法
+    // 移动指向较短线段的指针尽管造成了矩形宽度的减小，但却可能会有助于面积的增大。
+    public int maxArea(int[] height) {
+        int max = 0;
+        int i = 0;
+        int j = height.length - 1;
+        while (i < j) {
+            max = Math.max(max, Math.min(height[i], height[j]) * (j - i));
+            if (height[i] <= height[j]) {
+                i ++;
+            } else {
+                j --;
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 12. Integer to Roman
+     */
+    public String intToRoman(int num) {
+        if (num < 1 || num > 3999) return null;
+        String[][] t = new String[][]{
+                {"","I","II","III","IV","V","VI","VII","VIII","IX"},
+                {"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"},
+                {"","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"},
+                {"","M","MM","MMM"}
+        };
+        int c = 0;
+        StringBuilder sb = new StringBuilder(12);
+        while (num > 0) {
+            int i = num % 10;
+            sb.insert(0, t[c ++][i]);
+            num = num / 10;
+        }
+        return sb.toString();
     }
 
     /**
@@ -152,6 +361,15 @@ public class Solution {
         }
 
         return common;
+    }
+
+    /**
+     * 15. 3Sum
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new LinkedList<>();
+
     }
 
     /**
@@ -1478,6 +1696,9 @@ public class Solution {
     /**
      * 235. Lowest Common Ancestor of a Binary Search Tree
      */
+    /**
+     * 面试题68 - I. 二叉搜索树的最近公共祖先
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (p.val < root.val && q.val < root.val) {
             return lowestCommonAncestor(root.left, p, q);
@@ -1718,6 +1939,29 @@ public class Solution {
      */
     public boolean canWinNim(int n) {
         return n % 4 != 0;
+    }
+
+    /**
+     *  299. Bulls and Cows
+     */
+    public String getHint(String secret, String guess) {
+        int a = 0;
+        int b = 0;
+
+        int[] nums = new int[10];
+        for (int i = 0; i < secret.length(); i ++) {
+            int s = secret.charAt(i) - 48;
+            int g = guess.charAt(i) - 48;
+            if (s == g) {
+                a ++;
+            } else {
+                nums[s] ++;
+                nums[g] --;
+                if (nums[s] <= 0) b ++;
+                if (nums[g] >= 0) b ++;
+            }
+        }
+        return a + "A" + b + "B";
     }
 
     /**
@@ -2037,6 +2281,18 @@ public class Solution {
             result += c;
         }
         return result;
+    }
+
+    /**
+     * 392. Is Subsequence
+     */
+    public boolean isSubsequence(String s, String t) {
+        int index = -1;
+        for (char c: s.toCharArray()) {
+            index = t.indexOf(c, index + 1);
+            if (index == -1) return false;
+        }
+        return true;
     }
 
     /**
@@ -2923,6 +3179,26 @@ public class Solution {
     }
 
     /**
+     * 509. Fibonacci Number
+     */
+    public int fib(int N) {
+//        if (N == 0) return 0;
+//        if (N == 1) return 1;
+//        return fib(N - 1) + fib(N - 2);
+        if (N == 0) return 0;
+        int a = 0;
+        if (N == 1) return 1;
+        int b = 1;
+        int c = 0;
+        for (int i = 2; i <= N; i ++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+
+    /**
      * 520. Detect Capital
      */
     public boolean detectCapitalUse(String word) {
@@ -3058,6 +3334,43 @@ public class Solution {
             }
         }
         return root;
+    }
+
+    /**
+     * 541. Reverse String II
+     */
+    public String reverseStr(String s, int k) {
+        // if (s == null || s.equals("")) return s;
+        char[] ss = s.toCharArray();
+        int l = s.length();
+        for(int i = 0; i < l; i += 2 * k) {
+            int a = i;
+            int b = Math.min(l - 1, i + k - 1);
+            while (a < b) {
+                char c = ss[a];
+                ss[a ++] = ss[b];
+                ss[b --] = c;
+            }
+        }
+        return String.valueOf(ss);
+    }
+
+    /**
+     * 543. Diameter of Binary Tree
+     */
+    private int max = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        if (root == null) return 0;
+        setMaxAndGetHeight(root);
+        return max;
+    }
+
+    private int setMaxAndGetHeight(TreeNode root) {
+        if (root == null) return 0;
+        int l = setMaxAndGetHeight(root.left);
+        int r = setMaxAndGetHeight(root.right);
+        if (l + r > max) max = l + r;
+        return Math.max(l, r) + 1;
     }
 
     /**
@@ -4667,6 +4980,475 @@ public class Solution {
             }
         }
         return -1;
+    }
+
+    /**
+     * 1108. Defanging an IP Address
+     */
+    public String defangIPaddr(String address) {
+        // return address.replaceAll("\\.", "[.]");
+        StringBuilder sb = new StringBuilder();
+        for (char c: address.toCharArray()) {
+            if (c == '.') {
+                sb.append("[.]");
+                continue;
+            }
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 1114. Print in Order
+     */
+    class Foo {
+        CountDownLatch c1 ;
+        CountDownLatch c2 ;
+
+        public Foo() {
+            c1 = new CountDownLatch(1);
+            c2 = new CountDownLatch(1);
+        }
+
+        public void first(Runnable printFirst) throws InterruptedException {
+
+            // printFirst.run() outputs "first". Do not change or remove this line.
+            printFirst.run();
+            c1.countDown();
+        }
+
+        public void second(Runnable printSecond) throws InterruptedException {
+            c1.await();
+            // printSecond.run() outputs "second". Do not change or remove this line.
+            printSecond.run();
+            c2.countDown();
+        }
+
+        public void third(Runnable printThird) throws InterruptedException {
+            c2.await();
+            // printThird.run() outputs "third". Do not change or remove this line.
+            printThird.run();
+        }
+    }
+
+    /**
+     * 1115. Print FooBar Alternately
+     */
+    class FooBar {
+        private int n;
+        private Semaphore s1;
+        private Semaphore s2;
+
+        public FooBar(int n) {
+            this.n = n;
+            s1 = new Semaphore(1);
+            s2 = new Semaphore(0);
+        }
+
+        public void foo(Runnable printFoo) throws InterruptedException {
+
+            for (int i = 0; i < n; i++) {
+                s1.acquire();
+                // printFoo.run() outputs "foo". Do not change or remove this line.
+                printFoo.run();
+                s2.release(1);
+            }
+        }
+
+        public void bar(Runnable printBar) throws InterruptedException {
+
+            for (int i = 0; i < n; i++) {
+                s2.acquire();
+                // printBar.run() outputs "bar". Do not change or remove this line.
+                printBar.run();
+                s1.release(1);
+            }
+        }
+    }
+
+    /**
+     * 1116. Print Zero Even Odd
+     */
+    class ZeroEvenOdd {
+        private int n;
+        private Semaphore s0;
+        private Semaphore s1;
+        private Semaphore s2;
+
+        public ZeroEvenOdd(int n) {
+            this.n = n;
+            s0 = new Semaphore(1);
+            s1 = new Semaphore(0);
+            s2 = new Semaphore(0);
+        }
+
+        // printNumber.accept(x) outputs "x", where x is an integer.
+        public void zero(IntConsumer printNumber) throws InterruptedException {
+            for (int i = 0; i < n; i ++) {
+                s0.acquire();
+                printNumber.accept(0);
+                if (i % 2 == 0) {
+                    s2.release(1);
+                } else {
+                    s1.release(1);
+                }
+            }
+        }
+
+        public void even(IntConsumer printNumber) throws InterruptedException {
+            for (int i = 2; i <= n; i += 2) {
+                s1.acquire();
+                printNumber.accept(i);
+                s0.release(1);
+            }
+        }
+
+        public void odd(IntConsumer printNumber) throws InterruptedException {
+            for (int i = 1; i <= n; i += 2) {
+                s2.acquire();
+                printNumber.accept(i);
+                s0.release(1);
+            }
+        }
+    }
+
+    /**
+     * 1117. Building H2O
+     */
+//    private StringBuffer h2os = new StringBuffer();
+//    private Runnable releaseHydrogen = () -> h2os.append("H");
+//    private Runnable releaseOxygen = () -> h2os.append("O");
+
+    class H2O {
+        Semaphore semaphoreH;
+        Semaphore semaphoreO;
+        CyclicBarrier cyclicBarrier;
+
+        public H2O() {
+            semaphoreH = new Semaphore(2);
+            semaphoreO = new Semaphore(1);
+            cyclicBarrier = new CyclicBarrier(3);
+        }
+
+        public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
+            semaphoreH.acquire();
+            try {
+                cyclicBarrier.await();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+            // releaseHydrogen.run() outputs "H". Do not change or remove this line.
+            releaseHydrogen.run();
+            semaphoreH.release(1);
+        }
+
+        public void oxygen(Runnable releaseOxygen) throws InterruptedException {
+            semaphoreO.acquire();
+            try {
+                cyclicBarrier.await();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+            // releaseOxygen.run() outputs "O". Do not change or remove this line.
+            releaseOxygen.run();
+            semaphoreO.release(1);
+        }
+    }
+
+    /**
+     * 1195. Fizz Buzz Multithreaded
+     */
+    class FizzBuzz {
+        private int n;
+        private int i;
+        Semaphore semaphore;
+
+        public FizzBuzz(int n) {
+            this.n = n;
+            i = 1;
+            semaphore = new Semaphore(1);
+        }
+
+        // printFizz.run() outputs "fizz".
+        public void fizz(Runnable printFizz) throws InterruptedException {
+            while (true) {
+                try {
+                    semaphore.acquire();
+                    if (i > n) return;
+                    if (i % 3 == 0 && i % 5 != 0) {
+                        printFizz.run();
+                        i ++;
+                    }
+                } finally {
+                    semaphore.release();
+                }
+            }
+        }
+
+        // printBuzz.run() outputs "buzz".
+        public void buzz(Runnable printBuzz) throws InterruptedException {
+            while (true) {
+                try {
+                    semaphore.acquire();
+                    if (i > n) return;
+                    if (i % 5 == 0 && i % 3 != 0) {
+                        printBuzz.run();
+                        i ++;
+                    }
+                } finally {
+                    semaphore.release();
+                }
+            }
+        }
+
+        // printFizzBuzz.run() outputs "fizzbuzz".
+        public void fizzbuzz(Runnable printFizzBuzz) throws InterruptedException {
+            while (true) {
+                try {
+                    semaphore.acquire();
+                    if (i > n) return;
+                    if (i % 3 == 0 && i % 5 == 0) {
+                        printFizzBuzz.run();
+                        i ++;
+                    }
+                } finally {
+                    semaphore.release();
+                }
+            }
+        }
+
+        // printNumber.accept(x) outputs "x", where x is an integer.
+        public void number(IntConsumer printNumber) throws InterruptedException {
+            while (true) {
+                try {
+                    semaphore.acquire();
+                    if (i > n) return;
+                    if (i % 3 != 0 && i % 5 != 0) {
+                        printNumber.accept(i);
+                        i ++;
+                    }
+                } finally {
+                    semaphore.release();
+                }
+            }
+        }
+    }
+
+    class FizzBuzz1 {
+        private int n;
+        private AtomicInteger counter;
+
+        public FizzBuzz1(int n) {
+            this.n = n;
+            counter = new AtomicInteger(1);
+        }
+
+        // printFizz.run() outputs "fizz".
+        public void fizz(Runnable printFizz) throws InterruptedException {
+            int i;
+            while ((i = counter.get()) <= n) {
+                if (i % 3 == 0 && i % 5 != 0) {
+                    printFizz.run();
+                    counter.incrementAndGet();
+                }
+            }
+        }
+
+        // printBuzz.run() outputs "buzz".
+        public void buzz(Runnable printBuzz) throws InterruptedException {
+            int i;
+            while ((i = counter.get()) <= n) {
+                if (i % 5 == 0 && i % 3 != 0) {
+                    printBuzz.run();
+                    counter.incrementAndGet();
+                }
+            }
+        }
+
+        // printFizzBuzz.run() outputs "fizzbuzz".
+        public void fizzbuzz(Runnable printFizzBuzz) throws InterruptedException {
+            int i;
+            while ((i = counter.get()) <= n) {
+                if (i % 3 == 0 && i % 5 == 0) {
+                    printFizzBuzz.run();
+                    counter.incrementAndGet();
+                }
+            }
+        }
+
+        // printNumber.accept(x) outputs "x", where x is an integer.
+        public void number(IntConsumer printNumber) throws InterruptedException {
+            int i;
+            while ((i = counter.get()) <= n) {
+                if (i % 3 != 0 && i % 5 != 0) {
+                    printNumber.accept(i);
+                    counter.incrementAndGet();
+                }
+            }
+        }
+    }
+
+    /**
+     * 1226. The Dining Philosophers
+     * 防止死锁：
+     * 1. 若不能同时取到左右叉子则放下；
+     * 2. 先取编号最大（最小）的那个， 等待编号最小（最大）取到。
+     * 防止超时：
+     * 1. 获取失败则sleep
+     * 2. 一个一个吃
+     * 以下三个答案执行用时和内存消耗近似。
+     */
+    class DiningPhilosophers {
+        private Semaphore[] semaphores;
+
+        public DiningPhilosophers() {
+            semaphores = new Semaphore[]{
+                    new Semaphore(1),
+                    new Semaphore(0),
+                    new Semaphore(0),
+                    new Semaphore(0),
+                    new Semaphore(0),
+            };
+        }
+
+        // call the run() method of any runnable to execute its code
+        public void wantsToEat(int philosopher,
+                               Runnable pickLeftFork,
+                               Runnable pickRightFork,
+                               Runnable eat,
+                               Runnable putLeftFork,
+                               Runnable putRightFork) throws InterruptedException {
+            semaphores[philosopher].acquire();
+            pickLeftFork.run();
+            pickRightFork.run();
+            eat.run();
+            putLeftFork.run();
+            putRightFork.run();
+            semaphores[(philosopher + 1) % 5].release(1);
+        }
+    }
+
+    class DiningPhilosophers1 {
+        private AtomicBoolean[] forks = new AtomicBoolean[5];
+
+        public DiningPhilosophers1() {
+            for (int i = 0; i < 5; i ++) {
+                forks[i] = new AtomicBoolean(true);
+            }
+        }
+
+        // call the run() method of any runnable to execute its code
+        public void wantsToEat(int philosopher,
+                               Runnable pickLeftFork,
+                               Runnable pickRightFork,
+                               Runnable eat,
+                               Runnable putLeftFork,
+                               Runnable putRightFork) throws InterruptedException {
+            int min = Math.min(philosopher, (philosopher + 4) % 5);
+            int max = Math.max(philosopher, (philosopher + 4) % 5);
+            while (!forks[min].compareAndSet(true, false)) {
+                Thread.sleep(1);
+            }
+            while (!forks[max].compareAndSet(true, false)) {
+                Thread.sleep(1);
+            }
+            pickLeftFork.run();
+            pickRightFork.run();
+            eat.run();
+            putLeftFork.run();
+            putRightFork.run();
+            forks[max].set(true);
+            forks[min].set(true);
+        }
+    }
+
+    class DiningPhilosophers2 {
+        private boolean[] forks;
+
+        public DiningPhilosophers2() {
+            forks = new boolean[5];
+        }
+
+        private boolean getForks(int i) {
+            int j = i == 0 ? 4 : i - 1;
+            synchronized (forks) {
+                if (forks[i] == false && forks[j] == false) {
+                    forks[i] = true;
+                    forks[j] = true;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // call the run() method of any runnable to execute its code
+        public void wantsToEat(int philosopher,
+                               Runnable pickLeftFork,
+                               Runnable pickRightFork,
+                               Runnable eat,
+                               Runnable putLeftFork,
+                               Runnable putRightFork) throws InterruptedException {
+            while (!getForks(philosopher)) {
+                Thread.sleep(1);
+            }
+            pickLeftFork.run();
+            pickRightFork.run();
+            eat.run();
+            putLeftFork.run();
+            putRightFork.run();
+            forks[philosopher] = false;
+            forks[(philosopher + 4) % 5] = false;
+        }
+    }
+
+    /**
+     * 1290. Convert Binary Number in a Linked List to Integer
+     */
+    public int getDecimalValue(ListNode head) {
+        int result = 0;
+        ListNode pointer = head;
+        while (pointer != null) {
+            result <<= 1;
+            if (pointer.val == 1) {
+                result += 1;
+            }
+            pointer = pointer.next;
+        }
+        return result;
+    }
+
+    /**
+     * 1313. Decompress Run-Length Encoded List
+     */
+    public int[] decompressRLElist(int[] nums) {
+        int l = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            l += nums[i];
+        }
+        int from = 0;
+        int[] result = new int[l];
+        for (int i = 0; i < nums.length; i += 2) {
+            int to = from + nums[i];
+            Arrays.fill(result, from, to, nums[i + 1]);
+            from = to;
+        }
+        return result;
+    }
+
+    /**
+     * 1342. Number of Steps to Reduce a Number to Zero
+     */
+    public int numberOfSteps (int num) {
+        int count = 0;
+        while (num > 0) {
+            if ((num & 1) == 1) {
+                num --;
+            } else {
+                num >>>= 1;
+            }
+            count ++;
+        }
+        return count;
     }
 
 }

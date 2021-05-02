@@ -1,6 +1,7 @@
 package org.sweetycode.leetcode;
 
 
+import com.sun.jmx.snmp.tasks.ThreadService;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -11,8 +12,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.IntConsumer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Solution Tester.
@@ -97,7 +103,37 @@ public class SolutionTest {
      */
     @Test
     public void testFindMedianSortedArrays() throws Exception {
+        assertEquals(2, solution.findMedianSortedArrays(new int[]{1,3}, new int[]{2}), 0.000001);
+        assertEquals(2.5, solution.findMedianSortedArrays(new int[]{1,2}, new int[]{3,4}), 0.000001);
+        assertEquals(1, solution.findMedianSortedArrays(new int[]{1}, new int[]{}), 0.000001);
+    }
 
+    /**
+     * 5. Longest Palindromic Substring
+     */
+    @Test
+    public void testLongestPalindromeSubstring() {
+        assertEquals("bab", solution.longestPalindromeSubstring("babad"));
+        assertEquals("bb", solution.longestPalindromeSubstring("cbbd"));
+        assertEquals("", solution.longestPalindromeSubstring(""));
+    }
+
+    @Test
+    public void testLongestPalindromeSubstring1() {
+        assertEquals("bab", solution.longestPalindromeSubstring1("babad"));
+        assertEquals("bb", solution.longestPalindromeSubstring1("cbbd"));
+        assertEquals("", solution.longestPalindromeSubstring1(""));
+    }
+
+    /**
+     * 6. ZigZag Conversion
+     */
+    @Test
+    public void testConvert() {
+        assertEquals("LCIRETOESIIGEDHN", solution.convert("LEETCODEISHIRING", 3));
+        assertEquals("LDREOEIIECIHNTSG", solution.convert("LEETCODEISHIRING", 4));
+        assertEquals("PYAIHRNAPLSIIG", solution.convert("PAYPALISHIRING", 2));
+        assertEquals("PAYPALISHIRING", solution.convert("PAYPALISHIRING", 1));
     }
 
     /**
@@ -107,6 +143,21 @@ public class SolutionTest {
     public void testReverse() throws Exception {
         System.out.println(solution.reverse(-463847412));
         System.out.println(solution.reverse(463847412));
+    }
+
+    /**
+     * 8. String to Integer (atoi)
+     */
+    @Test
+    public void testMyAtoi() {
+        assertEquals(42, solution.myAtoi("42"));
+        assertEquals(-42, solution.myAtoi("      -42"));
+        assertEquals(4193, solution.myAtoi("4193 with words"));
+        assertEquals(0, solution.myAtoi("words and 987"));
+        assertEquals(-2147483648, solution.myAtoi("-91283472332"));
+        assertEquals(12345678, solution.myAtoi("  0000000000012345678"));
+        //The number "-91283472332" is out of the range of a 32-bit signed integer.
+        // Thefore INT_MIN (−231) is returned.
     }
 
     /**
@@ -120,6 +171,26 @@ public class SolutionTest {
     }
 
     /**
+     * 11. Container With Most Water
+     */
+    @Test
+    public void testMaxArea() {
+        assertEquals(49, solution.maxArea(new int[]{1,8,6,2,5,4,8,3,7}));
+    }
+    
+    /**
+     * 12. Integer to Roman
+     */
+    @Test
+    public void testIntToRoman() {
+        assertEquals("III", solution.intToRoman(3));
+        assertEquals("IV", solution.intToRoman(4));
+        assertEquals("IX", solution.intToRoman(9));
+        assertEquals("LVIII", solution.intToRoman(58));
+        assertEquals("MCMXCIV", solution.intToRoman(1994));
+    }
+
+    /**
      * 14. Longest Common Prefix
      */
     @Test
@@ -127,6 +198,19 @@ public class SolutionTest {
         System.out.println(solution.longestCommonPrefix(new String[]{"flower","flow","flight"}));
         System.out.println(solution.longestCommonPrefix(new String[]{"dog","racecar","car"}));
         System.out.println(solution.longestCommonPrefix(new String[]{"aa","a"}));
+    }
+
+    /**
+     * 15. 3Sum
+     */
+    @Test
+    public void testThreeSum() {
+        System.out.println(solution.threeSum(new int[]{1,-4,-2,-1,-7,-2,-8,-6,-6,-9,6,-6,8,-3,0,1}));
+        System.out.println(solution.threeSum(new int[]{-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6}));
+        System.out.println(solution.threeSum(new int[]{2,0,-2,-5,-5,-3,2,-4}));
+        System.out.println(solution.threeSum(new int[]{1, -1, -1, 0}));
+        System.out.println(solution.threeSum(new int[]{-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0}));
+        System.out.println(solution.threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
     }
 
     /**
@@ -777,6 +861,9 @@ public class SolutionTest {
     /**
      * 235. Lowest Common Ancestor of a Binary Search Tree
      */
+    /**
+     * 面试题68 - I. 二叉搜索树的最近公共祖先
+     */
     @Test
     public void testLowestCommonAncestor() throws Exception {
         TreeNode t = ConvertUtil.stringToTreeNode("[6,2,8,0,4,7,9,null,null,3,5]");
@@ -924,12 +1011,22 @@ public class SolutionTest {
         assertEquals(false, solution.wordPattern2("abba", "dog dog dog dog"));
         assertEquals(true, solution.wordPattern2("abba", "dog a a dog"));
     }
+
     /**
      * 292. Nim Game
      */
     @Test
     public void testCanWinNim() throws Exception {
         System.out.println(solution.canWinNim(4));
+    }
+
+    /**
+     * 299. Bulls and Cows
+     */
+    @Test
+    public void testGetHint() throws Exception {
+        assertEquals("1A3B", solution.getHint("1807", "7810"));
+        assertEquals("1A1B", solution.getHint("1123", "0111"));
     }
 
     /**
@@ -1087,6 +1184,14 @@ public class SolutionTest {
     @Test
     public void testFindTheDifference() throws Exception {
         System.out.println(solution.findTheDifference("afbcfd","ffabcd"));
+    }
+
+    @Test
+    public void testIsSubsequence() {
+        assertEquals(true, solution.isSubsequence("abc", "ahbgdc"));
+        assertEquals(false, solution.isSubsequence("axe", "ahbgdc"));
+        assertEquals(true, solution.isSubsequence("", "ahbgdc"));
+        assertEquals(false, solution.isSubsequence("leeeeetcode", "yyylyyeyytyycyyoyydyyeyy"));
     }
 
     /**
@@ -1446,6 +1551,16 @@ public class SolutionTest {
     }
 
     /**
+     * 509. Fibonacci Number
+     */
+    @Test
+    public void testFib() {
+        assertEquals(1, solution.fib(2));
+        assertEquals(2, solution.fib(3));
+        assertEquals(3, solution.fib(4));
+    }
+
+    /**
      * 520. Detect Capital
      */
     @Test
@@ -1496,6 +1611,28 @@ public class SolutionTest {
     public void testConvertBST() throws Exception {
         TreeNode t1 = ConvertUtil.stringToTreeNode("[5,2,13]");
         assertEquals("[18, 20, 13, null, null, null, null]",ConvertUtil.treeNodeToString(solution.convertBST(t1)));
+    }
+    
+    /**
+     * 541. Reverse String II
+     */
+    @Test
+    public void testReverseStr() {
+        assertEquals("bacdfeghi", solution.reverseStr("abcdefghi", 2));
+        assertEquals("bacdfeg", solution.reverseStr("abcdefg", 2));
+        assertEquals("bacdfe", solution.reverseStr("abcdef", 2));
+        assertEquals("bacde", solution.reverseStr("abcde", 2));
+        assertEquals("bacd", solution.reverseStr("abcd", 2));
+        assertEquals("", solution.reverseStr("", 2));
+    }
+
+    /**
+     * 543. Diameter of Binary Tree
+     */
+    @Test
+    public void testDiameterOfBinaryTree() {
+        TreeNode t1 = ConvertUtil.stringToTreeNode("[1,2,3,4,5]");
+        assertEquals(3, solution.diameterOfBinaryTree(t1));
     }
 
     /**
@@ -2168,6 +2305,280 @@ public class SolutionTest {
         assertEquals(3, solution.repeatedNTimes(new int[]{1,2,3,3}));
         assertEquals(2, solution.repeatedNTimes(new int[]{2,1,2,5,3,2}));
         assertEquals(5, solution.repeatedNTimes(new int[]{5,1,5,2,5,3,5,4}));
-
     }
+
+    /**
+     * 1108. Defanging an IP Address
+     */
+    @Test
+    public void testDefangIPaddr() {
+        assertEquals("1[.]1[.]1[.]1", solution.defangIPaddr("1.1.1.1"));
+        assertEquals("255[.]100[.]50[.]0", solution.defangIPaddr("255.100.50.0"));
+    }
+
+
+    /**
+     * 1114. Print in Order
+     */
+    @Test
+    public void testFoo() {
+        Runnable printFirst = () -> System.out.print("one");
+        Runnable printSecond = () -> System.out.print("two");
+        Runnable printThird = () -> System.out.print("three");
+
+        Solution.Foo foo = solution.new Foo();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.submit(() -> {
+            try {
+                foo.second(printSecond);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                foo.third(printThird);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                foo.first(printFirst);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.shutdown();
+    }
+
+    /**
+     * 1115. Print FooBar Alternately
+     */
+    @Test
+    public void testFooBar() {
+        Solution.FooBar fooBar = solution.new FooBar(5);
+        Runnable printFoo = () -> System.out.print("foo");
+        Runnable printBar = () -> System.out.print("bar");
+
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(() -> {
+            try {
+                fooBar.foo(printFoo);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                fooBar.bar(printBar);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.shutdown();
+    }
+    
+    /**
+     * 1116. Print Zero Even Odd
+     */
+    @Test
+    public void testZeroEvenOdd() {
+        IntConsumer printNumber = System.out::print;
+        Solution.ZeroEvenOdd zeroEvenOdd = solution.new ZeroEvenOdd(20);
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        executorService.submit(() -> {
+            try {
+                zeroEvenOdd.zero(printNumber);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                zeroEvenOdd.even(printNumber);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                zeroEvenOdd.odd(printNumber);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.shutdown();
+    }
+
+    /**
+     * 1117. Building H2O
+     */
+    @Test
+    public void testH2O() {
+        // TODO
+        // test1 frequently get a wrong answer.
+        // When moving all the test code to a main method, test1 pass.
+        // When defining StringBuffer as instance variables, test1 pass.
+        // StringBuffer
+        String test1 = testH2O("HOH");
+        assertTrue("fail",
+                test1.equals("HHO")
+                        || test1.equals("HOH")
+                        || test1.equals("OHH"));
+
+        String test2 = testH2O("OOHHHH");
+        assertTrue("fail",
+                test2.equals("HHOHHO")
+                        || test2.equals("HOHHHO")
+                        || test2.equals("OHHHHO")
+                        || test2.equals("HHOHOH")
+                        || test2.equals("HOHHOH")
+                        || test2.equals("OHHHOH")
+                        || test2.equals("HHOOHH")
+                        || test2.equals("HOHOHH")
+                        || test2.equals("OHHOHH"));
+    }
+
+
+
+    private String testH2O(String in) {
+        StringBuffer sb = new StringBuffer();
+        Runnable releaseHydrogen = () -> {
+            sb.append("H");
+        };
+        Runnable releaseOxygen = () -> {
+            sb.append("O");
+        };
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Solution.H2O h2O = solution.new H2O();
+        for (char c: in.toCharArray()) {
+            if (c == 'O') {
+                executorService.submit(() -> {
+                    try {
+                        h2O.oxygen(releaseOxygen);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } else if (c == 'H') {
+                executorService.submit(() -> {
+                    try {
+                        h2O.hydrogen(releaseHydrogen);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        }
+        executorService.shutdown();
+        return sb.toString();
+    }
+
+    /**
+     * 1195. Fizz Buzz Multithreaded
+     */
+    @Test
+    public void testFizzBuzzClass() {
+        Runnable printFizz = () -> System.out.print("fizz");
+        Runnable printBuzz = () -> System.out.print("buzz");
+        Runnable printFizzBuzz = () -> System.out.print("fizzbuzz");
+        IntConsumer printNumber = System.out::print;
+
+        Solution.FizzBuzz fizzBuzz = solution.new FizzBuzz(15);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        executorService.submit(() -> {
+            try {
+                fizzBuzz.fizz(printFizz);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                fizzBuzz.buzz(printBuzz);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                fizzBuzz.fizzbuzz(printFizzBuzz);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.submit(() -> {
+            try {
+                fizzBuzz.number(printNumber);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.shutdown();
+    }
+    
+    /**
+     * 1226. The Dining Philosophers
+     */
+    @Test
+    public void testDiningPhilosophers() {
+        Solution.DiningPhilosophers diningPhilosophers = solution.new DiningPhilosophers();
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        for (int i = 0; i < 5; i ++) {
+            final int j = i;
+            Runnable pickLeftFork = () -> System.out.println("[" + j + ",1,1]");
+            Runnable pickRightFork = () -> System.out.println("[" + j + ",2,1]");
+            Runnable eat = () -> System.out.println("[" + j + ",0,3]");
+            Runnable putLeftFork = () -> System.out.println("[" + j + ",1,2]");
+            Runnable putRightFork = () -> System.out.println("[" + j + ",2,2]");
+            executorService.submit(() ->
+            {
+                try {
+                    diningPhilosophers.wantsToEat(j
+                            , pickLeftFork
+                            , pickRightFork
+                            , eat
+                            , putLeftFork
+                            , putRightFork);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        executorService.shutdown();
+    }
+
+    /**
+     * 1290. Convert Binary Number in a Linked List to Integer
+     */
+    @Test
+    public void testGetDecimalValue() {
+        assertEquals(5, solution.getDecimalValue(new ListNode(new int[]{1,0,1})));
+        assertEquals(0, solution.getDecimalValue(new ListNode(new int[]{0})));
+        assertEquals(1, solution.getDecimalValue(new ListNode(new int[]{1})));
+        assertEquals(18880, solution.getDecimalValue(new ListNode(new int[]{1,0,0,1,0,0,1,1,1,0,0,0,0,0,0})));
+        assertEquals(0, solution.getDecimalValue(new ListNode(new int[]{0,0})));
+    }
+
+    /**
+     * 1313. Decompress Run-Length Encoded List
+     */
+    @Test
+    public void testDecompressRLElist() {
+        assertEquals("[2, 4, 4, 4]", Arrays.toString(solution.decompressRLElist(new int[]{1,2,3,4})));
+        assertEquals("[4, 4, 4]", Arrays.toString(solution.decompressRLElist(new int[]{0,2,3,4})));
+    }
+
+    /**
+     * 1342. Number of Steps to Reduce a Number to Zero
+     */
+    @Test
+    public void testNumberOfSteps() {
+        assertEquals(6, solution.numberOfSteps(14));
+        assertEquals(4, solution.numberOfSteps(8));
+        assertEquals(12, solution.numberOfSteps(123));
+    }
+
 }
