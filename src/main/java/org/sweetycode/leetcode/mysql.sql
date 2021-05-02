@@ -372,3 +372,30 @@ show variables like 'SQL_SAFE_UPDATES';  #  查看开关状态。
 SET SQL_SAFE_UPDATES = 0;  #  Error Code: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect.
 update salary set sex=case when sex='m' then 'f' else 'm' end ;
 SET SQL_SAFE_UPDATES = 1;  #  恢复mysql执行update的时候，如果不是用主键当where语句报错。
+
+
+# 1179. Reformat Department Table
+drop table if exists department;
+Create table department (id int,revenue int, month varchar(10));
+insert into department(id,revenue,month) values(1,8000,'Jan');
+insert into department(id,revenue,month) values(2,9000,'Jan');
+insert into department(id,revenue,month) values(3,10000,'Feb');
+insert into department(id,revenue,month) values(1,7000,'Feb');
+insert into department(id,revenue,month) values(1,6000,'Mar');
+
+# method :
+select id,
+max(if(month='Jan', revenue, null)) Jan_Revenue,
+max(if(month='Feb', revenue, null)) Feb_Revenue,
+max(if(month='Mar', revenue, null)) Mar_Revenue,
+max(if(month='Apr', revenue, null)) Apr_Revenue,
+max(if(month='May', revenue, null)) May_Revenue,
+max(if(month='Jun', revenue, null)) Jun_Revenue,
+max(if(month='Jul', revenue, null)) Jul_Revenue,
+max(if(month='Aug', revenue, null)) Aug_Revenue,
+max(if(month='Sep', revenue, null)) Sep_Revenue,
+max(if(month='Oct', revenue, null)) Oct_Revenue,
+max(if(month='Nov', revenue, null)) Nov_Revenue,
+max(if(month='Dec', revenue, null)) Dec_Revenue
+from department
+group by id
