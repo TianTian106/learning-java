@@ -1,18 +1,14 @@
 package org.sweetycode.leetcode;
 
-
-import com.sun.jmx.snmp.tasks.ThreadService;
-import org.junit.Test;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.sweetycode.leetcode.util.ConvertUtil;
 import org.sweetycode.leetcode.util.PrintUtil;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.IntConsumer;
@@ -24,8 +20,8 @@ import static org.junit.Assert.assertTrue;
  * Solution Tester.
  *
  * @author <Authors name>
- * @since <pre>Jul 5, 2018</pre>
  * @version 1.0
+ * @since <pre>Jul 5, 2018</pre>
  */
 public class SolutionTest {
 
@@ -42,20 +38,19 @@ public class SolutionTest {
     /**
      * 1. Two Sum
      * Method: twoSum(int[] nums, int target)
-     *
      */
     @Test
     public void testTwoSum() throws Exception {
         int[] nums = new int[]{3, 2, 4};
-        System.out.println(Arrays.toString(solution.twoSum(nums,6)));
+        System.out.println(Arrays.toString(solution.twoSum(nums, 6)));
     }
 
 
     public static ListNode arrayToListNode(int[] a) {
-        if(a == null) return null;
+        if (a == null) return null;
         ListNode result = new ListNode(a[0]);
         ListNode flag = result;
-        for (int i = 1 ; i < a.length; i ++) {
+        for (int i = 1; i < a.length; i++) {
             flag.next = new ListNode(a[i]);
             flag = flag.next;
         }
@@ -65,19 +60,18 @@ public class SolutionTest {
     /**
      * 2. Add Two Numbers
      * Method: addTwoNumbers(ListNode l1, ListNode l2)
-     *
      */
     @Test
     public void testAddTwoNumbers() throws Exception {
         int[] a2 = new int[]{2, 4};
-        int[] a1 = new int []{5, 6, 4};
+        int[] a1 = new int[]{5, 6, 4};
 
         ListNode l1 = arrayToListNode(a1);
         ListNode l2 = arrayToListNode(a2);
-        ListNode result = solution.addTwoNumbers(l1,l2);
+        ListNode result = solution.addTwoNumbers(l1, l2);
 
-        String  l= "" + result.val;
-        while(result.next != null) {
+        String l = "" + result.val;
+        while (result.next != null) {
             result = result.next;
             l = l + "," + result.val;
         }
@@ -88,7 +82,6 @@ public class SolutionTest {
     /**
      * 3. Longest Substring Without Repeating Characters
      * Method: lengthOfLongestSubstring(String s)
-     *
      */
     @Test
     public void testLengthOfLongestSubstring() throws Exception {
@@ -99,12 +92,11 @@ public class SolutionTest {
     /**
      * 4. Median of Two Sorted Arrays
      * Method: findMedianSortedArrays(int[] nums1, int[] nums2)
-     *
      */
     @Test
     public void testFindMedianSortedArrays() throws Exception {
-        assertEquals(2, solution.findMedianSortedArrays(new int[]{1,3}, new int[]{2}), 0.000001);
-        assertEquals(2.5, solution.findMedianSortedArrays(new int[]{1,2}, new int[]{3,4}), 0.000001);
+        assertEquals(2, solution.findMedianSortedArrays(new int[]{1, 3}, new int[]{2}), 0.000001);
+        assertEquals(2.5, solution.findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}), 0.000001);
         assertEquals(1, solution.findMedianSortedArrays(new int[]{1}, new int[]{}), 0.000001);
     }
 
@@ -175,9 +167,9 @@ public class SolutionTest {
      */
     @Test
     public void testMaxArea() {
-        assertEquals(49, solution.maxArea(new int[]{1,8,6,2,5,4,8,3,7}));
+        assertEquals(49, solution.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
     }
-    
+
     /**
      * 12. Integer to Roman
      */
@@ -195,9 +187,9 @@ public class SolutionTest {
      */
     @Test
     public void testLongestCommonPrefix() throws Exception {
-        System.out.println(solution.longestCommonPrefix(new String[]{"flower","flow","flight"}));
-        System.out.println(solution.longestCommonPrefix(new String[]{"dog","racecar","car"}));
-        System.out.println(solution.longestCommonPrefix(new String[]{"aa","a"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"flower", "flow", "flight"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"dog", "racecar", "car"}));
+        System.out.println(solution.longestCommonPrefix(new String[]{"aa", "a"}));
     }
 
     /**
@@ -205,11 +197,12 @@ public class SolutionTest {
      */
     @Test
     public void testThreeSum() {
-        System.out.println(solution.threeSum(new int[]{1,-4,-2,-1,-7,-2,-8,-6,-6,-9,6,-6,8,-3,0,1}));
-        System.out.println(solution.threeSum(new int[]{-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6}));
-        System.out.println(solution.threeSum(new int[]{2,0,-2,-5,-5,-3,2,-4}));
+        System.out.println(solution.threeSum(new int[]{-3, -2, -2, -1, -1, -1, 0, 1, 2, 2, 3, 4}));
+        System.out.println(solution.threeSum(new int[]{1, -4, -2, -1, -7, -2, -8, -6, -6, -9, 6, -6, 8, -3, 0, 1}));
+        System.out.println(solution.threeSum(new int[]{-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6}));
+        System.out.println(solution.threeSum(new int[]{2, 0, -2, -5, -5, -3, 2, -4})); // -5,-5,-4,-3,-2,0,2,2
         System.out.println(solution.threeSum(new int[]{1, -1, -1, 0}));
-        System.out.println(solution.threeSum(new int[]{-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0}));
+        System.out.println(solution.threeSum(new int[]{-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0}));
         System.out.println(solution.threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
     }
 
@@ -238,9 +231,11 @@ public class SolutionTest {
         ListNode l3 = new ListNode(3);
         ListNode l4 = new ListNode(4);
 
-        listNode1.next = listNode2; listNode2.next = listNode4;
-        l1.next = l3; l3.next = l4;
-        PrintUtil.printListNode(solution.mergeTwoListsNew(listNode1,l1));
+        listNode1.next = listNode2;
+        listNode2.next = listNode4;
+        l1.next = l3;
+        l3.next = l4;
+        PrintUtil.printListNode(solution.mergeTwoListsNew(listNode1, l1));
     }
 
     /**
@@ -248,8 +243,8 @@ public class SolutionTest {
      */
     @Test
     public void testRemoveDuplicates() throws Exception {
-        System.out.println(solution.removeDuplicates(new int[]{0,0,1,1,1,2,2,3,3,4}));
-        System.out.println(solution.removeDuplicates(new int[]{1,1,2}));
+        System.out.println(solution.removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+        System.out.println(solution.removeDuplicates(new int[]{1, 1, 2}));
     }
 
     /**
@@ -257,18 +252,19 @@ public class SolutionTest {
      */
     @Test
     public void testRemoveElement() throws Exception {
-        System.out.println(solution.removeElement(new int[]{4,5}, 4)); // 1
-        System.out.println(solution.removeElement(new int[]{4,5}, 5)); // 1
-        System.out.println(solution.removeElement(new int[]{3,2,2,3}, 3)); // 2
-        System.out.println(solution.removeElement(new int[]{0,1,2,2,3,0,4,2}, 2)); // 5
+        System.out.println(solution.removeElement(new int[]{4, 5}, 4)); // 1
+        System.out.println(solution.removeElement(new int[]{4, 5}, 5)); // 1
+        System.out.println(solution.removeElement(new int[]{3, 2, 2, 3}, 3)); // 2
+        System.out.println(solution.removeElement(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2)); // 5
     }
+
     @Test
     public void testRemoveElement2() throws Exception {
         System.out.println(solution.removeElement2(new int[]{}, 4)); // 1
-        System.out.println(solution.removeElement2(new int[]{4,5}, 4)); // 1
-        System.out.println(solution.removeElement2(new int[]{4,5}, 5)); // 1
-        System.out.println(solution.removeElement2(new int[]{3,2,2,3}, 3)); // 2
-        System.out.println(solution.removeElement2(new int[]{0,1,2,2,3,0,4,2}, 2)); // 5
+        System.out.println(solution.removeElement2(new int[]{4, 5}, 4)); // 1
+        System.out.println(solution.removeElement2(new int[]{4, 5}, 5)); // 1
+        System.out.println(solution.removeElement2(new int[]{3, 2, 2, 3}, 3)); // 2
+        System.out.println(solution.removeElement2(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2)); // 5
     }
 
     /**
@@ -286,9 +282,9 @@ public class SolutionTest {
      */
     @Test
     public void testSearchInsert() throws Exception {
-        assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 5), 2);
-        assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 2), 1);
-        assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 7), 4);
+        assertEquals(solution.searchInsert(new int[]{1, 3, 5, 6}, 5), 2);
+        assertEquals(solution.searchInsert(new int[]{1, 3, 5, 6}, 2), 1);
+        assertEquals(solution.searchInsert(new int[]{1, 3, 5, 6}, 7), 4);
         // assertEquals (solution.searchInsert(new int[]{1,3,5,6}, 0), 0);
 
     }
@@ -311,14 +307,14 @@ public class SolutionTest {
      */
     @Test
     public void testMaxSubArray() throws Exception {
-        assertEquals(solution.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}), 6);
-        assertEquals(solution.maxSubArray(new int[]{8,-19,5,-4,20}), 21);
+        assertEquals(solution.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), 6);
+        assertEquals(solution.maxSubArray(new int[]{8, -19, 5, -4, 20}), 21);
     }
 
     @Test
     public void testMaxSubArray2() throws Exception {
-        assertEquals(solution.maxSubArray2(new int[]{-2,1,-3,4,-1,2,1,-5,4}), 6);
-        assertEquals(solution.maxSubArray2(new int[]{8,-19,5,-4,20}), 21);
+        assertEquals(solution.maxSubArray2(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}), 6);
+        assertEquals(solution.maxSubArray2(new int[]{8, -19, 5, -4, 20}), 21);
     }
 
     /**
@@ -336,7 +332,7 @@ public class SolutionTest {
      */
     @Test
     public void testPlusOne() throws Exception {
-        System.out.println(Arrays.toString(solution.plusOne(new int[]{9,9,9,9})));
+        System.out.println(Arrays.toString(solution.plusOne(new int[]{9, 9, 9, 9})));
     }
 
     /**
@@ -354,7 +350,7 @@ public class SolutionTest {
      */
     @Test
     public void testMySqrt() throws Exception {
-        assertEquals(2 , solution.mySqrt(4));
+        assertEquals(2, solution.mySqrt(4));
         assertEquals(2, solution.mySqrt(8));
         assertEquals(1, solution.mySqrt(1));
         assertEquals(0, solution.mySqrt(0));
@@ -368,7 +364,7 @@ public class SolutionTest {
     public void testClimbStairs() throws Exception {
         assertEquals(3, solution.climbStairs(3));
     }
-    
+
     /**
      * 83. Remove Duplicates from Sorted List
      */
@@ -398,13 +394,13 @@ public class SolutionTest {
      */
     @Test
     public void testMerge() throws Exception {
-        int[] nums1 = new int[]{1,2,3,0,0,0};
-        solution.merge(nums1, 3, new int[]{2,5,6}, 3);
-        assertEquals(true, Arrays.equals(new int[]{1,2,2,3,5,6},nums1));
+        int[] nums1 = new int[]{1, 2, 3, 0, 0, 0};
+        solution.merge(nums1, 3, new int[]{2, 5, 6}, 3);
+        assertEquals(true, Arrays.equals(new int[]{1, 2, 2, 3, 5, 6}, nums1));
 
-        nums1 = new int[]{5,9,10,0,0,0,0};
-        solution.merge(nums1, 3, new int[]{2,4,8,11}, 4);
-        assertEquals(true, Arrays.equals(new int[]{2,4,5,8,9,10,11},nums1));
+        nums1 = new int[]{5, 9, 10, 0, 0, 0, 0};
+        solution.merge(nums1, 3, new int[]{2, 4, 8, 11}, 4);
+        assertEquals(true, Arrays.equals(new int[]{2, 4, 5, 8, 9, 10, 11}, nums1));
     }
 
     /**
@@ -416,7 +412,7 @@ public class SolutionTest {
         String t2 = "[1,null,2,null,null]";
         assertEquals(false, solution.isSameTree(ConvertUtil.stringToTreeNode(t1), ConvertUtil.stringToTreeNode(t2)));
 
-        String s1 ="[1,2,1,null,null,null,null]";
+        String s1 = "[1,2,1,null,null,null,null]";
         String s2 = "[1,1,2,null,null,null,null]";
         assertEquals(false, solution.isSameTree(ConvertUtil.stringToTreeNode(s1), ConvertUtil.stringToTreeNode(s2)));
     }
@@ -445,7 +441,7 @@ public class SolutionTest {
     @Test
     public void testLevelOrderBottom() throws Exception {
         String root = "[3,9,20,null,null,15,7]";
-        assertEquals("[[15, 7],[9, 20],[3]]",ConvertUtil.int2dListToString(solution.levelOrderBottom(ConvertUtil.stringToTreeNode(root))));
+        assertEquals("[[15, 7],[9, 20],[3]]", ConvertUtil.int2dListToString(solution.levelOrderBottom(ConvertUtil.stringToTreeNode(root))));
     }
 
     /**
@@ -453,7 +449,7 @@ public class SolutionTest {
      */
     @Test
     public void testSortedArrayToBST() throws Exception {
-        int[] nums  = new int[]{-10,-3,0,5,9};
+        int[] nums = new int[]{-10, -3, 0, 5, 9};
         assertEquals("[0, -3, 9, -10, null, 5, null, null, null, null, null]", ConvertUtil.treeNodeToString(solution.sortedArrayToBST(nums)));
     }
 
@@ -515,9 +511,9 @@ public class SolutionTest {
      */
     @Test
     public void testMaxProfit() throws Exception {
-        assertEquals(5, solution.maxProfit(new int[]{7,1,5,3,6,4}));
-        assertEquals(0, solution.maxProfit(new int[]{7,6,4,3,1}));
-        assertEquals(14, solution.maxProfit(new int[]{7,9,14,2,1,15}));
+        assertEquals(5, solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
+        assertEquals(0, solution.maxProfit(new int[]{7, 6, 4, 3, 1}));
+        assertEquals(14, solution.maxProfit(new int[]{7, 9, 14, 2, 1, 15}));
     }
 
     /**
@@ -525,15 +521,16 @@ public class SolutionTest {
      */
     @Test
     public void testMaxProfitII() throws Exception {
-        assertEquals(7, solution.maxProfitII(new int[]{7,1,5,3,6,4}));
-        assertEquals(4, solution.maxProfitII(new int[]{1,2,3,4,5}));
-        assertEquals(0, solution.maxProfitII(new int[]{7,6,4,3,1}));
+        assertEquals(7, solution.maxProfitII(new int[]{7, 1, 5, 3, 6, 4}));
+        assertEquals(4, solution.maxProfitII(new int[]{1, 2, 3, 4, 5}));
+        assertEquals(0, solution.maxProfitII(new int[]{7, 6, 4, 3, 1}));
     }
+
     @Test
     public void testMaxProfitII2() throws Exception {
-        assertEquals(7, solution.maxProfitII2(new int[]{7,1,5,3,6,4}));
-        assertEquals(4, solution.maxProfitII2(new int[]{1,2,3,4,5}));
-        assertEquals(0, solution.maxProfitII2(new int[]{7,6,4,3,1}));
+        assertEquals(7, solution.maxProfitII2(new int[]{7, 1, 5, 3, 6, 4}));
+        assertEquals(4, solution.maxProfitII2(new int[]{1, 2, 3, 4, 5}));
+        assertEquals(0, solution.maxProfitII2(new int[]{7, 6, 4, 3, 1}));
     }
 
     /**
@@ -551,7 +548,7 @@ public class SolutionTest {
      */
     @Test
     public void testSingleNumber() throws Exception {
-        System.out.println(solution.singleNumber(new int[]{4,4,1,2,1,2,0}));
+        System.out.println(solution.singleNumber(new int[]{4, 4, 1, 2, 1, 2, 0}));
     }
 
     /**
@@ -600,20 +597,21 @@ public class SolutionTest {
         ListNode l2 = ConvertUtil.stringToListNode("[3,4,5]");
         l1.next.next = l3;
         l2.next.next.next = l3;
-        assertEquals(6, solution.getIntersectionNode(l1,l2).val);
+        assertEquals(6, solution.getIntersectionNode(l1, l2).val);
     }
-    
+
     /**
      * 167. Two Sum II - Input array is sorted
      */
     @Test
     public void testTwoSumII() throws Exception {
-        assertEquals(Arrays.toString(new int[]{1,2}), Arrays.toString(solution.twoSumII(new int[]{2,7,11,15}, 9)));
-        assertEquals(Arrays.toString(new int[]{1,2}), Arrays.toString(solution.twoSumII(new int[]{-1,0,-1}, -1)));
+        assertEquals(Arrays.toString(new int[]{1, 2}), Arrays.toString(solution.twoSumII(new int[]{2, 7, 11, 15}, 9)));
+        assertEquals(Arrays.toString(new int[]{1, 2}), Arrays.toString(solution.twoSumII(new int[]{-1, 0, -1}, -1)));
     }
+
     @Test
     public void testTwoSumII2() throws Exception {
-        assertEquals(Arrays.toString(new int[]{1,2}), Arrays.toString(solution.twoSumII2(new int[]{2,7,11,15}, 9)));
+        assertEquals(Arrays.toString(new int[]{1, 2}), Arrays.toString(solution.twoSumII2(new int[]{2, 7, 11, 15}, 9)));
 
     }
 
@@ -633,9 +631,9 @@ public class SolutionTest {
      */
     @Test
     public void testMajorityElement() throws Exception {
-        System.out.println(solution.majorityElement(new int[]{0,0,2,2,2,0,0}));
-        System.out.println(solution.majorityElement(new int[]{3,2,3}));
-        System.out.println(solution.majorityElement(new int[]{2,2,1,1,1,2,2}));
+        System.out.println(solution.majorityElement(new int[]{0, 0, 2, 2, 2, 0, 0}));
+        System.out.println(solution.majorityElement(new int[]{3, 2, 3}));
+        System.out.println(solution.majorityElement(new int[]{2, 2, 1, 1, 1, 2, 2}));
     }
 
     /**
@@ -664,16 +662,16 @@ public class SolutionTest {
      */
     @Test
     public void testRotate() throws Exception {
-        int[] a1 = new int[]{1,2,3,4,5,6,7};
-        solution.rotate(a1,3);
-        assertEquals(Arrays.toString(new int[]{5,6,7,1,2,3,4}), Arrays.toString(a1));
+        int[] a1 = new int[]{1, 2, 3, 4, 5, 6, 7};
+        solution.rotate(a1, 3);
+        assertEquals(Arrays.toString(new int[]{5, 6, 7, 1, 2, 3, 4}), Arrays.toString(a1));
 
-        int[] a2 = new int[]{-1,-100,3,99};
-        solution.rotate(a2,2);
-        assertEquals(Arrays.toString(new int[]{3,99,-1,-100}), Arrays.toString(a2));
+        int[] a2 = new int[]{-1, -100, 3, 99};
+        solution.rotate(a2, 2);
+        assertEquals(Arrays.toString(new int[]{3, 99, -1, -100}), Arrays.toString(a2));
 
         int[] a3 = new int[]{-1};
-        solution.rotate(a3,2);
+        solution.rotate(a3, 2);
         assertEquals(Arrays.toString(new int[]{-1}), Arrays.toString(a3));
     }
 
@@ -701,9 +699,9 @@ public class SolutionTest {
      */
     @Test
     public void testRob() throws Exception {
-        assertEquals(4, solution.rob(new int[]{1,2,3,1}));
-        assertEquals(12, solution.rob(new int[]{2,7,9,3,1}));
-        assertEquals(3, solution.rob(new int[]{1,3,1}));
+        assertEquals(4, solution.rob(new int[]{1, 2, 3, 1}));
+        assertEquals(12, solution.rob(new int[]{2, 7, 9, 3, 1}));
+        assertEquals(3, solution.rob(new int[]{1, 3, 1}));
     }
 
     /**
@@ -719,7 +717,7 @@ public class SolutionTest {
      */
     @Test
     public void testRemoveElements() throws Exception {
-        assertEquals("1->2->3->4->5", PrintUtil.printListNode(solution.removeElements(ConvertUtil.stringToListNode("[1,2,6,3,4,5,6]"),6)));
+        assertEquals("1->2->3->4->5", PrintUtil.printListNode(solution.removeElements(ConvertUtil.stringToListNode("[1,2,6,3,4,5,6]"), 6)));
     }
 
     /**
@@ -767,9 +765,9 @@ public class SolutionTest {
      */
     @Test
     public void testContainsDuplicate() throws Exception {
-        assertEquals(true, solution.containsDuplicate(new int[]{1,2,3,1}));
-        assertEquals(false, solution.containsDuplicate(new int[]{1,2,3,4}));
-        assertEquals(true, solution.containsDuplicate(new int[]{1,1,1,3,3,4,3,2,4,2}));
+        assertEquals(true, solution.containsDuplicate(new int[]{1, 2, 3, 1}));
+        assertEquals(false, solution.containsDuplicate(new int[]{1, 2, 3, 4}));
+        assertEquals(true, solution.containsDuplicate(new int[]{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}));
     }
 
     /**
@@ -777,12 +775,12 @@ public class SolutionTest {
      */
     @Test
     public void testContainsNearbyDuplicate() throws Exception {
-        assertEquals(true, solution.containsNearbyDuplicate(new int[]{1,2,3,1}, 3));
-        assertEquals(true, solution.containsNearbyDuplicate(new int[]{1,0,1,1}, 1));
-        assertEquals(false, solution.containsNearbyDuplicate(new int[]{1,2,3,1,2,3}, 2));
-        assertEquals(true, solution.containsNearbyDuplicate(new int[]{99,99}, 2));
+        assertEquals(true, solution.containsNearbyDuplicate(new int[]{1, 2, 3, 1}, 3));
+        assertEquals(true, solution.containsNearbyDuplicate(new int[]{1, 0, 1, 1}, 1));
+        assertEquals(false, solution.containsNearbyDuplicate(new int[]{1, 2, 3, 1, 2, 3}, 2));
+        assertEquals(true, solution.containsNearbyDuplicate(new int[]{99, 99}, 2));
         assertEquals(false, solution.containsNearbyDuplicate(new int[]{}, 0));
-        assertEquals(false, solution.containsNearbyDuplicate(new int[]{99,98}, 2));
+        assertEquals(false, solution.containsNearbyDuplicate(new int[]{99, 98}, 2));
     }
 
     /**
@@ -897,6 +895,7 @@ public class SolutionTest {
         assertEquals(false, solution.isAnagram2("rat", "car"));
         //assertEquals(true, solution.isAnagram("我爱你", "你爱我"));
     }
+
     /**
      * 257. Binary Tree Paths
      */
@@ -932,41 +931,41 @@ public class SolutionTest {
      */
     @Test
     public void testMissingNumber() throws Exception {
-        assertEquals(2, solution.missingNumber(new int[]{3,0,1}));
-        assertEquals(8, solution.missingNumber(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(2, solution.missingNumber(new int[]{3, 0, 1}));
+        assertEquals(8, solution.missingNumber(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
         assertEquals(1, solution.missingNumber(new int[]{0}));
-        assertEquals(2, solution.missingNumber(new int[]{0,1}));
-        assertEquals(1, solution.missingNumber(new int[]{0,2}));
+        assertEquals(2, solution.missingNumber(new int[]{0, 1}));
+        assertEquals(1, solution.missingNumber(new int[]{0, 2}));
         assertEquals(0, solution.missingNumber(new int[]{1}));
     }
 
     @Test
     public void testMissingNumber2() throws Exception {
-        assertEquals(2, solution.missingNumber2(new int[]{3,0,1}));
-        assertEquals(8, solution.missingNumber2(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(2, solution.missingNumber2(new int[]{3, 0, 1}));
+        assertEquals(8, solution.missingNumber2(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
         assertEquals(1, solution.missingNumber2(new int[]{0}));
-        assertEquals(2, solution.missingNumber2(new int[]{0,1}));
-        assertEquals(1, solution.missingNumber2(new int[]{0,2}));
+        assertEquals(2, solution.missingNumber2(new int[]{0, 1}));
+        assertEquals(1, solution.missingNumber2(new int[]{0, 2}));
         assertEquals(0, solution.missingNumber2(new int[]{1}));
     }
 
     @Test
     public void testMissingNumber3() throws Exception {
-        assertEquals(2, solution.missingNumber3(new int[]{3,0,1}));
-        assertEquals(8, solution.missingNumber3(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(2, solution.missingNumber3(new int[]{3, 0, 1}));
+        assertEquals(8, solution.missingNumber3(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
         assertEquals(1, solution.missingNumber3(new int[]{0}));
-        assertEquals(2, solution.missingNumber3(new int[]{0,1}));
-        assertEquals(1, solution.missingNumber3(new int[]{0,2}));
+        assertEquals(2, solution.missingNumber3(new int[]{0, 1}));
+        assertEquals(1, solution.missingNumber3(new int[]{0, 2}));
         assertEquals(0, solution.missingNumber3(new int[]{1}));
     }
 
     @Test
     public void testMissingNumber4() throws Exception {
-        assertEquals(2, solution.missingNumber4(new int[]{3,0,1}));
-        assertEquals(8, solution.missingNumber4(new int[]{9,6,4,2,3,5,7,0,1}));
+        assertEquals(2, solution.missingNumber4(new int[]{3, 0, 1}));
+        assertEquals(8, solution.missingNumber4(new int[]{9, 6, 4, 2, 3, 5, 7, 0, 1}));
         assertEquals(1, solution.missingNumber4(new int[]{0}));
-        assertEquals(2, solution.missingNumber4(new int[]{0,1}));
-        assertEquals(1, solution.missingNumber4(new int[]{0,2}));
+        assertEquals(2, solution.missingNumber4(new int[]{0, 1}));
+        assertEquals(1, solution.missingNumber4(new int[]{0, 2}));
         assertEquals(0, solution.missingNumber4(new int[]{1}));
     }
 
@@ -976,7 +975,7 @@ public class SolutionTest {
     @Test
     public void testFirstBadVersion() throws Exception {
         int n = 65;
-        int firstBadVersion = (int)(Math.random() * (n + 1));
+        int firstBadVersion = (int) (Math.random() * (n + 1));
         solution.setFIRST_BAD_VERSION(firstBadVersion);
         assertEquals(firstBadVersion, solution.firstBadVersion(n));
 
@@ -987,7 +986,7 @@ public class SolutionTest {
      */
     @Test
     public void testMoveZeroes() throws Exception {
-        int nums[] = new int[]{0,1,0,3,12};
+        int nums[] = new int[]{0, 1, 0, 3, 12};
         solution.moveZeroes(nums);
         System.out.println(Arrays.toString(nums));
     }
@@ -1034,7 +1033,7 @@ public class SolutionTest {
      */
     @Test
     public void testNumArray() throws Exception {
-        Solution.NumArray numArray = solution.new NumArray(new int[]{-2,0,3,-5,2,-1});
+        Solution.NumArray numArray = solution.new NumArray(new int[]{-2, 0, 3, -5, 2, -1});
         assertEquals(1, numArray.sumRange(0, 2));
         assertEquals(-1, numArray.sumRange(2, 5));
         assertEquals(-3, numArray.sumRange(0, 5));
@@ -1112,8 +1111,8 @@ public class SolutionTest {
      */
     @Test
     public void testIntersection() throws Exception {
-        PrintUtil.printArray(solution.intersection(new int[]{1,2,2,1}, new int[]{2,2}));
-        PrintUtil.printArray(solution.intersection(new int[]{4,9,5}, new int[]{9,4,9,8,4}));
+        PrintUtil.printArray(solution.intersection(new int[]{1, 2, 2, 1}, new int[]{2, 2}));
+        PrintUtil.printArray(solution.intersection(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}));
         PrintUtil.printArray(solution.intersection(new int[]{}, new int[]{}));
     }
 
@@ -1123,8 +1122,8 @@ public class SolutionTest {
      */
     @Test
     public void testIntersect() throws Exception {
-        assertEquals("[2, 2]", Arrays.toString(solution.intersect2(new int[]{1,2,2,1}, new int[]{2,2})));
-        assertEquals("[9, 4]", Arrays.toString(solution.intersect2(new int[]{4,9,5}, new int[]{9,4,9,8,4})));
+        assertEquals("[2, 2]", Arrays.toString(solution.intersect2(new int[]{1, 2, 2, 1}, new int[]{2, 2})));
+        assertEquals("[9, 4]", Arrays.toString(solution.intersect2(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4})));
     }
 
     /**
@@ -1143,7 +1142,7 @@ public class SolutionTest {
      */
     @Test
     public void testGetSum() throws Exception {
-        System.out.println(solution.getSum(100,2000));
+        System.out.println(solution.getSum(100, 2000));
     }
 
     /**
@@ -1153,11 +1152,11 @@ public class SolutionTest {
     public void testGuessNumber() throws Exception {
 
         int n = 65;
-        int myNumber = (int)(Math.random() * (n + 1));
+        int myNumber = (int) (Math.random() * (n + 1));
         solution.setMY_NUMBER(myNumber);
         assertEquals(myNumber, solution.guessNumber(n));
     }
-    
+
     /**
      * 383. Ransom Note
      */
@@ -1165,7 +1164,7 @@ public class SolutionTest {
     public void testCanConstruct() throws Exception {
         assertEquals(false, solution.canConstruct("a", "b"));
         assertEquals(false, solution.canConstruct("aa", "ab"));
-        assertEquals(true, solution.canConstruct("aa" ,"aab"));
+        assertEquals(true, solution.canConstruct("aa", "aab"));
     }
 
     /**
@@ -1183,7 +1182,7 @@ public class SolutionTest {
      */
     @Test
     public void testFindTheDifference() throws Exception {
-        System.out.println(solution.findTheDifference("afbcfd","ffabcd"));
+        System.out.println(solution.findTheDifference("afbcfd", "ffabcd"));
     }
 
     @Test
@@ -1247,7 +1246,7 @@ public class SolutionTest {
     public void testFizzBuzz() throws Exception {
         System.out.println(solution.fizzBuzz(16));
     }
-    
+
     /**
      * 414. Third Maximum Number
      */
@@ -1256,7 +1255,7 @@ public class SolutionTest {
         assertEquals(1, solution.thirdMax(new int[]{3, 2, 1}));
         assertEquals(2, solution.thirdMax(new int[]{1, 2}));
         assertEquals(1, solution.thirdMax(new int[]{2, 2, 3, 1}));
-        assertEquals(-2147483648, solution.thirdMax(new int[]{1,2,-2147483648}));
+        assertEquals(-2147483648, solution.thirdMax(new int[]{1, 2, -2147483648}));
     }
 
     /**
@@ -1298,7 +1297,7 @@ public class SolutionTest {
         assertEquals(0, solution.countSegments(""));
         assertEquals(0, solution.countSegments("  "));
     }
-    
+
     /**
      * 437. Path Sum III
      */
@@ -1315,8 +1314,8 @@ public class SolutionTest {
      */
     @Test
     public void testFindAnagrams() throws Exception {
-        assertEquals("[0, 1, 2]",ConvertUtil.integerArrayListToString(solution.findAnagrams("abab","ab")));
-        assertEquals("[0, 6]",ConvertUtil.integerArrayListToString(solution.findAnagrams("cbaebabacd","abc")));
+        assertEquals("[0, 1, 2]", ConvertUtil.integerArrayListToString(solution.findAnagrams("abab", "ab")));
+        assertEquals("[0, 6]", ConvertUtil.integerArrayListToString(solution.findAnagrams("cbaebabacd", "abc")));
 
     }
 
@@ -1341,11 +1340,11 @@ public class SolutionTest {
      */
     @Test
     public void testCompress() throws Exception {
-        assertEquals(6, solution.compress(new char[]{'a','a','b','b','c','c','c'}));
-        assertEquals(4, solution.compress(new char[]{'a','a','b','c'}));
-        assertEquals(5, solution.compress(new char[]{'a','a','b','b','c'}));
+        assertEquals(6, solution.compress(new char[]{'a', 'a', 'b', 'b', 'c', 'c', 'c'}));
+        assertEquals(4, solution.compress(new char[]{'a', 'a', 'b', 'c'}));
+        assertEquals(5, solution.compress(new char[]{'a', 'a', 'b', 'b', 'c'}));
         assertEquals(1, solution.compress(new char[]{'a'}));
-        assertEquals(4, solution.compress(new char[]{'a','b','b','b','b','b','b','b','b','b','b','b','b'}));
+        assertEquals(4, solution.compress(new char[]{'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}));
     }
 
     /**
@@ -1362,7 +1361,7 @@ public class SolutionTest {
      */
     @Test
     public void testFindDisappearedNumbers() throws Exception {
-        assertEquals("[5, 6]", ConvertUtil.integerArrayListToString(solution.findDisappearedNumbers(new int[]{4,3,2,7,8,2,3,1})));
+        assertEquals("[5, 6]", ConvertUtil.integerArrayListToString(solution.findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1})));
 
     }
 
@@ -1371,11 +1370,11 @@ public class SolutionTest {
      */
     @Test
     public void testMinMoves() throws Exception {
-        assertEquals(3, solution.minMoves(new int[]{1,2,3}));
+        assertEquals(3, solution.minMoves(new int[]{1, 2, 3}));
         assertEquals(0, solution.minMoves(new int[]{0}));
-        assertEquals(1, solution.minMoves(new int[]{1,2}));
-        assertEquals(2147483646, solution.minMoves(new int[]{1,1,2147483647}));
-        assertEquals(2, solution.minMoves(new int[]{1,1,2,2}));
+        assertEquals(1, solution.minMoves(new int[]{1, 2}));
+        assertEquals(2147483646, solution.minMoves(new int[]{1, 1, 2147483647}));
+        assertEquals(2, solution.minMoves(new int[]{1, 1, 2, 2}));
     }
 
     /**
@@ -1383,8 +1382,8 @@ public class SolutionTest {
      */
     @Test
     public void testFindContentChildren() throws Exception {
-        assertEquals(1, solution.findContentChildren(new int[]{1,2,3}, new int[]{1,1}));
-        assertEquals(2, solution.findContentChildren(new int[]{1,2}, new int[]{1,2,3}));
+        assertEquals(1, solution.findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}));
+        assertEquals(2, solution.findContentChildren(new int[]{1, 2}, new int[]{1, 2, 3}));
 
     }
 
@@ -1419,7 +1418,7 @@ public class SolutionTest {
      */
     @Test
     public void testHammingDistance() throws Exception {
-        System.out.println(solution.hammingDistance(1,4));
+        System.out.println(solution.hammingDistance(1, 4));
     }
 
     /**
@@ -1427,7 +1426,7 @@ public class SolutionTest {
      */
     @Test
     public void testIslandPerimeter() throws Exception {
-        System.out.println(solution.islandPerimeter(new int[][]{{0,1,0,0},{1,1,1,0},{0,1,0,0},{1,1,0,0}}));
+        System.out.println(solution.islandPerimeter(new int[][]{{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}}));
     }
 
     /**
@@ -1435,13 +1434,13 @@ public class SolutionTest {
      */
     @Test
     public void testFindRadius() throws Exception {
-        assertEquals(498, solution.findRadius(new int[]{1,1,1,1,1,1,999,999,999,999,999}, new int[]{499,500,501}));
-        assertEquals(3, solution.findRadius(new int[]{1,5}, new int[]{2}));
+        assertEquals(498, solution.findRadius(new int[]{1, 1, 1, 1, 1, 1, 999, 999, 999, 999, 999}, new int[]{499, 500, 501}));
+        assertEquals(3, solution.findRadius(new int[]{1, 5}, new int[]{2}));
         assertEquals(0, solution.findRadius(new int[]{1}, new int[]{1}));
-        assertEquals(1, solution.findRadius(new int[]{1,2}, new int[]{1}));
-        assertEquals(0, solution.findRadius(new int[]{1,2}, new int[]{1,2}));
-        assertEquals(1, solution.findRadius(new int[]{1,2,3}, new int[]{2}));
-        assertEquals(1, solution.findRadius(new int[]{1,2,3,4}, new int[]{1,4}));
+        assertEquals(1, solution.findRadius(new int[]{1, 2}, new int[]{1}));
+        assertEquals(0, solution.findRadius(new int[]{1, 2}, new int[]{1, 2}));
+        assertEquals(1, solution.findRadius(new int[]{1, 2, 3}, new int[]{2}));
+        assertEquals(1, solution.findRadius(new int[]{1, 2, 3, 4}, new int[]{1, 4}));
 
     }
 
@@ -1454,7 +1453,7 @@ public class SolutionTest {
         System.out.println(solution.findComplement(1));
 
     }
-    
+
     /**
      * 479. Largest Palindrome Product
      */
@@ -1476,9 +1475,9 @@ public class SolutionTest {
      */
     @Test
     public void testFindMaxConsecutiveOnes() throws Exception {
-        assertEquals(2, solution.findMaxConsecutiveOnes(new int[]{1,0,1,1,0,1}));
+        assertEquals(2, solution.findMaxConsecutiveOnes(new int[]{1, 0, 1, 1, 0, 1}));
         assertEquals(1, solution.findMaxConsecutiveOnes(new int[]{1}));
-        assertEquals(3, solution.findMaxConsecutiveOnes(new int[]{1,1,0,1,1,1}));
+        assertEquals(3, solution.findMaxConsecutiveOnes(new int[]{1, 1, 0, 1, 1, 1}));
     }
 
     /**
@@ -1495,9 +1494,9 @@ public class SolutionTest {
      */
     @Test
     public void testNextGreaterElement() throws Exception {
-        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{1,3,5,2,4}, new int[]{6,5,4,3,2,1,7}))); // [7,7,7,7,7]
-        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{4,1,2}, new int[]{1,3,4,2}))); // [-1, 3, -1]
-        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{2,4}, new int[]{1,2,3,4}))); //[3, -1]
+        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{1, 3, 5, 2, 4}, new int[]{6, 5, 4, 3, 2, 1, 7}))); // [7,7,7,7,7]
+        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{4, 1, 2}, new int[]{1, 3, 4, 2}))); // [-1, 3, -1]
+        System.out.println(Arrays.toString(solution.nextGreaterElement(new int[]{2, 4}, new int[]{1, 2, 3, 4}))); //[3, -1]
     }
 
     /**
@@ -1532,7 +1531,7 @@ public class SolutionTest {
         assertEquals("-5", solution.convertToBase7(-5));
         assertEquals("0", solution.convertToBase7(0));
     }
-    
+
     /**
      * 506. Relative Ranks
      */
@@ -1598,21 +1597,21 @@ public class SolutionTest {
      */
     @Test
     public void testFindPairs() throws Exception {
-        assertEquals(2, solution.findPairs(new int[]{3,1,4,1,5}, 2));
-        assertEquals(4, solution.findPairs(new int[]{1,2,3,4,5}, 1));
-        assertEquals(1, solution.findPairs(new int[]{1,3,1,5,4}, 0));
-        assertEquals(0, solution.findPairs(new int[]{1,2,3,4,5}, -1));
+        assertEquals(2, solution.findPairs(new int[]{3, 1, 4, 1, 5}, 2));
+        assertEquals(4, solution.findPairs(new int[]{1, 2, 3, 4, 5}, 1));
+        assertEquals(1, solution.findPairs(new int[]{1, 3, 1, 5, 4}, 0));
+        assertEquals(0, solution.findPairs(new int[]{1, 2, 3, 4, 5}, -1));
     }
-    
+
     /**
      * 538. Convert BST to Greater Tree
      */
     @Test
     public void testConvertBST() throws Exception {
         TreeNode t1 = ConvertUtil.stringToTreeNode("[5,2,13]");
-        assertEquals("[18, 20, 13, null, null, null, null]",ConvertUtil.treeNodeToString(solution.convertBST(t1)));
+        assertEquals("[18, 20, 13, null, null, null, null]", ConvertUtil.treeNodeToString(solution.convertBST(t1)));
     }
-    
+
     /**
      * 541. Reverse String II
      */
@@ -1650,10 +1649,10 @@ public class SolutionTest {
     public void testMaxDepthNT() throws Exception {
         Node node5 = new Node(5, null);
         Node node6 = new Node(6, null);
-        Node node3 = new Node(3, new ArrayList<>(Arrays.asList(node5,node6)));
+        Node node3 = new Node(3, new ArrayList<>(Arrays.asList(node5, node6)));
         Node node2 = new Node(2, null);
         Node node4 = new Node(4, null);
-        Node node1 = new Node(1, new ArrayList<>(Arrays.asList(node3,node2,node4)));
+        Node node1 = new Node(1, new ArrayList<>(Arrays.asList(node3, node2, node4)));
 
         System.out.println(solution.maxDepthNT(node1));
     }
@@ -1663,7 +1662,7 @@ public class SolutionTest {
      */
     @Test
     public void testArrayPairSum() throws Exception {
-        System.out.println(solution.arrayPairSum(new int[]{1,4,3,2,6,7}));
+        System.out.println(solution.arrayPairSum(new int[]{1, 4, 3, 2, 6, 7}));
     }
 
     /**
@@ -1671,7 +1670,7 @@ public class SolutionTest {
      */
     @Test
     public void testMatrixReshape() throws Exception {
-        PrintUtil.printArray(solution.matrixReshape(new int[][]{{1,2,3},{4,5,6},{7,8,9},{10,11,12}},6,2));
+        PrintUtil.printArray(solution.matrixReshape(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}}, 6, 2));
     }
 
     /**
@@ -1679,7 +1678,7 @@ public class SolutionTest {
      */
     @Test
     public void testDistributeCandies() throws Exception {
-        System.out.println(solution.distributeCandies(new int[]{1,1,2,2,3,3,4,5}));
+        System.out.println(solution.distributeCandies(new int[]{1, 1, 2, 2, 3, 3, 4, 5}));
     }
 
     /**
@@ -1696,10 +1695,10 @@ public class SolutionTest {
     public void testPostorder() throws Exception {
         Node node5 = new Node(5, null);
         Node node6 = new Node(6, null);
-        Node node3 = new Node(3, new ArrayList<>(Arrays.asList(node5,node6)));
+        Node node3 = new Node(3, new ArrayList<>(Arrays.asList(node5, node6)));
         Node node2 = new Node(2, null);
         Node node4 = new Node(4, null);
-        Node node1 = new Node(1, new ArrayList<>(Arrays.asList(node3,node2,node4)));
+        Node node1 = new Node(1, new ArrayList<>(Arrays.asList(node3, node2, node4)));
 
         System.out.println(solution.postorder(node1));
     }
@@ -1709,7 +1708,7 @@ public class SolutionTest {
      */
     @Test
     public void testCanPlaceFlowers() throws Exception {
-        System.out.println(solution.canPlaceFlowers(new int[]{0,1,1,0,0,0,0,0,1,0,0}, 3));
+        System.out.println(solution.canPlaceFlowers(new int[]{0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0}, 3));
     }
 
     /**
@@ -1726,7 +1725,9 @@ public class SolutionTest {
     @Test
     public void testAverageOfLevels() throws Exception {
         List<Double> expected = new ArrayList<>();
-        expected.add(3.0); expected.add(14.5); expected.add(11.0);
+        expected.add(3.0);
+        expected.add(14.5);
+        expected.add(11.0);
         assertEquals(true, expected.equals(solution.averageOfLevels(ConvertUtil.stringToTreeNode("[3,9,20,null,null,15,7]"))));
     }
 
@@ -1745,8 +1746,8 @@ public class SolutionTest {
      */
     @Test
     public void testCheckPossibility() throws Exception {
-        System.out.println(solution.checkPossibility(new int[]{1,2,5,7,4,5})); //false
-        System.out.println(solution.checkPossibility(new int[]{2,3,3,2,4})); // true
+        System.out.println(solution.checkPossibility(new int[]{1, 2, 5, 7, 4, 5})); //false
+        System.out.println(solution.checkPossibility(new int[]{2, 3, 3, 2, 4})); // true
     }
 
     /**
@@ -1762,8 +1763,8 @@ public class SolutionTest {
      */
     @Test
     public void testCalPoints() throws Exception {
-        System.out.println(solution.calPoints(new String[]{"5","2","C","D","+"}));
-        System.out.println(solution.calPoints(new String[]{"5","-2","4","C","D","9","+","+"}));
+        System.out.println(solution.calPoints(new String[]{"5", "2", "C", "D", "+"}));
+        System.out.println(solution.calPoints(new String[]{"5", "-2", "4", "C", "D", "9", "+", "+"}));
     }
 
     /**
@@ -1785,16 +1786,16 @@ public class SolutionTest {
      */
     @Test
     public void testMaxAreaOfIsland() throws Exception {
-        System.out.println(solution.maxAreaOfIsland(new int[][]{{0,0,1,0,0,0,0,1,0,0,0,0,0},
-                {0,0,0,0,0,0,0,1,1,1,0,0,0},
-                {0,1,1,0,1,0,0,0,0,0,0,0,0},
-                {0,1,0,0,1,1,0,0,1,0,1,0,0},
-                {0,1,0,0,1,1,0,0,1,1,1,0,0},
-                {0,0,0,0,0,0,0,0,0,0,1,0,0},
-                {0,0,0,0,0,0,0,1,1,1,0,0,0},
-                {0,0,0,0,0,0,0,1,1,0,0,0,0}}));
+        System.out.println(solution.maxAreaOfIsland(new int[][]{{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}}));
 
-        System.out.println(solution.maxAreaOfIsland(new int[][]{{0,0,0,0,0,0,0,0}}));
+        System.out.println(solution.maxAreaOfIsland(new int[][]{{0, 0, 0, 0, 0, 0, 0, 0}}));
     }
 
     /**
@@ -1805,12 +1806,16 @@ public class SolutionTest {
         Solution.MyHashSet hashSet = solution.new MyHashSet();
         hashSet.add(1);
         hashSet.add(2);
-        System.out.println(hashSet.contains(1));;    // returns true
-        System.out.println(hashSet.contains(3));;    // returns false (not found)
+        System.out.println(hashSet.contains(1));
+        ;    // returns true
+        System.out.println(hashSet.contains(3));
+        ;    // returns false (not found)
         hashSet.add(2);
-        System.out.println(hashSet.contains(2));;    // returns true
+        System.out.println(hashSet.contains(2));
+        ;    // returns true
         hashSet.remove(2);
-        System.out.println(hashSet.contains(2));;    // returns false (already removed)
+        System.out.println(hashSet.contains(2));
+        ;    // returns false (already removed)
 
     }
 
@@ -1827,7 +1832,7 @@ public class SolutionTest {
      */
     @Test
     public void testSelfDividingNumbers() throws Exception {
-        System.out.println(solution.selfDividingNumbers(100,222));
+        System.out.println(solution.selfDividingNumbers(100, 222));
     }
 
     /**
@@ -1890,7 +1895,8 @@ public class SolutionTest {
      */
     @Test
     public void testCountPrimeSetBits() throws Exception {
-        System.out.println(solution.countPrimeSetBits(10,15));;
+        System.out.println(solution.countPrimeSetBits(10, 15));
+        ;
     }
 
     /**
@@ -1898,12 +1904,12 @@ public class SolutionTest {
      */
     @Test
     public void testIsToeplitzMatrix() throws Exception {
-        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{1,2,3,4},{5,1,2,3},{9,5,1,2}}));// true
-        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{1,2},{2,2}})); // false
-        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{36,59,71,15,26,82,87},{56,36,59,71,15,26,82},{15,0,36,59,71,15,26}})); // false
-        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{18},{66}})); //true
-        assertEquals(true,solution.isToeplitzMatrix(new int[][]{{18},{66},{57}})); //true
-        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{44,35,39},{15,44,35},{17,15,44},{80,17,15},{43,80,0},{77,43,80}})); //false
+        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{1, 2, 3, 4}, {5, 1, 2, 3}, {9, 5, 1, 2}}));// true
+        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{1, 2}, {2, 2}})); // false
+        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{36, 59, 71, 15, 26, 82, 87}, {56, 36, 59, 71, 15, 26, 82}, {15, 0, 36, 59, 71, 15, 26}})); // false
+        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{18}, {66}})); //true
+        assertEquals(true, solution.isToeplitzMatrix(new int[][]{{18}, {66}, {57}})); //true
+        assertEquals(false, solution.isToeplitzMatrix(new int[][]{{44, 35, 39}, {15, 44, 35}, {17, 15, 44}, {80, 17, 15}, {43, 80, 0}, {77, 43, 80}})); //false
     }
 
     /**
@@ -1911,19 +1917,20 @@ public class SolutionTest {
      */
     @Test
     public void testLetterCasePermutation() throws Exception {
-        assertEquals("[c,C]",ConvertUtil.stringListToString(solution.letterCasePermutation("C")));
-        assertEquals("[a1b2,a1B2,A1b2,A1B2]",ConvertUtil.stringListToString(solution.letterCasePermutation("a1b2")));
-        assertEquals("[3z4,3Z4]",ConvertUtil.stringListToString(solution.letterCasePermutation("3z4")));
-        assertEquals("[12345]",ConvertUtil.stringListToString(solution.letterCasePermutation("12345")));
-        assertEquals("[]",ConvertUtil.stringListToString(solution.letterCasePermutation("")));
+        assertEquals("[c,C]", ConvertUtil.stringListToString(solution.letterCasePermutation("C")));
+        assertEquals("[a1b2,a1B2,A1b2,A1B2]", ConvertUtil.stringListToString(solution.letterCasePermutation("a1b2")));
+        assertEquals("[3z4,3Z4]", ConvertUtil.stringListToString(solution.letterCasePermutation("3z4")));
+        assertEquals("[12345]", ConvertUtil.stringListToString(solution.letterCasePermutation("12345")));
+        assertEquals("[]", ConvertUtil.stringListToString(solution.letterCasePermutation("")));
     }
+
     @Test
     public void testLetterCasePermutation2() throws Exception {
-        // assertEquals("[c,C]",ConvertUtil.stringListToString(solution.letterCasePermutation2("C")));
-        assertEquals("[a1b2,a1B2,A1b2,A1B2]",ConvertUtil.stringListToString(solution.letterCasePermutation2("a1b2")));
-        assertEquals("[3z4,3Z4]",ConvertUtil.stringListToString(solution.letterCasePermutation2("3z4")));
-        assertEquals("[12345]",ConvertUtil.stringListToString(solution.letterCasePermutation2("12345")));
-        assertEquals("[]",ConvertUtil.stringListToString(solution.letterCasePermutation2("")));
+        assertTrue(solution.letterCasePermutation2("C").containsAll(Arrays.asList("c", "C")));
+        assertTrue(solution.letterCasePermutation2("a1b2").containsAll(Arrays.asList("a1b2", "a1B2", "A1b2", "A1B2")));
+        assertEquals("[3z4,3Z4]", ConvertUtil.stringListToString(solution.letterCasePermutation2("3z4")));
+        assertEquals("[12345]", ConvertUtil.stringListToString(solution.letterCasePermutation2("12345")));
+        assertEquals("[]", ConvertUtil.stringListToString(solution.letterCasePermutation2("")));
     }
 
     /**
@@ -1931,13 +1938,13 @@ public class SolutionTest {
      */
     @Test
     public void testIsBipartite() throws Exception {
-        assertEquals(true, solution.isBipartite(new int[][]{{1,3},{0,2},{1,3},{0,2}}));
-        assertEquals(false, solution.isBipartite(new int[][]{{1,2,3},{0,2},{0,1,3},{0,2}}));
-        assertEquals(false, solution.isBipartite(new int[][]{{},{2,4,6},{1,4,8,9},{7,8},{1,2,8,9},{6,9},{1,5,7,8,9},{3,6,9},{2,3,4,6,9},{2,4,5,6,7,8}}));
-        assertEquals(true, solution.isBipartite(new int[][]{{},{3},{},{1},{}}));
-        assertEquals(true, solution.isBipartite(new int[][]{{},{},{}}));
+        assertEquals(true, solution.isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}}));
+        assertEquals(false, solution.isBipartite(new int[][]{{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}}));
+        assertEquals(false, solution.isBipartite(new int[][]{{}, {2, 4, 6}, {1, 4, 8, 9}, {7, 8}, {1, 2, 8, 9}, {6, 9}, {1, 5, 7, 8, 9}, {3, 6, 9}, {2, 3, 4, 6, 9}, {2, 4, 5, 6, 7, 8}}));
+        assertEquals(true, solution.isBipartite(new int[][]{{}, {3}, {}, {1}, {}}));
+        assertEquals(true, solution.isBipartite(new int[][]{{}, {}, {}}));
         // multiple graph:
-        assertEquals(false, solution.isBipartite(new int[][]{{2,4},{2,3,4},{0,1},{1},{0,1},{7},{9},{5},{},{6},{12,14},{},{10},{},{10},{19},{18},{},{16},{15},{23},{23},{},{20,21},{},{},{27},{26},{},{},{34},{33,34},{},{31},{30,31},{38,39},{37,38,39},{36},{35,36},{35,36},{43},{},{},{40},{},{49},{47,48,49},{46,48,49},{46,47,49},{45,46,47,48}}));
+        assertEquals(false, solution.isBipartite(new int[][]{{2, 4}, {2, 3, 4}, {0, 1}, {1}, {0, 1}, {7}, {9}, {5}, {}, {6}, {12, 14}, {}, {10}, {}, {10}, {19}, {18}, {}, {16}, {15}, {23}, {23}, {}, {20, 21}, {}, {}, {27}, {26}, {}, {}, {34}, {33, 34}, {}, {31}, {30, 31}, {38, 39}, {37, 38, 39}, {36}, {35, 36}, {35, 36}, {43}, {}, {}, {40}, {}, {49}, {47, 48, 49}, {46, 48, 49}, {46, 47, 49}, {45, 46, 47, 48}}));
     }
 
     /**
@@ -1962,8 +1969,8 @@ public class SolutionTest {
      */
     @Test
     public void testMaxIncreaseKeepingSkyline() throws Exception {
-        System.out.println(solution.maxIncreaseKeepingSkyline(new int[][]{{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
-        System.out.println(solution.maxIncreaseKeepingSkyline(new int[][]{{3,0,8,4},{1,0,0,0}}));
+        System.out.println(solution.maxIncreaseKeepingSkyline(new int[][]{{3, 0, 8, 4}, {2, 4, 5, 7}, {9, 2, 6, 3}, {0, 3, 1, 0}}));
+        System.out.println(solution.maxIncreaseKeepingSkyline(new int[][]{{3, 0, 8, 4}, {1, 0, 0, 0}}));
     }
 
     /**
@@ -1980,7 +1987,7 @@ public class SolutionTest {
      */
     @Test
     public void testLargestTriangleArea() throws Exception {
-        System.out.println(solution.largestTriangleArea(new int[][]{{0,0},{0,1},{1,0},{0,2},{2,0}}));
+        System.out.println(solution.largestTriangleArea(new int[][]{{0, 0}, {0, 1}, {1, 0}, {0, 2}, {2, 0}}));
     }
 
     /**
@@ -1988,7 +1995,7 @@ public class SolutionTest {
      */
     @Test
     public void testShortestToChar() throws Exception {
-        System.out.println(Arrays.toString(solution.shortestToChar("aaba",'b')));
+        System.out.println(Arrays.toString(solution.shortestToChar("aaba", 'b')));
     }
 
     /**
@@ -2005,8 +2012,8 @@ public class SolutionTest {
      */
     @Test
     public void testFlipAndInvertImage() throws Exception {
-        PrintUtil.printArray(solution.flipAndInvertImage(new int[][]{{1,1,0},{1,0,1},{0,0,0}}));
-        PrintUtil.printArray(solution.flipAndInvertImage(new int[][]{{1,1,0,0},{1,0,0,1},{0,1,1,1},{1,0,1,0}}));
+        PrintUtil.printArray(solution.flipAndInvertImage(new int[][]{{1, 1, 0}, {1, 0, 1}, {0, 0, 0}}));
+        PrintUtil.printArray(solution.flipAndInvertImage(new int[][]{{1, 1, 0, 0}, {1, 0, 0, 1}, {0, 1, 1, 1}, {1, 0, 1, 0}}));
     }
 
     /**
@@ -2014,16 +2021,16 @@ public class SolutionTest {
      */
     @Test
     public void testPeakIndexInMountainArray() throws Exception {
-        System.out.println(solution.peakIndexInMountainArray(new int[]{0,1,0}));
-        System.out.println(solution.peakIndexInMountainArray(new int[]{0,2,5,8,9,100,0}));
+        System.out.println(solution.peakIndexInMountainArray(new int[]{0, 1, 0}));
+        System.out.println(solution.peakIndexInMountainArray(new int[]{0, 2, 5, 8, 9, 100, 0}));
     }
-    
+
     /**
      * 860. Lemonade Change
      */
     @Test
     public void testLemonadeChange() throws Exception {
-        System.out.println(solution.lemonadeChange(new int[]{5,5,10,10,20}));
+        System.out.println(solution.lemonadeChange(new int[]{5, 5, 10, 10, 20}));
     }
 
     /**
@@ -2031,8 +2038,8 @@ public class SolutionTest {
      */
     @Test
     public void testTranspose() throws Exception {
-        PrintUtil.printArray(solution.transpose(new int[][]{{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
-        PrintUtil.printArray(solution.transpose(new int[][]{{1,2,3},{4,5,6}}));
+        PrintUtil.printArray(solution.transpose(new int[][]{{3, 0, 8, 4}, {2, 4, 5, 7}, {9, 2, 6, 3}, {0, 3, 1, 0}}));
+        PrintUtil.printArray(solution.transpose(new int[][]{{1, 2, 3}, {4, 5, 6}}));
     }
 
     /**
@@ -2062,13 +2069,12 @@ public class SolutionTest {
         //System.out.println(solution.robotSim(new int[]{4,-1,4,-2,4}, new int[][]{{2,4}}));
 
 
+        int[] commands = new int[]{1, 2, -2, 5, -1, -2, -1, 8, 3, -1, 9, 4, -2, 3, 2, 4, 3, 9, 2, -1, -1, -2, 1, 3, -2, 4, 1, 4, -1, 1, 9, -1, -2, 5, -1, 5, 5, -2, 6, 6, 7, 7, 2, 8, 9, -1, 7, 4, 6, 9, 9, 9, -1, 5, 1, 3, 3, -1, 5, 9, 7, 4, 8, -1, -2, 1, 3, 2, 9, 3, -1, -2, 8, 8, 7, 5, -2, 6, 8, 4, 6, 2, 7, 2, -1, 7, -2, 3, 3, 2, -2, 6, 9, 8, 1, -2, -1, 1, 4, 7};
 
-        int[] commands = new int[]{1,2,-2,5,-1,-2,-1,8,3,-1,9,4,-2,3,2,4,3,9,2,-1,-1,-2,1,3,-2,4,1,4,-1,1,9,-1,-2,5,-1,5,5,-2,6,6,7,7,2,8,9,-1,7,4,6,9,9,9,-1,5,1,3,3,-1,5,9,7,4,8,-1,-2,1,3,2,9,3,-1,-2,8,8,7,5,-2,6,8,4,6,2,7,2,-1,7,-2,3,3,2,-2,6,9,8,1,-2,-1,1,4,7};
+        int[][] obstacles = new int[][]{{-57, -58}, {-72, 91}, {-55, 35}, {-20, 29}, {51, 70}, {-61, 88}, {-62, 99}, {52, 17}, {-75, -32}, {91, -22}, {54, 33}, {-45, -59}, {47, -48}, {53, -98}, {-91, 83}, {81, 12}, {-34, -90}, {-79, -82}, {-15, -86}, {-24, 66}, {-35, 35}, {3, 31}, {87, 93}, {2, -19}, {87, -93}, {24, -10}, {84, -53}, {86, 87}, {-88, -18}, {-51, 89}, {96, 66}, {-77, -94}, {-39, -1}, {89, 51}, {-23, -72}, {27, 24}, {53, -80}, {52, -33}, {32, 4}, {78, -55}, {-25, 18}, {-23, 47}, {79, -5}, {-23, -22}, {14, -25}, {-11, 69}, {63, 36}, {35, -99}, {-24, 82}, {-29, -98}, {-50, -70}, {72, 95}, {80, 80}, {-68, -40}, {65, 70}, {-92, 78}, {-45, -63}, {1, 34}, {81, 50}, {14, 91}, {-77, -54}, {13, -88}, {24, 37}, {-12, 59}, {-48, -62}, {57, -22}, {-8, 85}, {48, 71}, {12, 1}, {-20, 36}, {-32, -14}, {39, 46}, {-41, 75}, {13, -23}, {98, 10}, {-88, 64}, {50, 37}, {-95, -32}, {46, -91}, {10, 79}, {-11, 43}, {-94, 98}, {79, 42}, {51, 71}, {4, -30}, {2, 74}, {4, 10}, {61, 98}, {57, 98}, {46, 43}, {-16, 72}, {53, -69}, {54, -96}, {22, 0}, {-7, 92}, {-69, 80}, {68, -73}, {-24, -92}, {-21, 82}, {32, -1}, {-6, 16}, {15, -29}, {70, -66}, {-85, 80}, {50, -3}, {6, 13}, {-30, -98}, {-30, 59}, {-67, 40}, {17, 72}, {79, 82}, {89, -100}, {2, 79}, {-95, -46}, {17, 68}, {-46, 81}, {-5, -57}, {7, 58}, {-42, 68}, {19, -95}, {-17, -76}, {81, -86}, {79, 78}, {-82, -67}, {6, 0}, {35, -16}, {98, 83}, {-81, 100}, {-11, 46}, {-21, -38}, {-30, -41}, {86, 18}, {-68, 6}, {80, 75}, {-96, -44}, {-19, 66}, {21, 84}, {-56, -64}, {39, -15}, {0, 45}, {-81, -54}, {-66, -93}, {-4, 2}, {-42, -67}, {-15, -33}, {1, -32}, {-74, -24}, {7, 18}, {-62, 84}, {19, 61}, {39, 79}, {60, -98}, {-76, 45}, {58, -98}, {33, 26}, {-74, -95}, {22, 30}, {-68, -62}, {-59, 4}, {-62, 35}, {-78, 80}, {-82, 54}, {-42, 81}, {56, -15}, {32, -19}, {34, 93}, {57, -100}, {-1, -87}, {68, -26}, {18, 86}, {-55, -19}, {-68, -99}, {-9, 47}, {24, 94}, {92, 97}, {5, 67}, {97, -71}, {63, -57}, {-52, -14}, {-86, -78}, {-17, 92}, {-61, -83}, {-84, -10}, {20, 13}, {-68, -47}, {7, 28}, {66, 89}, {-41, -17}, {-14, -46}, {-72, -91}, {4, 52}, {-17, -59}, {-85, -46}, {-94, -23}, {-48, -3}, {-64, -37}, {2, 26}, {76, 88}, {-8, -46}, {-19, -68}};
+        System.out.println(solution.robotSim(commands, obstacles)); //5140
 
-        int[][] obstacles = new int[][]{{-57,-58},{-72,91},{-55,35},{-20,29},{51,70},{-61,88},{-62,99},{52,17},{-75,-32},{91,-22},{54,33},{-45,-59},{47,-48},{53,-98},{-91,83},{81,12},{-34,-90},{-79,-82},{-15,-86},{-24,66},{-35,35},{3,31},{87,93},{2,-19},{87,-93},{24,-10},{84,-53},{86,87},{-88,-18},{-51,89},{96,66},{-77,-94},{-39,-1},{89,51},{-23,-72},{27,24},{53,-80},{52,-33},{32,4},{78,-55},{-25,18},{-23,47},{79,-5},{-23,-22},{14,-25},{-11,69},{63,36},{35,-99},{-24,82},{-29,-98},{-50,-70},{72,95},{80,80},{-68,-40},{65,70},{-92,78},{-45,-63},{1,34},{81,50},{14,91},{-77,-54},{13,-88},{24,37},{-12,59},{-48,-62},{57,-22},{-8,85},{48,71},{12,1},{-20,36},{-32,-14},{39,46},{-41,75},{13,-23},{98,10},{-88,64},{50,37},{-95,-32},{46,-91},{10,79},{-11,43},{-94,98},{79,42},{51,71},{4,-30},{2,74},{4,10},{61,98},{57,98},{46,43},{-16,72},{53,-69},{54,-96},{22,0},{-7,92},{-69,80},{68,-73},{-24,-92},{-21,82},{32,-1},{-6,16},{15,-29},{70,-66},{-85,80},{50,-3},{6,13},{-30,-98},{-30,59},{-67,40},{17,72},{79,82},{89,-100},{2,79},{-95,-46},{17,68},{-46,81},{-5,-57},{7,58},{-42,68},{19,-95},{-17,-76},{81,-86},{79,78},{-82,-67},{6,0},{35,-16},{98,83},{-81,100},{-11,46},{-21,-38},{-30,-41},{86,18},{-68,6},{80,75},{-96,-44},{-19,66},{21,84},{-56,-64},{39,-15},{0,45},{-81,-54},{-66,-93},{-4,2},{-42,-67},{-15,-33},{1,-32},{-74,-24},{7,18},{-62,84},{19,61},{39,79},{60,-98},{-76,45},{58,-98},{33,26},{-74,-95},{22,30},{-68,-62},{-59,4},{-62,35},{-78,80},{-82,54},{-42,81},{56,-15},{32,-19},{34,93},{57,-100},{-1,-87},{68,-26},{18,86},{-55,-19},{-68,-99},{-9,47},{24,94},{92,97},{5,67},{97,-71},{63,-57},{-52,-14},{-86,-78},{-17,92},{-61,-83},{-84,-10},{20,13},{-68,-47},{7,28},{66,89},{-41,-17},{-14,-46},{-72,-91},{4,52},{-17,-59},{-85,-46},{-94,-23},{-48,-3},{-64,-37},{2,26},{76,88},{-8,-46},{-19,-68}};
-        System.out.println(solution.robotSim(commands,obstacles)); //5140
-
-        System.out.println(solution.robotSim1(commands,obstacles));
+        System.out.println(solution.robotSim1(commands, obstacles));
 
 
     }
@@ -2078,7 +2084,7 @@ public class SolutionTest {
      */
     @Test
     public void testMiddleNode() throws Exception {
-        System.out.println(solution.middleNode(arrayToListNode(new int[]{1,2,3,4,5,6})));
+        System.out.println(solution.middleNode(arrayToListNode(new int[]{1, 2, 3, 4, 5, 6})));
     }
 
     /**
@@ -2087,10 +2093,10 @@ public class SolutionTest {
     @Test
     public void testProjectionArea() throws Exception {
         System.out.println(solution.projectionArea(new int[][]{{2}}));
-        System.out.println(solution.projectionArea(new int[][]{{1,2},{3,4}}));
-        System.out.println(solution.projectionArea(new int[][]{{1,0},{0,2}}));
-        System.out.println(solution.projectionArea(new int[][]{{1,1,1},{1,0,1},{1,1,1}}));
-        System.out.println(solution.projectionArea(new int[][]{{2,2,2},{2,1,2},{2,2,2}}));
+        System.out.println(solution.projectionArea(new int[][]{{1, 2}, {3, 4}}));
+        System.out.println(solution.projectionArea(new int[][]{{1, 0}, {0, 2}}));
+        System.out.println(solution.projectionArea(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}));
+        System.out.println(solution.projectionArea(new int[][]{{2, 2, 2}, {2, 1, 2}, {2, 2, 2}}));
     }
 
     /**
@@ -2107,10 +2113,10 @@ public class SolutionTest {
      */
     @Test
     public void testFairCandySwap() throws Exception {
-        PrintUtil.printArray(solution.fairCandySwap(new int[]{1,1}, new int[]{2,2}));
-        PrintUtil.printArray(solution.fairCandySwap(new int[]{1,2}, new int[]{2,3}));
-        PrintUtil.printArray(solution.fairCandySwap(new int[]{2}, new int[]{1,3}));
-        PrintUtil.printArray(solution.fairCandySwap(new int[]{1,2,5}, new int[]{2,4}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{1, 1}, new int[]{2, 2}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{1, 2}, new int[]{2, 3}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{2}, new int[]{1, 3}));
+        PrintUtil.printArray(solution.fairCandySwap(new int[]{1, 2, 5}, new int[]{2, 4}));
     }
 
     /**
@@ -2119,9 +2125,9 @@ public class SolutionTest {
     @Test
     public void testSurfaceArea() throws Exception {
         System.out.println(solution.surfaceArea(new int[][]{{2}}));
-        System.out.println(solution.surfaceArea(new int[][]{{1,2},{3,4}}));
-        System.out.println(solution.surfaceArea(new int[][]{{1,0},{0,2}}));
-        System.out.println(solution.surfaceArea(new int[][]{{1,1,1},{1,0,1},{1,1,1}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1, 2}, {3, 4}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1, 0}, {0, 2}}));
+        System.out.println(solution.surfaceArea(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}));
     }
 
     /**
@@ -2136,11 +2142,11 @@ public class SolutionTest {
      */
     @Test
     public void testIsMonotonic() throws Exception {
-        assertEquals(true, solution.isMonotonic(new int[]{1,2,2,3}));
-        assertEquals(true, solution.isMonotonic(new int[]{6,5,4,4}));
-        assertEquals(false, solution.isMonotonic(new int[]{1,3,2}));
-        assertEquals(true, solution.isMonotonic(new int[]{1,2,4,5}));
-        assertEquals(true, solution.isMonotonic(new int[]{1,1,1}));
+        assertEquals(true, solution.isMonotonic(new int[]{1, 2, 2, 3}));
+        assertEquals(true, solution.isMonotonic(new int[]{6, 5, 4, 4}));
+        assertEquals(false, solution.isMonotonic(new int[]{1, 3, 2}));
+        assertEquals(true, solution.isMonotonic(new int[]{1, 2, 4, 5}));
+        assertEquals(true, solution.isMonotonic(new int[]{1, 1, 1}));
     }
 
     /**
@@ -2157,7 +2163,7 @@ public class SolutionTest {
      */
     @Test
     public void testSortArrayByParity() throws Exception {
-        PrintUtil.printArray(solution.sortArrayByParity(new int[]{3,1,2,4}));
+        PrintUtil.printArray(solution.sortArrayByParity(new int[]{3, 1, 2, 4}));
     }
 
     /**
@@ -2172,18 +2178,18 @@ public class SolutionTest {
      */
     @Test
     public void testHasGroupsSizeX() throws Exception {
-        assertEquals(true, solution.hasGroupsSizeX(new int[]{1,2,3,4,4,3,2,1}));
-        assertEquals(false, solution.hasGroupsSizeX(new int[]{1,1,1,2,2,2,3,3}));
+        assertEquals(true, solution.hasGroupsSizeX(new int[]{1, 2, 3, 4, 4, 3, 2, 1}));
+        assertEquals(false, solution.hasGroupsSizeX(new int[]{1, 1, 1, 2, 2, 2, 3, 3}));
         assertEquals(false, solution.hasGroupsSizeX(new int[]{1}));
-        assertEquals(true, solution.hasGroupsSizeX(new int[]{1,1}));
+        assertEquals(true, solution.hasGroupsSizeX(new int[]{1, 1}));
     }
 
     @Test
     public void testHasGroupsSizeX2() throws Exception {
-        assertEquals(true, solution.hasGroupsSizeX2(new int[]{1,2,3,4,4,3,2,1}));
-        assertEquals(false, solution.hasGroupsSizeX2(new int[]{1,1,1,2,2,2,3,3}));
+        assertEquals(true, solution.hasGroupsSizeX2(new int[]{1, 2, 3, 4, 4, 3, 2, 1}));
+        assertEquals(false, solution.hasGroupsSizeX2(new int[]{1, 1, 1, 2, 2, 2, 3, 3}));
         assertEquals(false, solution.hasGroupsSizeX2(new int[]{1}));
-        assertEquals(true, solution.hasGroupsSizeX2(new int[]{1,1}));
+        assertEquals(true, solution.hasGroupsSizeX2(new int[]{1, 1}));
     }
 
     /**
@@ -2201,7 +2207,7 @@ public class SolutionTest {
      */
     @Test
     public void testSortArrayByParityII() throws Exception {
-        PrintUtil.printArray(solution.sortArrayByParityII(new int[]{4,2,5,7}));
+        PrintUtil.printArray(solution.sortArrayByParityII(new int[]{4, 2, 5, 7}));
     }
 
     /**
@@ -2221,7 +2227,7 @@ public class SolutionTest {
      */
     @Test
     public void testNumUniqueEmails() throws Exception {
-        assertEquals(2, solution.numUniqueEmails(new String[]{"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"}));
+        assertEquals(2, solution.numUniqueEmails(new String[]{"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"}));
     }
 
     /**
@@ -2229,11 +2235,11 @@ public class SolutionTest {
      */
     @Test
     public void testRecentCounter() throws Exception {
-         Solution.RecentCounter obj = solution.new RecentCounter();
-         assertEquals(1, obj.ping(1));
-         assertEquals(2, obj.ping(100));
-         assertEquals(3, obj.ping(3001));
-         assertEquals(3, obj.ping(3002));
+        Solution.RecentCounter obj = solution.new RecentCounter();
+        assertEquals(1, obj.ping(1));
+        assertEquals(2, obj.ping(100));
+        assertEquals(3, obj.ping(3001));
+        assertEquals(3, obj.ping(3002));
     }
 
     /**
@@ -2241,7 +2247,7 @@ public class SolutionTest {
      */
     @Test
     public void testReorderLogFiles() throws Exception {
-        String[] logs = new String[]{"a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"};
+        String[] logs = new String[]{"a1 9 2 3 1", "g1 act car", "zo4 4 7", "ab1 off key dog", "a8 act zoo"};
         assertEquals("[g1 act car, a8 act zoo, ab1 off key dog, a1 9 2 3 1, zo4 4 7]", Arrays.toString(solution.reorderLogFiles(logs)));
     }
 
@@ -2250,9 +2256,9 @@ public class SolutionTest {
      */
     @Test
     public void testValidMountainArray() throws Exception {
-        assertEquals(false, solution.validMountainArray(new int[]{3,5,5}));
-        assertEquals(true, solution.validMountainArray(new int[]{0,3,2,1}));
-        assertEquals(false, solution.validMountainArray(new int[]{2,1}));
+        assertEquals(false, solution.validMountainArray(new int[]{3, 5, 5}));
+        assertEquals(true, solution.validMountainArray(new int[]{0, 3, 2, 1}));
+        assertEquals(false, solution.validMountainArray(new int[]{2, 1}));
     }
 
     /**
@@ -2280,10 +2286,10 @@ public class SolutionTest {
      */
     @Test
     public void testLargestTimeFromDigits() throws Exception {
-        assertEquals("04:00", solution.largestTimeFromDigits(new int[]{0,4,0,0}));
-        assertEquals("00:00", solution.largestTimeFromDigits(new int[]{0,0,0,0}));
-        assertEquals("23:41", solution.largestTimeFromDigits(new int[]{1,2,3,4}));
-        assertEquals("", solution.largestTimeFromDigits(new int[]{5,5,5,5}));
+        assertEquals("04:00", solution.largestTimeFromDigits(new int[]{0, 4, 0, 0}));
+        assertEquals("00:00", solution.largestTimeFromDigits(new int[]{0, 0, 0, 0}));
+        assertEquals("23:41", solution.largestTimeFromDigits(new int[]{1, 2, 3, 4}));
+        assertEquals("", solution.largestTimeFromDigits(new int[]{5, 5, 5, 5}));
     }
 
     /**
@@ -2291,10 +2297,10 @@ public class SolutionTest {
      */
     @Test
     public void testIsAlienSorted() throws Exception {
-        assertEquals(true, solution.isAlienSorted(new String[]{"kuvp","q"}, "ngxlkthsjuoqcpavbfdermiywz"));
-        assertEquals(true, solution.isAlienSorted(new String[]{"hello","leetcode"}, "hlabcdefgijkmnopqrstuvwxyz"));
-        assertEquals(false, solution.isAlienSorted(new String[]{"word","world","row"}, "worldabcefghijkmnpqstuvxyz"));
-        assertEquals(false, solution.isAlienSorted(new String[]{"apple","app"}, "abcdefghijklmnopqrstuvwxyz"));
+        assertEquals(true, solution.isAlienSorted(new String[]{"kuvp", "q"}, "ngxlkthsjuoqcpavbfdermiywz"));
+        assertEquals(true, solution.isAlienSorted(new String[]{"hello", "leetcode"}, "hlabcdefgijkmnopqrstuvwxyz"));
+        assertEquals(false, solution.isAlienSorted(new String[]{"word", "world", "row"}, "worldabcefghijkmnpqstuvxyz"));
+        assertEquals(false, solution.isAlienSorted(new String[]{"apple", "app"}, "abcdefghijklmnopqrstuvwxyz"));
     }
 
     /**
@@ -2302,9 +2308,9 @@ public class SolutionTest {
      */
     @Test
     public void testRepeatedNTimes() throws Exception {
-        assertEquals(3, solution.repeatedNTimes(new int[]{1,2,3,3}));
-        assertEquals(2, solution.repeatedNTimes(new int[]{2,1,2,5,3,2}));
-        assertEquals(5, solution.repeatedNTimes(new int[]{5,1,5,2,5,3,5,4}));
+        assertEquals(3, solution.repeatedNTimes(new int[]{1, 2, 3, 3}));
+        assertEquals(2, solution.repeatedNTimes(new int[]{2, 1, 2, 5, 3, 2}));
+        assertEquals(5, solution.repeatedNTimes(new int[]{5, 1, 5, 2, 5, 3, 5, 4}));
     }
 
     /**
@@ -2378,7 +2384,7 @@ public class SolutionTest {
         });
         executorService.shutdown();
     }
-    
+
     /**
      * 1116. Print Zero Even Odd
      */
@@ -2441,7 +2447,6 @@ public class SolutionTest {
     }
 
 
-
     private String testH2O(String in) {
         StringBuffer sb = new StringBuffer();
         Runnable releaseHydrogen = () -> {
@@ -2453,7 +2458,7 @@ public class SolutionTest {
 
         ExecutorService executorService = Executors.newCachedThreadPool();
         Solution.H2O h2O = solution.new H2O();
-        for (char c: in.toCharArray()) {
+        for (char c : in.toCharArray()) {
             if (c == 'O') {
                 executorService.submit(() -> {
                     try {
@@ -2518,7 +2523,7 @@ public class SolutionTest {
         });
         executorService.shutdown();
     }
-    
+
     /**
      * 1226. The Dining Philosophers
      */
@@ -2526,7 +2531,7 @@ public class SolutionTest {
     public void testDiningPhilosophers() {
         Solution.DiningPhilosophers diningPhilosophers = solution.new DiningPhilosophers();
         ExecutorService executorService = Executors.newFixedThreadPool(5);
-        for (int i = 0; i < 5; i ++) {
+        for (int i = 0; i < 5; i++) {
             final int j = i;
             Runnable pickLeftFork = () -> System.out.println("[" + j + ",1,1]");
             Runnable pickRightFork = () -> System.out.println("[" + j + ",2,1]");
@@ -2555,11 +2560,11 @@ public class SolutionTest {
      */
     @Test
     public void testGetDecimalValue() {
-        assertEquals(5, solution.getDecimalValue(new ListNode(new int[]{1,0,1})));
+        assertEquals(5, solution.getDecimalValue(new ListNode(new int[]{1, 0, 1})));
         assertEquals(0, solution.getDecimalValue(new ListNode(new int[]{0})));
         assertEquals(1, solution.getDecimalValue(new ListNode(new int[]{1})));
-        assertEquals(18880, solution.getDecimalValue(new ListNode(new int[]{1,0,0,1,0,0,1,1,1,0,0,0,0,0,0})));
-        assertEquals(0, solution.getDecimalValue(new ListNode(new int[]{0,0})));
+        assertEquals(18880, solution.getDecimalValue(new ListNode(new int[]{1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0})));
+        assertEquals(0, solution.getDecimalValue(new ListNode(new int[]{0, 0})));
     }
 
     /**
@@ -2567,8 +2572,8 @@ public class SolutionTest {
      */
     @Test
     public void testDecompressRLElist() {
-        assertEquals("[2, 4, 4, 4]", Arrays.toString(solution.decompressRLElist(new int[]{1,2,3,4})));
-        assertEquals("[4, 4, 4]", Arrays.toString(solution.decompressRLElist(new int[]{0,2,3,4})));
+        assertEquals("[2, 4, 4, 4]", Arrays.toString(solution.decompressRLElist(new int[]{1, 2, 3, 4})));
+        assertEquals("[4, 4, 4]", Arrays.toString(solution.decompressRLElist(new int[]{0, 2, 3, 4})));
     }
 
     /**

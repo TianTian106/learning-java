@@ -1,14 +1,10 @@
 package org.sweetycode.leetcode;
 
-import com.google.common.collect.Lists;
-import com.sun.jmx.snmp.tasks.ThreadService;
-import org.sweetycode.leetcode.util.PrintUtil;
-import sun.reflect.generics.tree.Tree;
-
-import java.lang.reflect.Array;
-import java.math.BigInteger;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntConsumer;
@@ -357,7 +353,7 @@ public class Solution {
                 }
             }
 
-            if(common.length() == 0) return "";
+            if (common.length() == 0) return "";
         }
 
         return common;
@@ -367,9 +363,43 @@ public class Solution {
      * 15. 3Sum
      */
     public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
         List<List<Integer>> result = new LinkedList<>();
-
+        int l = nums.length;
+        if (l < 3) {
+            return result;
+        }
+        Arrays.sort(nums);
+        int i = 0;
+        while (i < l - 2) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                i++;
+                continue;
+            }
+            int left = i + 1;
+            int right = l - 1;
+            while (left < right) {
+                if (left != i + 1 && nums[left] == nums[left - 1]) {
+                    left++;
+                    continue;
+                }
+                if (right != l - 1 && nums[right] == nums[right + 1]) {
+                    right--;
+                    continue;
+                }
+                int s = nums[i] + nums[left] + nums[right];
+                if (s < 0) {
+                    left++;
+                } else if (s > 0) {
+                    right--;
+                } else {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                }
+            }
+            i++;
+        }
+        return result;
     }
 
     /**
